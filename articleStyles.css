@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  font-family: 'Source Code Pro', monospace; 
+  display: flex; 
+  align-items: left; 
+  justify-content: left; 
+  text-align: center;
+}
+.textArea {
+  margin-top: 5vh; 
+  padding-left: 10vw; 
+  padding-right: 10vw;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+img {
+  max-width: 70%;
+  /* align-self: center */
+}
+
+.fig {
+  /* background-color: lightgray;
+  border-color: black;
+  border-style: solid;
+  border-width: 1; */
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: 10px;
+}
+
+iframe {
+  max-width: 100%;
+  max-height: 40vh;
+}
+@import url('https://web.archive.org/web/20230512043741cs_/https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@media screen and (max-width: 768px) {
+  .textArea {
+    margin-top: 0vh; 
+    margin-left: 2vw; 
+    margin-right: 2vw;
+  }
+}
