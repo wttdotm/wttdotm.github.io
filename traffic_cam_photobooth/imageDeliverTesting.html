@@ -49,26 +49,15 @@
     <!-- <main>
     </main> -->
     <div class="filmstrip">
-        <h1 style="margin-top: 0px; padding-top: 0px;">Tap to take a photo</h1>
+        <h1 style="margin-top: 0px; padding-top: 0px;">Tap to take a photo!</h1>
         <img id="image1" src="./holder.png" onclick="updateImage('image1')">
         <img id="image2" src="./holder.png" onclick="updateImage('image2')">
         <img id="image3" src="./holder.png" onclick="updateImage('image3')">
 
     </div>
-    <!-- <div id="imageHolder">
-        <div class="imageDiv">
-            <img id="image1" src="../assets/holder.png" onclick="updateImage('image1')">
-        </div>
-        <div class="imageDiv">
-            <img id="image2" src="../assets/holder.png" onclick="updateImage('image2')">
-        </div>
-        <div class="imageDiv">
-            <img id="image3" src="../assets/holder.png" onclick="updateImage('image3')">
-        </div>
-    </div> -->
     <script>
         const updateImage = (imageDivId) => {
-            document.getElementById(imageDivId).src = `https://webcams.nyctmc.org/api/cameras/${cameraId}/image`
+            document.getElementById(imageDivId).src = `https://webcams.nyctmc.org/api/cameras/${cameraId}/image?cacheAvoidance=${Math.floor(Math.random() * 100000)}`
         }
     </script>
   </body>
