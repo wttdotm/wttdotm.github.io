@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css"></style>
+    <script>
+        const queryString = window.location.search;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        let cameraId = urlParams.get('cameraId')
+
+    </script>
+    <style>
+        /* .imageHolder {
+            display : flex;
+            flex-direction: column;
+        } */
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+        }
+        .filmstrip {
+            width: 80vw;
+            display : flex;
+            flex-direction: column;
+            gap: 30px;
+            --background: rgba(0, 0, 0, 0.9);
+            --hole-color: white;
+            --size: 30px;
+            
+            background:
+            conic-gradient(at var(--size),var(--background) 75%, var(--hole-color) 0)
+            0 0/calc(100% - var(--size)) calc(2*var(--size)) padding-box;
+            
+            border: var(--size) solid var(--background);
+            padding: calc(var(--size) * 2.5);
+        }
+    </style>
+  </head>
+  <body>
+    <!-- <main>
+    </main> -->
+    <div class="filmstrip">
+        <h1>Tap to take a photo</h1>
+        <img id="image1" src="../assets/holder.png" onclick="updateImage('image1')">
+        <img id="image2" src="../assets/holder.png" onclick="updateImage('image2')">
+        <img id="image3" src="../assets/holder.png" onclick="updateImage('image3')">
+
+    </div>
+    <!-- <div id="imageHolder">
+        <div class="imageDiv">
+            <img id="image1" src="../assets/holder.png" onclick="updateImage('image1')">
+        </div>
+        <div class="imageDiv">
+            <img id="image2" src="../assets/holder.png" onclick="updateImage('image2')">
+        </div>
+        <div class="imageDiv">
+            <img id="image3" src="../assets/holder.png" onclick="updateImage('image3')">
+        </div>
+    </div> -->
+    <script>
+        const updateImage = (imageDivId) => {
+            document.getElementById(imageDivId).src = `https://webcams.nyctmc.org/api/cameras/${cameraId}/image`
+        }
+    </script>
+  </body>
+</html>
