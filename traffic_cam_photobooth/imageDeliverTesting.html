@@ -25,6 +25,7 @@
         }
         .filmstrip {
             width: 80vw;
+            max-height: 80%;
             display : flex;
             flex-direction: column;
             gap: 30px;
@@ -39,13 +40,16 @@
             border: var(--size) solid var(--background);
             padding: calc(var(--size) * 2.5);
         }
+        img {
+            max-height: 30%;
+        }
     </style>
   </head>
   <body>
     <!-- <main>
     </main> -->
     <div class="filmstrip">
-        <h1>Tap to take a photo</h1>
+        <h1 style="margin-top: 0px; padding-top: 0px;">Tap to take a photo</h1>
         <img id="image1" src="./holder.png" onclick="updateImage('image1')">
         <img id="image2" src="./holder.png" onclick="updateImage('image2')">
         <img id="image3" src="./holder.png" onclick="updateImage('image3')">
