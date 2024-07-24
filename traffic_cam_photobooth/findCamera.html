@@ -50,7 +50,7 @@
 
                     findNearestCamera(userCoords)
             },(error) => {
-                alert("Geolocation error:", allCameras.length, error);
+                alert("Geolocation error:", error);
                 document.getElementById("button").innerHTML = "Error getting location";
                 document.getElementById("button").style.background = "#efefef";
             },
@@ -100,7 +100,7 @@
   <body>
     <div id="main">
         <div id="buttonAsk">
-            <h1>Click the button to find your nearest camera</h1>
+            <h1>Click the button to find your nearest camera!</h1>
             <button id="button" onclick="getUserLocation()">🧐🔎📸</button>
             <!-- <div id="buttonDiv" onclick="getUserLocation()">🧐🔎📸</div> -->
         </div>
