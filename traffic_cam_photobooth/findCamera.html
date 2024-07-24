@@ -50,8 +50,11 @@
 
                     findNearestCamera(userCoords)
             },(error) => {
+                document.getElementById("buttonAsk").style.display = 'none'
+                document.getElementById("result").style.display = 'none'
+                document.getElementById("errorDiv").style.display = 'block'
                 //maybe I should add a big ol list here lmao
-                alert("Geolocation Error\nYou probably have location turned off for your browser (a reasonable thing to do). Here are your options:\n(1) Turn on location in Settings > Location > [Your Browser]\n(2) Find a QR sticker near one in the wild and scan it (3) Close this popup and check out The Big List", error);
+                // alert("Geolocation Error\nYou probably have location turned off for your browser (a reasonable thing to do). Here are your options:\n(1) Turn on location in Settings > Location > [Your Browser]\n(2) Find a QR sticker near one in the wild and scan it (3) Close this popup and check out The Big List", error);
             },
             { timeout: 10000, maximumAge: 60000 }
             );
@@ -94,6 +97,11 @@
         img {
             min-width: 100%;
         }
+        #errorDiv {
+            display: none;
+            text-align: left;
+            padding: 5vw
+        }
     </style>
   </head>
   <body>
@@ -108,6 +116,15 @@
             <img id="cameraImage" src="">
             <br/>
             <h2><a href="" id="cameraLink">I'm here!</a></h2>
+        </div>
+        <div id="errorDiv">
+            <h1>Geolocation Error</h1>
+            <p>You probably have location services turned off on your phone (reasonable tbh). To fix this, you have a few options:</p>
+            <ol>
+                <li>Turn on location in Settings > Location > [Your Browser]</li>
+                <li>Find a QR sticker near one in the wild and scan it</li>
+                <li>Go to the <a href="./listPage.html">List Page</a> and find a camera near you (i have not made this work yet, its coming soon)</li>
+            </ol>
         </div>
     </div>
     <script>
