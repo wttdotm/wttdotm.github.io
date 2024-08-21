@@ -129,10 +129,12 @@
                 push()
                 // blendMode(MULTIPLY)
                 noStroke()
+                fill('black')
                 image(workerPng, 320,450)
 
                 if (arrOfShapes.length >= 10) {
                     image(worker2Png, 500,450)
+                    
                     text("boss is gonna flip", 540, 450)
                 }
 
