@@ -129,16 +129,16 @@
                 rSlider.size(255);
 
                 gSlider = createSlider(0, 255, 50);
-                gSlider.position(50, 140);
+                gSlider.position(50, 180);
                 gSlider.size(255);
 
                 bSlider = createSlider(0, 255, 140);
-                bSlider.position(50, 180);
+                bSlider.position(380, 100);
                 bSlider.size(255);
 
 
                 sSlider = createSlider(0, 100, 20);
-                sSlider.position(50, 220);
+                sSlider.position(380, 180);
                 sSlider.size(255);
 
                 
@@ -165,7 +165,7 @@
                 //I have no idea why these have to be 40 height less than their actual counterparts
                 push()
                     textAlign(LEFT, CENTER)
-
+                    textSize(24);
                     stroke("red")
                     strokeWeight(2)
                     fill("Red")
@@ -174,17 +174,17 @@
                     stroke("green")
                     strokeWeight(2)
                     fill("Green")
-                    text("G", 30, 80)
+                    text("G", 30, 120)
 
                     stroke("blue")
                     strokeWeight(2)
                     fill("Blue")
-                    text("B", 30, 120)
+                    text("B", 360, 40)
 
                     stroke("black")
                     strokeWeight(2)
-                    fill("Blacl")
-                    text("S", 30, 160)
+                    fill("Black")
+                    text("S", 360, 120)
 
 
                 pop()
