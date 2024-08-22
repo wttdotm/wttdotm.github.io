@@ -27,6 +27,11 @@
             fetch('https://wemakeinter.net/diyPixel/morryProjPixel.php?event=guessWeDoinNowVisit&device=mobile')
       
           </script>
+          <style>
+            canvas {
+                touch-action: none;
+            }
+          </style>
     </head>
     <body>
         <p><i><b>Guess We Doin Games Now</i> by <a href="https://wttdotm.com">WTTDOTM</a></b></p>
@@ -35,7 +40,7 @@
         <script>
 
 
-            let canvasWidth
+            // let canvasWidth
             // STOP CANVAS FROM MOVING ON TOUCH
             // TAKEN FROM https://editor.p5js.org/Kumu-Paul/sketches/O9BljyKkm
 
@@ -429,7 +434,7 @@
             }
 
             // document.body.style.width = canvasWidth;
-            document.body.style.transform = "scale(1)";
+            // document.body.style.transform = "scale(1)";
         </script>
     </body>
 </html>
