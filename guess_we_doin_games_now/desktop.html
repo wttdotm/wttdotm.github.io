@@ -1,0 +1,495 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+        <script src="workerImage.js"></script>
+        <!-- <script>console.log(workerImage)</script> -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>guess we doin games now</title>
+        <meta name="description" content="Guess We Doin ______ Now Game by @WTTDOTM">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#212121" />
+        <meta property="og:title" content="guess we doin games now" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://wttdotm.com/guess_we_doin_games_now/" />
+        <meta property="og:image" content="https://wttdotm.com/guess_we_doin_games_now/link_preview.png" />
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script>
+            //this is diy alternative to a google analytics
+            //it only logs IP (for calcultating unique views) and event type
+            //pls do not spam I just want to know how many ppl use my site
+            //you can view the source code at https://github.com/we-make-internet/home-page/blob/main/www/diyPixel/morryProjPixel.php
+            fetch('https://wemakeinter.net/diyPixel/morryProjPixel.php?event=guessWeDoinNowVisit&device=desktop')
+      
+          </script>
+    </head>
+    <body>
+        <p><i><b>Guess We Doin Games Now</i> by <a href="https://wttdotm.com">WTTDOTM</a></b> (<a href="https://github.com/wttdotm/wttdotm.github.io/tree/master/guess_we_doin_games_now">source code</a>)</p>
+
+        <!-- <script language="javascript" type="text/javascript" src="js/vendor/p5.min.js"></script> -->
+        <script>
+
+            // this should hopefully let it work with tablets too
+                        // Check if canvas is touched. If it
+            document.addEventListener('touchstart', (event) => {
+                if (event.target.isEqualNode(canvas.canvas)) {
+                    // Check if canvas is touched
+                    onCanvas = true;
+                    event.preventDefault();
+                }
+                else {
+                    onCanvas = false;
+                }
+            }, { passive: false });
+
+            // Prevent all touchmove events
+            document.addEventListener('touchmove', (event) => {
+                if (onCanvas || event.scale !== 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+
+
+            document.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                ptouchY = 0;
+                ptouchX = 0;
+            });
+
+
+            let mouseArrPoints = []
+            let mouseCurrentlyPressed = false
+            let drawSpace
+            let arrOfShapes = []
+            let latestShape
+            let savedShape
+            let indexOfNextShape
+            let workerPng
+            let worker2Png
+            let factoryPng
+            let worker3Png
+
+            let rSlider
+            let gSlider
+            let bSlider
+            let sizeSlider
+            
+            let gridSizeSlider
+            let gridSize
+            let oldGridSize = 10
+            let newGridSize = 10
+            
+            let gridWidthSlider
+            let gridWidth
+            let oldGridWidth = 200
+            let newGridWidth = 200
+            
+
+            let shapeSmallWidth 
+
+            let conveyorY
+
+            function preload() {
+
+            }
+
+            function setup() {
+                
+                workerPng = loadImage(workerImage);
+                worker2Png = loadImage(worker2);
+                worker3Png = loadImage(worker3);
+                factoryPng = loadImage(factory);
+                drawSpace = {x : 200, y: 200, h: 200, w:200}
+                gridSpace = {x : 500, y: 100, h: 200, w:200}
+                createCanvas(800, 800);
+                conveyorY = height - 200
+
+                // Style the circle.
+                fill('orange');
+                stroke('royalblue');
+                // strokeWeight(40);
+
+                // let gear circle = 
+                angleMode(DEGREES)
+                
+
+                //Sliders
+                rSlider = createSlider(0, 255, 255);
+                rSlider.position(50, 100);
+                rSlider.size(255);
+
+                gSlider = createSlider(0, 255, 50);
+                gSlider.position(50, 140);
+                gSlider.size(255);
+
+                bSlider = createSlider(0, 255, 140);
+                bSlider.position(50, 180);
+                bSlider.size(255);
+
+
+                sSlider = createSlider(0, 100, 20);
+                sSlider.position(50, 220);
+                sSlider.size(255);
+
+        
+                gridSizeSlider = createSlider(4, 100, 10);
+                gridSizeSlider.position(400, 100)
+                gridSizeSlider.size(100)
+
+                gridWidthSlider = createSlider(200, 300, 200);
+                gridWidthSlider.position(550, 100)
+                gridWidthSlider.size(255)
+
+
+
+                
+                // console.log(rSlider.style.background)
+                // rSlider.background = "red"
+
+                
+            }
+
+            function draw() {
+                clear()
+                gridSpace = {x : 500, y: 100, h: 200, w:200}
+
+
+                //i dont know, p5 is stupid
+                let r = rSlider.value();
+                let g = bSlider.value();
+                let b = gSlider.value();
+                let s = sSlider.value();
+                gridSize = gridSizeSlider.value()
+                gridWidth = gridWidthSlider.value()
+
+                gridSpace.h = gridWidth
+                gridSpace.w = gridWidth
+
+                newGridWidth = gridWidth
+                if (oldGridWidth === gridWidth) {
+                    oldGridWidth = newGridWidth
+                } else {
+                    if(arrOfShapes.length) arrOfShapes.forEach(s => s.resizeSmall(gridSpace.w / gridSize  *2))
+                    oldGridWidth = newGridWidth
+                }
+
+                // let gridWidth = gridSizeSlider.value()
+                newGridSize = gridSize
+                if (oldGridSize === newGridSize) {
+                    oldGridSize = newGridSize
+                } else {
+                    if(arrOfShapes.length) arrOfShapes.forEach(s => s.resizeSmall(gridSpace.w / gridSize  *2))
+                    oldGridSize = newGridSize
+                }
+                
+                // Set blend mode to blend colors normally, allowing transparency
+
+                if (mouseCurrentlyPressed) mouseArrPoints.push([mouseX, mouseY])
+                background(0,0,0,0);
+
+        //SLIDERS
+                //I have no idea why these have to be 40 height less than their actual counterparts
+                push()
+                    textAlign(LEFT, CENTER)
+
+                    stroke("red")
+                    strokeWeight(2)
+                    fill("Red")
+                    text("R", 30, 60)
+
+                    stroke("green")
+                    strokeWeight(2)
+                    fill("Green")
+                    text("G", 30, 100)
+
+                    stroke("blue")
+                    strokeWeight(2)
+                    fill("Blue")
+                    text("B", 30, 140)
+
+                    stroke("black")
+                    strokeWeight(1)
+                    fill("Black")
+                    text("S", 30, 180)
+                    
+                    strokeWeight(1)
+                    text(`Grid Size: ${gridSize} x ${gridSize}`, 400, 40)
+
+                pop()
+
+                
+                
+                
+        // PEOPLE 
+                push()
+                noStroke()
+                fill('black')
+
+                //conveyorY - 150
+                // image(workerPng, 320,conveyorY - 150)
+                image(workerPng, 320,450)
+
+                if (arrOfShapes.length >= 10) {
+                    //conveyorY - 150
+                    // image(worker2Png, 500,conveyorY - 150)
+                    image(worker2Png, 500,450)
+                    //conveyorY - 150
+                    // text("boss is gonna flip", 540, conveyorY - 150)
+                    text("boss is gonna flip", 540, 450)
+                }
+
+                if (arrOfShapes.length >= 25) {
+                    //conveyorY - 125
+                    image(worker3Png, 210,conveyorY - 125)
+                    // image(worker3Png, 210,475)
+                    //conveyorY-120
+                    // text("these don't create any\nvalue for shareholders", 230, conveyorY - 150)
+                    text("these don't create any\nvalue for shareholders", 230, 450)
+                }
+                
+                // worker2Image.resize(80,0)
+                fill(0,0,0,255)
+                noStroke()
+                
+                // text("man what the fuck", 400, conveyorY - 130)
+                text("man what the fuck", 400, 470)
+                
+                pop()
+
+                //conveyorY= 600
+        //CONVEYOR BELT
+                rect(-50,600,width-50, 100)
+
+                //Circles
+                for (let i = 0; i < 4; i++) {
+                    circle(200 * i + 100, 650, 100)
+                    let lineLength = 100
+                    let centerX = 200 * i + 100
+                    let centerY = 650
+                    let x1 = centerX + (lineLength / 2) * cos(frameCount);
+                    let y1 = centerY + (lineLength / 2) * sin(frameCount);
+                    let x2 = centerX - (lineLength / 2) * cos(frameCount);
+                    let y2 = centerY - (lineLength / 2) * sin(frameCount);
+                    line(x1, y1, x2, y2);
+
+                }
+                image(factoryPng, -120,250)
+
+
+        // GRID MAKING
+                let gridUnitWidth = gridSpace.w / gridSize
+                if(arrOfShapes.length) {
+                    //Make array of all shapes
+                    // let limitOfShapes = arrOfShapes.length > gridSize**gridSize ? gridSize**gridSize : arrOfShapes.length
+                    let limitOfShapes = Math.min(arrOfShapes.length, gridSize*gridSize)
+                    // console.log("limit of shapes", limitOfShapes, "arrlen", arrOfShapes.length, "gridsize * gridSize ")
+                    for (let i = 0; i < limitOfShapes; i++) {
+                        let yIndex = Math.floor(i / gridSize)
+                        let xIndex = i - yIndex * gridSize
+                        image(arrOfShapes[arrOfShapes.length - 1 - i].shapeSmall, 500 + xIndex*gridUnitWidth, 100 + yIndex * gridUnitWidth)
+                        // console.log("shape at",   500 + xIndex*20, 100 + yIndex * 20)
+                        // newImg.mouseClicked(() => console.log(arrOfShapes[arrOfShapes.length - 1 - i].currentX))
+                        // image(shape.shape)
+                    }
+                    // let limitOfShapes = arrOfShapes.length > 100 ? 100 : arrOfShapes.length
+                    // for (let i = 0; i < limitOfShapes; i++) {
+                    //     let yIndex = Math.floor(i / 10)
+                    //     let xIndex = i - yIndex * 10 
+                    //     image(arrOfShapes[arrOfShapes.length - 1 - i].shapeSmall, 500 + xIndex*gridUnitWidth, 100 + yIndex * gridUnitWidth)
+                    //     // console.log("shape at",   500 + xIndex*20, 100 + yIndex * 20)
+                    //     // newImg.mouseClicked(() => console.log(arrOfShapes[arrOfShapes.length - 1 - i].currentX))
+                    //     // image(shape.shape)
+                    // }
+                }
+
+                // push()
+                // rectMode(CENTER)
+                // rotate(radians(frameCount))
+                // rect(198, 650, 2, 100)
+                // pop()
+                
+                // savedShape ? image(savedShape, 0, 0) : console.log("no saved shape")
+
+                // if (arrOfShapes.length) {
+                //     image(arrOfShapes[0], 0,0)
+                //     arrOfShapes[0].resize(20,0)
+                // }
+
+                arrOfShapes.forEach((shape, i) => {
+                    push()
+                    // noStroke()
+                    if (shape.currentX < width) {
+                        image(shape.shape, shape.currentX, 400 + (200 - shape.realHeight/2))
+                        shape.moveRight(3)
+                    }
+                    pop()
+                })
+
+
+                fill("none")
+                stroke("black")
+                strokeWeight(2)
+
+    // DRAW AREA
+                //this is the 
+                let drawRect = rect(drawSpace.x, drawSpace.y, drawSpace.w, drawSpace.h)
+
+
+                // Draw the circle.
+                // circle(50, 50, 20);
+                push()
+                strokeWeight(s)
+                stroke(r,b,g)
+                for (let i = 0; i < mouseArrPoints.length-1; i++) {
+                    if (mouseArrPoints[i][0] > drawSpace.x &&
+                        drawSpace.x + drawSpace.w > mouseArrPoints[i][0] &&
+                        mouseArrPoints[i][1] > drawSpace.y &&
+                        drawSpace.x + drawSpace.w > mouseArrPoints[i][1] &&
+                        mouseArrPoints[i+1][0] > drawSpace.x &&
+                        drawSpace.x + drawSpace.w > mouseArrPoints[i+1][0] &&
+                        mouseArrPoints[i+1][1] > drawSpace.y &&
+                        drawSpace.x + drawSpace.w > mouseArrPoints[i+1][1]
+                    ) {
+                    line(...mouseArrPoints[i], ...mouseArrPoints[i+1])
+                    } 
+                
+                }
+                pop()
+
+            }
+
+            class ShapeWeDoin {
+                constructor(shape, shapeSmall, realHeight) {
+                    this.shape = shape,
+                    this.currentX = 20,
+                    this.shapeSmall = shapeSmall
+                    this.realHeight = realHeight
+                }
+
+                moveRight (amt) {
+                    this.currentX += amt
+                }
+
+                resizeSmall (newSize) {
+                    let newShapeSmall = this.shape.get();
+                    // Resize the new image
+                    newShapeSmall.resize(newSize, 0);
+                    // Update the shapeSmall property with the resized image
+                    this.shapeSmall = newShapeSmall;
+                }
+            }
+
+
+            // Set the stroke color and weight as soon as the user clicks.
+            function mousePressed() {
+                if (mouseX > drawSpace.x &&
+                    drawSpace.x + drawSpace.w > mouseX &&
+                    mouseY > drawSpace.y &&
+                    drawSpace.x + drawSpace.w > mouseY
+                ) {
+                    mouseCurrentlyPressed = true
+                    // console.log(mouseX, mouseY)
+    
+                    mouseArrPoints.push([mouseX, mouseY])
+                }
+                // stroke('deeppink');
+                // strokeWeight(20);
+            }
+
+            // Set the stroke and fill colors as soon as the user releases
+            // the mouse.
+            function mouseReleased(event) {
+                if (mouseCurrentlyPressed) {
+                    // stroke('royalblue');
+                    // console.log("mouse released")
+                    // console.log(event)
+    
+    
+                    mouseCurrentlyPressed = false
+                    // console.log()
+                    let newShape = get(drawSpace.x + 2, drawSpace.y + 2, drawSpace.w - 3, drawSpace.h -3)
+                    let newShapeSmall = get(drawSpace.x, drawSpace.y, drawSpace.w, drawSpace.h)
+                    // let lowestY = 0
+                    newShape = removeBG(newShape)
+                    newShapeSmall = removeBG(newShapeSmall)
+                    // newShape = removeBottom(newShape)
+                    newShape.resize(100,0)
+                    newShapeSmall.resize(gridSpace.w / gridSize,0)
+                    let realHeight = findRealHeight(newShape)
+                    // console.log()
+                    // console.log("this is gotten shape", newShape)
+                    // let resizedShape = newShape.resize(100,0)
+                    let shapeForPush = new ShapeWeDoin(newShape, newShapeSmall, realHeight)
+                    setTimeout(() => arrOfShapes.push(shapeForPush), 200)
+                    // savedShape = newShape.resize(100,0)
+                    // image(resizedShape, 0,0)
+                    // console.log("mouse released", newShape)
+                    mouseArrPoints = [] 
+                }
+            }
+
+            // Set the fill color and stroke weight after
+            // mousePressed() and mouseReleased() are called.
+            function mouseClicked() {
+            // console.log("mouseclicked", mouseX, mouseY)
+            // fill('orange');
+            // strokeWeight(10);
+            }
+
+            //come back to this, it only does the bottom alf
+            function removeBG (img) {
+                img.loadPixels();
+                let lowestY = 0
+                let lastIndex = 0
+                for (let y = 0; y < img.height * 2; y++) {
+                    for (let x = 0; x < img.width; x++) {
+                        // console.log(img.pixels)
+                        // console.log(y/img.height)
+                        let index = (x + y * img.width) * 4;
+                        let r = img.pixels[index];
+                        let g = img.pixels[index + 1];
+                        let b = img.pixels[index + 2];
+                        let a = img.pixels[index + 3];
+                        
+                        // Check if the pixel is white (r=255, g=255, b=255)
+                        if (r >= 250 && g >= 250 && b >= 250) {
+                            // Set alpha to 0 to make it fully transparent
+                            img.pixels[index + 3] = 0;
+                        } else {
+                            // console.log("lowest Index:", y)
+                        }
+                    }
+                }
+                let originalLength = img.pixels.length
+                // console.log("lowestY", lowestY)
+                img.pixels.slice(lastIndex + 1)
+                let newLength = img.pixels.length
+                // console.log("old length", originalLength, newLength, newLength)
+                // let newImg = img.get(0,0, img.width,100)
+                img.updatePixels();
+                // console.log("NEW IAMAGE", newImg)
+                // console.log("img". img.height, "newimg", newImg.height)
+                return img
+            }
+
+            function findRealHeight (img) {
+                let lowestY = 0
+                for (let y = 0; y < img.height * 2; y++) {
+                    for (let x = 0; x < img.width; x++) {
+                        // console.log(img.pixels)
+                        // console.log(y/img.height)
+                        let index = (x + y * img.width) * 4;
+                        let a = img.pixels[index + 3];
+                        
+                        // Check if the pixel is white (r=255, g=255, b=255)
+                        if (a >= 10 && y > lowestY) lowestY = y
+                    }
+                }
+                return lowestY
+            }
+        </script>
+    </body>
+</html>
