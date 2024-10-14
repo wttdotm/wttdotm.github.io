@@ -28,9 +28,14 @@
       
           </script>
           <style>
-            canvas {
+            /* canvas {
                 touch-action: none;
-            }
+            } */
+
+            /* input[type="range"] {
+                touch-action: auto;
+            } */
+
           </style>
     </head>
     <body>
@@ -127,19 +132,23 @@
                 rSlider = createSlider(0, 255, 255);
                 rSlider.position(50, 100);
                 rSlider.size(255);
+                // rSlider.addClass("mySliders");
 
                 gSlider = createSlider(0, 255, 50);
                 gSlider.position(50, 180);
                 gSlider.size(255);
+                // gSlider.addClass("mySliders");
 
                 bSlider = createSlider(0, 255, 140);
                 bSlider.position(380, 100);
                 bSlider.size(255);
+                // bSlider.addClass("mySliders");
 
 
                 sSlider = createSlider(0, 100, 20);
                 sSlider.position(380, 180);
                 sSlider.size(255);
+                // sSlider.addClass("mySliders");
 
                 
                 // console.log(rSlider.style.background)
