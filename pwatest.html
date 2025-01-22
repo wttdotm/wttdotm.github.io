@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification PWA</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk5vdGlmaWNhdGlvbiBQV0EiLAogICJzaG9ydF9uYW1lIjogIk5vdGlmeVBXQSIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZmZmIiwKICAidGhlbWVfY29sb3IiOiAiIzAwMDAwMCIKfQ==">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 1rem;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Notification PWA</h1>
+    <button id="notifyBtn">Enable Notifications</button>
+    <button id="stopBtn" disabled>Stop Notifications</button>
+
+    <script>
+        let notificationInterval;
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGNvbnNvbGUubG9nKCdTZXJ2aWNlIFdvcmtlciBpbnN0YWxsZWQnKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2FjdGl2YXRlJywgZXZlbnQgPT4gewogIGNvbnNvbGUubG9nKCdTZXJ2aWNlIFdvcmtlciBhY3RpdmF0ZWQnKTsKfSk7')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.error('ServiceWorker registration failed:', err));
+        }
+
+        // Notification functionality
+        const notifyBtn = document.getElementById('notifyBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        function startNotifications() {
+            notificationInterval = setInterval(() => {
+                new Notification('Notification', {
+                    body: 'This is a notification',
+                    icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIzMCIgZmlsbD0iIzRDQUY1MCIvPjwvc3ZnPg=='
+                });
+            }, 10000);
+            
+            notifyBtn.disabled = true;
+            stopBtn.disabled = false;
+        }
+
+        function stopNotifications() {
+            clearInterval(notificationInterval);
+            notifyBtn.disabled = false;
+            stopBtn.disabled = true;
+        }
+
+        notifyBtn.addEventListener('click', async () => {
+            if (!('Notification' in window)) {
+                alert('This browser does not support notifications');
+                return;
+            }
+
+            let permission = await Notification.requestPermission();
+            
+            if (permission === 'granted') {
+                startNotifications();
+            } else {
+                alert('Permission denied for notifications');
+            }
+        });
+
+        stopBtn.addEventListener('click', stopNotifications);
+    </script>
+</body>
+</html>
