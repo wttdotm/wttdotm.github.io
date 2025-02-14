@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bad Apple But Its A Favicon</title>
+    <link id="favicon" rel="icon" type="image/png">
+</head>
+<body>
+    <h1>Bad Apple But Its A Favicon</h1>
+    <h3>lolololololol</h3>
+    <p>hire me wttdotm at gmail dot com</p>
+    <script>
+        const FPS = 30; // Frames per second - adjust this to change speed
+        let currentFrame = 1;
+
+        function updateFavicon() {
+            // Update favicon to current frame number
+            const favicon = document.getElementById('favicon');
+            favicon.href = `./icons/${currentFrame}.png`;
+            console.log(`./icons/${currentFrame}.png`);
+            // Increment frame counter
+            currentFrame++;
+        }
+
+        // Update favicon at specified FPS
+        setInterval(updateFavicon, 1000/FPS);
+    </script>
+</body>
+</html>
