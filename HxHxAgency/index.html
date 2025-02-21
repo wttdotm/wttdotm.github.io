@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HxH Agency</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            const iframe = document.querySelector('iframe');
+            const baseUrl = 'https://gonandkilluawatchstuff--wttdotm.on.websim.ai/';
+            const queryString = window.location.search;
+            iframe.src = baseUrl + queryString;
+        }
+    </script>
+</head>
+<body>
+    <iframe allowfullscreen></iframe>
+</body>
+</html>
