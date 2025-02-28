@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doge Decimator: Government Collapse</title>
+    <meta name="description" content="Watch basic government functionality collapse as you make reckless and marginal cuts to the federal budget.">
+    <meta name="author" content="WTTDOTM">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Doge Decimator: Government Collapse">
+    <meta property="og:description" content="Watch basic government functionality collapse as you make reckless and marginal cuts to the federal budget.">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:title" content="Doge Decimator: Government Collapse">
+    <meta name="twitter:description" content="Watch basic government functionality collapse as you make reckless and marginal cuts to the federal budget.">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            const iframe = document.querySelector('iframe');
+            const baseUrl = 'https://corner-cutter-the-budget-game--wttdotm.on.websim.ai/';
+            const queryString = window.location.search;
+            iframe.src = baseUrl + queryString;
+        }
+    </script>
+</head>
+<body>
+    <iframe allowfullscreen></iframe>
+</body>
+</html>
