@@ -57,13 +57,13 @@
   
   <h2><i>"i mean... i GUESS those could be pixels": How I rendered Bad Apple in my Finder window</i></h2>
   <h2>By Morry Kolman/WTTDOTM</h2>
-  <p>I make <a href="http://DoesMyIPAddressHave69InIt.com">a</a>. <a href="http://wttdotm.com/cowStars">lot</a>. <a href="http://areyoutheasshole.com">of</a>. <a href="https://wttdotm.com/blog/bad_apple.html">stupid</a>. <a href="http://github.com/wttdotm/nubmoan">projects</a>. Sometimes, <a href="https://www.fastcompany.com/91176990/surveillance-cameras-self-photo-nyc">they become pretty big</a>, other times, <a href="https://chromewebstore.google.com/detail/dudes-hanging-out-in-art/eanfdbfaanjgniplfofgcbhdmdhghamc">they go nowhere</a>. One of the things that is consistent among the web-based ones, however, is that they all at some point need to be put online. For anything static, I just put it on Github Pages. This is a post about the ones that need more.</p>
+  <p>I make <a href="http://DoesMyIPAddressHave69InIt.com">a</a>. <a href="http://wttdotm.com/cowStars">lot</a>. <a href="https://areyoutheasshole.com">of</a>. <a href="https://wttdotm.com/blog/bad_apple.html">stupid</a>. <a href="https://github.com/wttdotm/nubmoan">projects</a>. Sometimes, <a href="https://www.fastcompany.com/91176990/surveillance-cameras-self-photo-nyc">they become pretty big</a>, other times, <a href="https://chromewebstore.google.com/detail/dudes-hanging-out-in-art/eanfdbfaanjgniplfofgcbhdmdhghamc">they go nowhere</a>. One of the things that is consistent among the web-based ones, however, is that they all at some point need to be put online. For anything static, I just put it on Github Pages. This is a post about the ones that need more.</p>
 
   <hr>
 
   <h3><strong>The VW / WV Stack</strong></h3>
 
-  <p>I just finished up a three month stint as the Artist-In-Residence at <a href="websim.ai">Websim</a>, and I want to take a second to talk about how to pair it with <a href="val.town">Val Town</a> to make a very pleasant and fun stack for building out early ideas. Let me say this from the jump: this is not a stack I would use in any kind of business or beyond-simple-SPA type app. It is, however, a combination I now enjoy for testing out proofs of concept, getting a project from 0->0.1, and in general minimizing the friction between idea and first-manifestation of that idea.</p>
+  <p>I just finished up a three month stint as the Artist-In-Residence at <a href="https://websim.ai">Websim</a>, and I want to take a second to talk about how to pair it with <a href="https://val.town">Val Town</a> to make a very pleasant and fun stack for building out early ideas. Let me say this from the jump: this is not a stack I would use in any kind of business or beyond-simple-SPA type app. It is, however, a combination I now enjoy for testing out proofs of concept, getting a project from 0->0.1, and in general minimizing the friction between idea and first-manifestation of that idea.</p>
 
   <p>So, for the uninitiated, what <em>are</em> Websim and Val Town? Well, <strong>Websim is an in-browser, AI-native website builder.</strong> You prompt for a website and the changes you want to make to it on a chatbar/changelog on the right, and you get to see and interact with the created website in realtime on the left. <strong>Val Town provides - as their founder's bio used to say - "delightful serverless functions."</strong> You can go into their website, create a "val" (which can be a one-off or email-triggered script, a regularly scheduled cronjob, or an HTTP endpoint) and code it up and run it right there in the browser.</p>
 
@@ -78,7 +78,7 @@
 
   <p>The nice thing about the last one is that they are pretty complementary. That is, Val Town is focused on easily implementable backend functionality/primitives, while kind of forgoing the goal of creating rich frontend experiences. Websim, as its name implies, is all about the website, and prioritizes making actual pages and interfaces over customizable server logic.</p>
 
-  <p>Now to be sure, I have used both platforms on their own for a number of projects. Val Town, for example, runs the email capture for my sites <a href="trafficcamphotobooth.com">Traffic Cam Photobooth</a> and <a href="firstlightstars.com">First Light</a>, as well as the <a href="https://x.com/WTTDOTM/status/1899932662120276217">website I use to let people submit pictures of my cats when they are in my window</a> via my mildly psychotic signage. For Websim, as their artist-in-residence, I make a bunch of stuff from simple to elaborate. There's the <a href="https://websim.ai/@WTTDOTM/favicon-qr-generator/">Favicon QR code generator</a>, <a href="https://wttdotm.com/dogedecimator.html">Doge Decimator</a>, <a href="https://websim.ai/@WTTDOTM/dont-cause-911/">Don't Cause 9/11 Simulator</a>, and more.</p>
+  <p>Now to be sure, I have used both platforms on their own for a number of projects. Val Town, for example, runs the email capture for my sites <a href="https://trafficcamphotobooth.com">Traffic Cam Photobooth</a> and <a href="https://firstlightstars.com">First Light</a>, as well as the <a href="https://x.com/WTTDOTM/status/1899932662120276217">website I use to let people submit pictures of my cats when they are in my window</a> via my mildly psychotic signage. For Websim, as their artist-in-residence, I make a bunch of stuff from simple to elaborate. There's the <a href="https://websim.ai/@WTTDOTM/favicon-qr-generator/">Favicon QR code generator</a>, <a href="https://wttdotm.com/dogedecimator.html">Doge Decimator</a>, <a href="https://websim.ai/@WTTDOTM/dont-cause-911/">Don't Cause 9/11 Simulator</a>, and more.</p>
 
   <p>My favorite thing I've made so far though is a very simple, very stupid website that uses both.</p>
 
@@ -98,32 +98,33 @@
   <p><em>you are looking at three iframes: the youtube player, the websim canvas, and the websim site itself</em></p>
   </iframe></p>
 
-  <h4><strong>Building HxHxAgency</strong></h4>
+  <hr/>
+  <h3><strong>Building HxHxAgency</strong></h3>
 
   <p>Ok, so there are two main problems to solve with this project: First, how do I get the video / iframe to exist within the screen in the meme, and second how do I keep it updated?</p>
 
   <p>Websim helped out a lot on the first problem. Words cannot explain how much less painful of a process it is to deal with CSS and perspective transforms when they appear on the same web page you are coding the thing in. Two main benefits to note here:
   <ol>
-      <li>Websim defaults to showing you your page, not your code, and makes it very easy to click around different versions or branches of it. I know Claude and ChatGPT have canvas / preview integrations, but they're so much clunkier.</li>
-      <li>Websim's focus on previews and iteration means you can make yourself better interfaces for building certain parts of your project. I <em>really</em> did not want to spend all day fiddling with the right numbers and coordinates for how to skew the iframe to make it fit into the meme, so instead I had Websim make the site itself a GUI for me to figure it out [v/18]. It took a number of tries, but a try in websim is like "does this do what I need it to do" and a re-prompt. Anyway, I eventually get it to this, where I - on page - can move and edit my iframe and get an easy copy-pastable values to hardcode into it. I will admit, sometimes the details can get annoying (ss of  v 22-25) but its less annoying than alt tabbing, ctrl s, refreshing, etc the entire time (and i dont care about hot reloading, the entire point of this is to not have to deal with any kind of server environment, shut up). For a while, I tried to make this work dynamically and not screw up when i resized the page, but weirdness with transforms, canvas pixels, window pixels, etc, eventually made me throw my hands up and say screw it, it'll look fine on all desktops and it'd be weird to look at on mobile anyway (though I did add a fun <a href="#">mobile screen</a>).</li>
+      <li><b>Websim defaults to showing you your page, not your code,</b> and makes it very easy to click around different versions or branches of it. I know Claude and ChatGPT have canvas / preview integrations, but they're so much clunkier.</li>
+      <li><b>Websim's focus on previews and iteration means you can make yourself better interfaces for building certain parts of your project.</b> I <em>really</em> did not want to spend all day fiddling with the right numbers and coordinates for how to skew the iframe to make it fit into the meme, so instead I had Websim make the site itself a GUI for me to figure it out [v/18]. It took a number of tries, but a try in websim is like "does this do what I need it to do" and a re-prompt. Anyway, I eventually get it to this, where I - on page - can move and edit my iframe and get an easy copy-pastable values to hardcode into it. I will admit, sometimes the details can get annoying (ss of  v 22-25) but its less annoying than alt tabbing, ctrl s, refreshing, etc the entire time (and i dont care about hot reloading, the entire point of this is to not have to deal with any kind of server environment, shut up). For a while, I tried to make this work dynamically and not screw up when i resized the page, but weirdness with transforms, canvas pixels, window pixels, etc, eventually made me throw my hands up and say screw it, it'll look fine on all desktops and it'd be weird to look at on mobile anyway (though I did add a fun <a href="#">mobile screen</a>).</li>
   </ol></p>
 
   <p>After I got the basic iframe functionality working, it was a lot of minor tweaking around what to enable the user to do (do I want to let them browse any youtube video? just ones from people I like? etc), but because the goal was to make Gon and Killua watch Blunder, the real question was how was I going to make it always show his most recent video (or at least, keep it updated / not stale).</p>
 
   <p>Now, I can't just fetch the youtube page and parse it because of CORS 🙄. Fine. Whatever. I also don't want to hardcode it because I want this thing to work seamlessly for at least a few months without intervention. I need a different solution then, there are a number of things I do not want it to include:
   <ol>
-      <li>I do not want it to hit YouTube's API on the frontend. There is no world - even with written-in-stone restrictions - that I would be comfortable exposing a key linked to my account on a site that anyone can use and remix.</li>
-      <li>I do not want it to cost money. I don't expect this to go super viral, but I also don't want to create a situation where some script kiddie makes whatever I come up with hit Google like 1 trillion times and leave me with a huge bill.</li>
-      <li>I do not want to use the YouTube API at all to be honest. It seems like overkill. I want one thing - Blunder's most recent video - and I know where it will always be - the top slot on https://www.youtube.com/@Thunderblunder777/videos. Just GIVE ME THAT.</li>
-      <li>I do not want to have some repo for this. This also feels like overkill. I don't need a server, I need a function. Why should that require several git commands and a deployment? Literally just fetch me something and return it. Hmmmm. Delightful serverless functions, where can i do that?</li>
-      <li>I do not want to actually write this thing. I know how to write it. I've written dumb scraping stuff like this before, I have a fly.io instance that scrapes the blue note website to tell me when new shows happening (by the way, the fact that I need to set a machine to be always on in fly.io is so annoying, and why do I need a Dockerfile and .toml for something so simple). I think there is a lot of value in coding something yourself (something which my friend Alex never lets me forget) but this is just repeating a pattern I already know, I can already describe what I want to happen and how to do it, and I don't want to deal with writing it out and debugging it. I want it to just exist.</li>
+      <li><b>I do not want it to hit YouTube's API on the frontend.</b> There is no world - even with written-in-stone restrictions - that I would be comfortable exposing a key linked to my account on a site that anyone can use and remix.</li>
+      <li><b>I do not want it to cost money.</b> I don't expect this to go super viral, but I also don't want to create a situation where some script kiddie makes whatever I come up with hit Google like 1 trillion times and leave me with a huge bill.</li>
+      <li><b>I do not want to use the YouTube API at all to be honest.</b> It seems like overkill. I want one thing - Blunder's most recent video - and I know where it will always be - the top slot on https://www.youtube.com/@Thunderblunder777/videos. Just GIVE ME THAT.</li>
+      <li><b>I do not want to have some repo for this.</b> This also feels like overkill. I don't need a server, I need a function. Why should that require several git commands and a deployment? Literally just fetch me something and return it. Hmmmm. Delightful serverless functions, where can i do that?</li>
+      <li><b>I do not want to actually write this thing.</b> I know how to write it. I've written dumb scraping stuff like this before, I have a fly.io instance that scrapes the blue note website to tell me when new shows happening (by the way, the fact that I need to set a machine to be always on in fly.io is so annoying, and why do I need a Dockerfile and .toml for something so simple). I think there is a lot of value in coding something yourself (something which my friend Alex never lets me forget) but this is just repeating a pattern I already know, I can already describe what I want to happen and how to do it, and I don't want to deal with writing it out and debugging it. I want it to just exist.</li>
   </ol></p>
 
   <p>Thus, I turned to Val and their AI tool Townie. I told it "make a script that goes to https://www.youtube.com/@Thunderblunder777 and gets the URL of the most recent video" and went from there. Looking back, it took 4 total prompts for me to get to the original functionality I wanted (with minor manual tweaking and iterating on the side), and 4 more to get to the slightly more advanced version that HxHxAgency runs on now. All told, probably 30-60 min of work. Now, before you say "it's like one scraping/parsing function, you could write that by hand in the same amount of time or cursor could do it even quicker", consider that is only really true locally. This workflow:
   <ol type="a">
-      <li>...was never local. It was always live, always in the cloud, always testable by any device.</li>
-      <li>...was completely free. Val's basic plan is free and includes Townie. I had one of the paid plans for Websim just due to my role but didn't do anything I couldn't have achieved with the free tier.</li>
-      <li>...was extremely contained. At no point did I ever need to go to any website or interface with any service that was no Val Town or Websim. No deployment. No pushing. No going configuration. I got the Val working, and then in much the same way I made the Val, I dropped the link into Websim, I told it "hey use this," and it <em>just worked</em>. <a href="https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/52">https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/52</a></li>
+      <li><b>...was never local.</b> It was always live, always in the cloud, always testable by any device.</li>
+      <li><b>...was completely free.</b> Val's basic plan is free and includes Townie. I had one of the paid plans for Websim just due to my role but didn't do anything I couldn't have achieved with the free tier.</li>
+      <li><b>...was extremely contained.</b> At no point did I ever need to go to any website or interface with any service that was no Val Town or Websim. No deployment. No pushing. No going configuration. I got the Val working, and then in much the same way I made the Val, I dropped the link into Websim, I told it "hey use this," and it <em>just worked</em>. <a href="https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/52">https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/52</a></li>
   </ol></p>
 
   <p>There was a lot more that went into this project afterwards. You can see that the version above is #52, and the final one is #93. I spent a lot of time adding more features (eg. YouTubers other than Blunder) flipping between Val and Websim, making its look more consistent (more on LLMs and styling at the end of <a href="https://youtu.be/0HULrJ_DlVg?t=855">this video</a>), and adding a fun bookmarklet feature (<a href="https://caiorss.github.io/bookmarklet-maker/">this tool was great</a>), but those aren't directly relevant to the topic at hand. If you want more, though, one of the wonderful things about building on both these platforms is that the development process is extremely easy to follow along with <em>live and dynamically</em> online without any futzing around with branches or moving through commits etc. Websim allows you view every iteration of the site on the project's page (<a href="https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/">which you can access here</a>) and Val provides a very nice versioning/diff view that you can click through and clone (<a href="https://www.val.town/v/wttdotm/graciousMagentaAphid/versions">which live here</a>).</p>
@@ -135,5 +136,20 @@
             for (let link of allLinks) {
                 link.target = "_blank"
             }
+
+            const iframe = document.querySelector('iframe');
+            console.log(iframe)
+            iframe.onload = function() {
+              const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+              const style = iframeDocument.createElement('style');
+              style.textContent = `
+                body {
+                  transform: scale(0.3);
+                  transform-origin: 0 0;
+                  display: none;
+                }
+              `;
+              iframeDocument.head.appendChild(style);
+            };
         </script>
   </body>
