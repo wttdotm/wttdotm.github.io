@@ -94,7 +94,7 @@
   <img src="/api/placeholder/800/450" alt="Pasted image 20250319150545.png"></p>
 
   <p>I forget exactly how I had the idea, but it occurred to me that it would be fun to take the computer in the meme and make it into an actually usable one. Or at least, make the screen of the computer appear to be somewhat functional. I think I was noodling on nesting iframes (in the websim editor itself, the thing you see on the left is an iframe, and I wanted to test how it handled nested one) and how to play around with them. In considering what they might be watching, it made sense that if Blunder watches HxH, then obviously HxH would watch Blunder. Ok, let's make it.
-  <iframe style="width: 800px; height: 450px;" src="https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/">
+  <iframe style="width: 800px; height: 450px;" src="https://websim.ai/@WTTDOTM/gonandkilluawatchstuff/?fullscreen=true">
   <p><em>you are looking at three iframes: the youtube player, the websim canvas, and the websim site itself</em></p>
   </iframe></p>
 
@@ -137,19 +137,6 @@
                 link.target = "_blank"
             }
 
-            const iframe = document.querySelector('iframe');
-            console.log(iframe)
-            iframe.onload = function() {
-              const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-              const style = iframeDocument.createElement('style');
-              style.textContent = `
-                body {
-                  transform: scale(0.3);
-                  transform-origin: 0 0;
-                  display: none;
-                }
-              `;
-              iframeDocument.head.appendChild(style);
-            };
+            
         </script>
   </body>
