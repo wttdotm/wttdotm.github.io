@@ -378,15 +378,15 @@ function addStatusText(goodBad) {
   input.value = ''; // Clear input after adding
 }
 
-function changePokemon() {
-      const input = document.getElementById('pokemonInput');
-      const sprite = document.getElementById('pokemonSprite');
-      const name = document.getElementById('pokemonName');
-      const pokemon = input.value.toLowerCase();
-      sprite.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
-      name.textContent = pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
-      input.value = '';
-    }
+// function changePokemon() {
+//       const input = document.getElementById('pokemonInput');
+//       const sprite = document.getElementById('pokemonSprite');
+//       const name = document.getElementById('pokemonName');
+//       const pokemon = input.value.toLowerCase();
+//       sprite.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
+//       name.textContent = pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
+//       input.value = '';
+//     }
 </script>
 <div class="userSelections">
   <div class="inner">
@@ -419,6 +419,8 @@ function handleInput(value) {
 
 function handleKeyDown(event) {
   if (event.key === 'Enter') {
+    updatePokemon();
+  } else if (event.key === "Tab") {
     updatePokemon();
   }
 }
@@ -469,11 +471,11 @@ function handleKeyDown(event) {
 // }
 </script>
 <div style="margin-bottom: 10px;">
-    <label>Pokemon Name:</label>
+    <label>Change Pokemon:</label>
     <div style="position: relative; display: inline-block;">
-      <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 200px; display: inline-block;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { this.value = document.getElementById('autocomplete').textContent; handleInput(this.value); } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="color: #999; margin-left: 0px; display: inline-block;"> </span>
+      <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 200px; display: inline-block;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="color: #999; margin-left: 0px; display: inline-block;"> </span>
     </div><br/>
-    <button onclick="changePokemon()">Change Pokemon</button>
+    <button onclick="updatePokemon()">Change Pokemon</button>
   </div>
 
 <label>Status Effect:</label>
@@ -787,9 +789,15 @@ document.getElementById('levelInput').addEventListener('change', function() {
 
 
 function updatePokemon() {
+  console.log("loading in pokemon no mon");
+  console.log("in update pokemon");
   // const input = document.getElementById('pokemonInput');
+  console.log("autocomplete", document.getElementById('autocomplete').innerHTML);
+  let displayName = document.getElementById('autocomplete').innerText;
+  console.log("display name", document.getElementById('autocomplete').textContent);
   let pokemon = document.getElementById('autocomplete').textContent.toLowerCase().replace(" ", '') || firstMon.toLowerCase();
-  console.log("loading in pokemon", pokemon);
+  console.log("loading in pokemon", displayName);
+  document.getElementById('pokemonInput').value = displayName;
   // let pokemon = document.getElementById('pokemonName').textContent.toLowerCase().replace(" ", '');
   if (pokemon.includes('-')) {
     let parts = pokemon.split('-');
@@ -849,7 +857,7 @@ function updatePokemon() {
   }
 
   //CHANGE NAME:
-  document.getElementById('pokemonName').textContent = document.getElementById('autocomplete').textContent.replace(" ", '') || firstMon;
+  document.getElementById('pokemonName').textContent = displayName || firstMon;
 
   const img = new Image();
   img.src = spriteUrl;
