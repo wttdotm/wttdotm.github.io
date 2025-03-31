@@ -299,6 +299,7 @@ let numSpikes = 0;
 let numTSpikes = 0;
 let numStickyWeb = 0;
 let numRocks = 0;
+let firstMon = "Quagsire"
 </script>
 </head>
 <body>
@@ -418,54 +419,54 @@ function handleInput(value) {
 
 function handleKeyDown(event) {
   if (event.key === 'Enter') {
-    changePokemon();
+    updatePokemon();
   }
 }
 
-function changePokemon() {
-  const input = document.getElementById('pokemonInput');
-  const autocomplete = document.getElementById('autocomplete');
-  const sprite = document.getElementById('pokemonSprite');
-  const name = document.getElementById('pokemonName');
+// function changePokemon() {
+//   const input = document.getElementById('pokemonInput');
+//   const autocomplete = document.getElementById('autocomplete');
+//   const sprite = document.getElementById('pokemonSprite');
+//   const name = document.getElementById('pokemonName');
   
-  let pokemon = input.value.toLowerCase();
-  let fullname = pokemon
-  pokemon = pokemon.replace(" ", '');
-  // Remove extra hyphens after first one
+//   let pokemon = autocomplete.value.toLowerCase();
+//   let fullname = pokemon
+//   pokemon = pokemon.replace(" ", '');
+//   // Remove extra hyphens after first one
 
-  console.log("pokemon", pokemon);
+//   console.log("pokemon", pokemon);
   
-  // Use autocomplete value if available
-  if (autocomplete.textContent) {
-    console.log("autocomplete", autocomplete.textContent);
-    fullname = autocomplete.textContent;
-    // pokemon = dex[autocomplete.textContent].toLowerCase();
-  }
+//   // Use autocomplete value if available
+//   if (autocomplete.textContent) {
+//     console.log("autocomplete", autocomplete.textContent);
+//     fullname = autocomplete.textContent;
+//     // pokemon = dex[autocomplete.textContent].toLowerCase();
+//   }
 
-  console.log("pokemon", pokemon);
-  if (pokemon.includes('-')) {
-    const parts = pokemon.split('-');
-    pokemon = parts[0] + "-" + parts.slice(1).join('');
-  }
-  console.log("pokemon", pokemon);
-  // Check if animated sprite exists
-  const img = new Image();
-  img.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
+//   console.log("pokemon", pokemon);
+//   if (pokemon.includes('-')) {
+//     const parts = pokemon.split('-');
+//     pokemon = parts[0] + "-" + parts.slice(1).join('');
+//   }
+//   console.log("pokemon", pokemon);
+//   // Check if animated sprite exists
+//   const img = new Image();
+//   img.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
   
-  img.onerror = function() {
-    // If animated sprite fails to load, use static sprite
-    sprite.src = `https://play.pokemonshowdown.com/sprites/gen5/${pokemon}.png`;
-  };
+//   img.onerror = function() {
+//     // If animated sprite fails to load, use static sprite
+//     sprite.src = `https://play.pokemonshowdown.com/sprites/gen5/${pokemon}.png`;
+//   };
   
-  img.onload = function() {
-    // If animated sprite loads successfully, use it
-    sprite.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
-  };
-//   sprite.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
-  name.textContent = fullname;
-  input.value = '';
-  autocomplete.textContent = '';
-}
+//   img.onload = function() {
+//     // If animated sprite loads successfully, use it
+//     sprite.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
+//   };
+// //   sprite.src = `https://play.pokemonshowdown.com/sprites/ani/${pokemon}.gif`;
+//   name.textContent = fullname;
+//   input.value = '';
+//   autocomplete.textContent = '';
+// }
 </script>
 <div style="margin-bottom: 10px;">
     <label>Pokemon Name:</label>
@@ -786,7 +787,10 @@ document.getElementById('levelInput').addEventListener('change', function() {
 
 
 function updatePokemon() {
-  let pokemon = document.getElementById('pokemonName').textContent.toLowerCase().replace(" ", '');
+  // const input = document.getElementById('pokemonInput');
+  let pokemon = document.getElementById('autocomplete').textContent.toLowerCase().replace(" ", '') || firstMon.toLowerCase();
+  console.log("loading in pokemon", pokemon);
+  // let pokemon = document.getElementById('pokemonName').textContent.toLowerCase().replace(" ", '');
   if (pokemon.includes('-')) {
     let parts = pokemon.split('-');
     pokemon = parts[0] + "-" + parts.slice(1).join('');
@@ -843,6 +847,9 @@ function updatePokemon() {
   } else {
     document.getElementById('hazards').style.zIndex = 3;
   }
+
+  //CHANGE NAME:
+  document.getElementById('pokemonName').textContent = document.getElementById('autocomplete').textContent.replace(" ", '') || firstMon;
 
   const img = new Image();
   img.src = spriteUrl;
