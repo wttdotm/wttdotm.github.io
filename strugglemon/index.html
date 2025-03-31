@@ -356,7 +356,8 @@ let nickname = "";
         </div>
       </div>
       <div style="z-index: 1;">
-        <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; height: 115px; margin-top: 15px; opacity: 1; z-index: 2;">
+        <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; margin-top: 15px; opacity: 1; z-index: 2;">
+        <!-- <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; height: 115px; margin-top: 15px; opacity: 1; z-index: 2;"> -->
       </div>
     </div>
     </div>
@@ -367,6 +368,9 @@ let nickname = "";
 <script>
 function addStatusText(goodBad) {
   const input = document.getElementById('statusInput');
+  if (!input.value.length) {
+    return
+  }
   const status = document.querySelector('.status');
   const span = document.createElement('span');
   span.className = goodBad;
@@ -878,11 +882,16 @@ function updatePokemon() {
   img.onerror = function() {
     // If animated sprite fails to load, use static sprite
     sprite.src = spriteUrl.replace('ani', 'gen5').replace('.gif', '.png');
+    
   };
   
   img.onload = function() {
     // If animated sprite loads successfully, use it
     sprite.src = spriteUrl;
+    sprite.style.width = img.width + 'px';
+    if (img.width < 80) {
+      sprite.style.width = '80px';
+    }
   };
   
 //   sprite.src = spriteUrl;
