@@ -53,6 +53,39 @@
         }
 
     </style>
+    <script>
+      async function testFetch() {
+        try {
+            const response = await fetch("https://api.webbyawards.com/api/PV/GetPVBallot", {
+                "headers": {
+                    "accept": "application/json, text/plain, */*", 
+                    "accept-language": "en-US,en;q=0.9",
+                    "content-type": "application/json;charset=UTF-8",
+                    "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"macOS\"",
+                    "sec-fetch-dest": "empty",
+                    "sec-fetch-mode": "cors", 
+                    "sec-fetch-site": "same-site"
+                },
+                "referrer": "https://vote.webbyawards.com/",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "body": "{\"PropertyCategoryID\":49087,\"PropertyID\":1,\"PVUserID\":69}",
+                "method": "POST",
+                "mode": "cors",
+                "credentials": "include"
+            });
+            const data = await response.json();
+            let totalVotes = data.Data.Entries[1].TotalVoteCount
+            document.getElementById('totalVotes').innerHTML = totalVotes
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+        // Call the test function when page loads
+        window.addEventListener('load', testFetch);
+    </script>
   </head>
   <body>
     <div class="textArea">
@@ -103,7 +136,7 @@
       <hr>
       <br/>
       <p><b>If you liked this post, please support me by voting for Traffic Cam Photobooth to win a Webby! Here's a big green button that brings you right to the voting page :)</b></p>
-      <div style="background-color: lime; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10vh;">
+      <div style="background-color: lime; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10vh; text-align: center;">
         <p><b>Now nominated for a <a href="https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird" target="_blank">Webby!</a><br/>Total Votes: <span id="totalVotes">loading...</span></b></p>
         <span>➡️ ➡️ ➡️ <button 
           onclick="window.open('https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird', '_blank')"
