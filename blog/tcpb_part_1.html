@@ -1,0 +1,138 @@
+<head>
+    <title>TCPB Part 1: The Creative Technology Ideation Process</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="../articleStyles.css" rel="stylesheet"/>
+    <meta property="og:title" content='TCPB Part 1: The Creative Technology Ideation Process' />
+    <meta property="og:type" content="website" />
+    <!-- <meta property="og:url" content="https://wttdotm.com/blog/bad_apple.html" />
+    <meta property="og:image" content="https://wttdotm.com/assets/link_previews/bad_apple_blog_post.png" /> -->
+    <style type="text/css">
+        html, body {
+            line-height: 1.6;
+            max-width: 90vw;
+            align-items: center;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        iframe {
+
+            max-width: 90%;
+        }
+         img {
+          justify-self: center;
+          align-self: center;
+          max-width: 40vw;
+         }
+
+         code {
+            background-color: lightgray;
+         }
+
+         pre {
+            background-color: lightgray;
+            max-width: 80vw ;
+            overflow-x: auto;
+        }
+
+         .textArea {
+            max-width: 100vw;
+            text-align: left;
+         }
+
+         @media screen and (max-width: 768px) {
+
+            .textArea {
+                margin-top: 0vh; 
+                font-size: small;
+                box-sizing: border-box;
+            }
+
+            img {
+                max-width: 60vw;
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="textArea">
+      <h1>The Making of Traffic Cam Photobooth Part 1:<br/>The Creative Technology Ideation Process</h1>
+      <p>Back in August, I made the site TrafficCamPhotobooth.com for fun, and it ended up blowing up. Traffic Cam Photobooth lets people take selfies with traffic cameras, and has had hundreds of thousands of users and received international press coverage. </p>
+      <p>It seems like a simple site, and it is, but it’s also the product of a pretty winding process. Being that it's now nominated for a Webby (<a href="trafficcamphotobooth.com">vote for me here!</a>), I wanted to give it some proper documentation. This is Part 1 of a multi-part series of posts that will go up regularly from now until the end of the voting period on April 17th, please follow along!</p>
+
+      <h3>From Nothing to 0</h3>
+
+      <p>Two years ago I was hunting through assorted Open Data NYC pages and found out that, while not well-documented, the NYC Department of Transportation hosted regularly updating, <a href="https://webcams.nyctmc.org/map">publicly available image feeds of their traffic cameras</a>. Surveillance sucks, and sure, this is about surveilling <i>cars</i> but (a) it still catches people in its gaze and (b) cars ALSO suck. Anyway, the silver lining is that these cameras constitute one of the easier surveillance methods to access, so I took a mental note of it and forgot about it for while.</p>
+      <p>Then, back in June 2024, two things happened:</p>
+      <ol>
+        <li>I started taking a class taught by <a href="https://mollysoda.exposed">Molly Soda</a> (great artist) through the <a href="https://sfpc.study">School for Poetic Computation</a> (great org) called <a href="https://sfpc.study/sessions/summer-24/imperfect-pictures">Imperfect Pictures</a>. It’s a tough class to describe, but I’ve tended to explain it as an investigation into what makes a good image on the internet by exploring all the different ways they can be bad: screenshots, flop posts, candids, AI garbage, etc. The penultimate assignment for the course is to “take a picture without taking it.” Basically, produce an image without being behind the camera yourself: generate it, scrape it, collage it, whatever, just don’t click a shutter.</li>
+        <li> I decided that I was getting somewhat tired of listening to <a href="https://www.youtube.com/channel/UCuFJa-IMBq4wOVeZFQHvTmQ">the same Pokemon youtuber</a> every time I did my morning yoga, and put out a poll on my instagram story asking people to reply “yes” if they would be down to receive a sporadic call from me during that time instead. Of the 20 or so people who signed up (you can sign up to, just shoot me an email with your name & number to wttdotm at gmail dot com), one of them was my friend Chris.</li>
+      </ol>
+
+      <p>According to my phone, I ended up calling Chris on July 16th, and one topic that came up was his recent exploration into iPhone shortcuts. I had always seen the app on my phone, and had futzed around with it a bit, but I'd never given it much thought. Chris encouraged me to give it a second look. A great engineer in his own right, he ran through all the automations he had set up for himself, and talked about the scripting gods on <a href="http://reddit.com/r/shortcuts">r/shortcuts</a> that had taken the tool to the next level. I was only sold as much as anyone being told to adopt a new language or app is, but sold enough to pick it up just a few days later.</p>
+
+      <p>That sunday rolls around, and I have a completely open day. I love a blank column on Google Calendar, and a day is a good unit of time to get something done. I wake up thinking, as I imagine most people do, about traffic cameras. They had been on my mind for a while. Looking back at my chat history with my friend <a href="https://alexanderpetros.com">Alex</a> in the Discord server for our group <a href="https://wemakeinter.net">We Make Internet</a>, I can see that I had made a proof of concept for a Morgan-Freeman-At-The-End-Of-The-Dark-Knight-esque site that showed you all of the feeds at once in a grid on July 2nd.</p>
+      <img src="../assets/tcpb_blogs/darkknight.jpg"/>
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Similarly, back when I had called Chris, later in the day I texted my other friend Alex (all my close friends, family, and therapist know them by "Guy Alex" and "Girl Alex") and brought up the idea of using the cameras to spell out Chappell Roan’s HOTTOGO dance (I leave it to the reader to figure out which Alex is which). </p>
+      <img src="../assets/tcpb_blogs/chappel.jpg"/>
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>I kept trying to figure out how to take these ideas a step further. They were nifty, but not exactly interesting. The cameras didn’t have video feeds, so the Dark Knight concept wouldn’t look great, and god bless Ms. Roan but I wanted to make something more than just an album/carousel of pictures. </p>
+      <p>That entire month, whenever I passed by a traffic camera I knew of (mostly just the ones on Bushwick ave), I would use it to take a selfie of myself. They weren’t great, and sometimes it was hard to see me, but it was a fun bit. I had thought briefly about how to make this more automatic, but tossed aside the idea because (as will come up later) I really did not want to deal with building an app.  </p>
+      <img src="../assets/tcpb_blogs/mobiless.png"/>
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Then, during my daily shower zone-out and thanks to Chris bringing shortcuts back into my life, I remembered the first time I had seen someone talk about using shortcuts online, and how they had set theirs up so that their coffee maker would start as soon as they entered the house. The thing that stood out to me was the location trigger: `enter area`, `initiate action`. App-like functionality without an app. The traffic cameras are all on a map, and the dataset of all 900-something of them has lat/long coordinates for each one (more to come on this in the next post). With a bit of manual effort, I could pin down the exact location they look at, and then run a shortcut when I get there. Best of all, one action you can take with a shortcut is to <i>send an HTTP request</i>. Now - however ironically given that my hot water was running out - we were cooking with gas. </p>
+      <img src="../assets/tcpb_blogs/shortcut.png"/>
+      <p>I’m a big believer in tiny tiny MVPs, and for this one, the requirements were simple: set up server to scrape and store a cache of the most recent 3 minutes of my closest traffic camera, set up an endpoint that emails me the most recent images from that cache whenever it receives a GET request, and set a shortcut to hit that endpoint whenever I enter and exit that camera’s range.</p>
+      <p>Also, I wanted to make a video about it. I’d been wanting to revive my old TikTok presence (I have about ~77k followers there) and in general start talking about my work more. I figured that while neither were trivial tasks, if I just recorded as I wrote the code, I could probably end the day with both of them.</p>
+      <p>I was right. The shortcut setup takes two minutes, and with a bit of Node, Express, SQLite, and <a href="https://fly.io">Fly.io</a>, I have a server up and running within a few hours. I enter an area, automatically send a request to one of my Fly.io endpoints, and it will send the recent pictures it has from the camera to my email (these days I'd probably try to do it with a <a href="val.town">Val</a> but whatever). 
+      <p>It was finicky, but after a couple tries I finally got it to work, and received a bunch of pictures of myself in my inbox. In retrospect, I think even the scraping and delivery of the pictures could have been accomplished through shortcuts with a bit more elbow grease, but done is better than perfect. Satisfied, I cut the video together and posted it.</p>
+      <p>It was not my best video, and I could watch it back and list off all of its flaws, but I can do that because I’ve made enough of them (over 500 by my count) that I’m at the point where with best practices and a bit of luck they can take off. This one in particular didn’t truly soar, but it did start to rack up tens of thousands of views over the next few days (now it sits right above ~100k), which some nice validation. The comments were pretty varied. Some people thought it was extremely cool, others bemoaned the surveillance state, many talked about how I shouldn’t release this because it could be used for stalking people (how they think this would happen without access to the person's physical device is an open question), and one guy even told me off for accessing the cameras and not destroying them instead. </p>
+      <p>All in all, pretty standard internet comments section.</p>
+      <p>The biggest request, however, was for me to make this an app. But again, I do not want to make an app. There are a few reasons why this one in particular would be a bad idea:</p>
+      <ol>
+        <li> In order for it to work, I would need to request constant access to a user’s location, which feels like a very ironic and somewhat delegitimizing ask for a project against surveillance.</li>
+        <li>The location data provided by an iPhone isn’t actually dependable enough to work consistently. It took me like four circles around the block to get the traffic camera to finally take a picture of me at the right time. My shortcut could only trigger when I entered a specific area with a radius of ~30 meters (iirc, and a fuzzy 30 meters at that) and it seems like app developers similarly complain about getting location data with the necessary granularity. Cameras do not take images of circles/spheres, they take images of the polyhedron of space in front of them. Additionally, that space can be pretty small (eg. a side street intersection), so the margin of smaller than what an app can realistically achieve. A circle of confidence is great for identifying that you’re probably in a building, it’s bad for telling you when you’re in frame.</li>
+        <li>Apps are dumb, cost money, take time to get on the App Store, I don’t know Swift, I don’t want to touch Xcode, and I don’t want to write something in React Native.
+        </li>
+      </ol>
+      <br/><img src="../assets/tcpb_blogs/postss.png"/>
+      <p>When Alex (guy Alex) and I talk about stuff we like on the internet, we spend as much if not more time talking about <i>why</i> we like it than the actual thing itself. To me, <i>why</i> people thought this idea was fun was clear. First, people love getting pictures of themselves. Second, it turns the tables on surveillance. Traffic cameras go from things out of your control that passively capture you as you walk by, to cameras you can leverage to take your own photos. Neither of these require an app, they just require a way to find those cameras and get those images. And so, the idea for <a href="https://TrafficCamPhotobooth.com">TrafficCamPhotobooth.com</a> was born.</p>
+      <p>Check in tomorrow for the next step in the process!</p>
+      <br/>
+      <hr>
+      <br/>
+      <p><b>If you liked this post, please support me by voting for Traffic Cam Photobooth to win a Webby! Here's a big green button that brings you right to the voting page :)</b></p>
+      <div style="background-color: lime; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10vh;">
+        <p><b>Now nominated for a <a href="https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird" target="_blank">Webby!</a><br/>Total Votes: <span id="totalVotes">loading...</span></b></p>
+        <span>➡️ ➡️ ➡️ <button 
+          onclick="window.open('https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird', '_blank')"
+          ontouchstart="this.style.backgroundColor='#00cc00'"
+          ontouchend="this.style.backgroundColor='lime'"
+          onmouseover="this.style.backgroundColor='#00cc00'; this.style.cursor='pointer'" 
+          onmouseout="this.style.backgroundColor='lime'"
+          style="background-color: lime; color: black; border-radius: 10px; border: 3px solid black; padding: 10px; font-size: 1.2em; font-weight: bolder; margin-bottom: 10px; -webkit-tap-highlight-color: transparent;">VOTE HERE</button> ⬅️ ⬅️ ⬅️</span>
+          <p style="font-size: small;">vote and reload to see it change :)</p>
+      </div>
+      </div>
+        <script>
+            allLinks = document.getElementsByTagName("a")
+            for (let link of allLinks) {
+                link.target = "_blank"
+            }
+
+            allImgs = document.getElementsByTagName("img")
+            for (let img of allImgs) {
+                // set max height to 80px
+                // add an onclick event that makes the max height 50vh or back to 80px
+                img.style.maxHeight = "160px"
+                img.onclick = function() {
+                    if (img.style.maxHeight === "160px") {
+                        img.style.maxHeight = "50vh"
+                    } else {
+                        img.style.maxHeight = "160px"
+                    }
+                }
+            }
+        </script>
+  </body>
