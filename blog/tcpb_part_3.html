@@ -1,0 +1,136 @@
+<head>
+    <title>TCPB Part 3: Making The Site</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="../articleStyles.css" rel="stylesheet"/>
+    <meta property="og:title" content='TCPB Part 3: Making The Site' />
+    <meta property="og:type" content="website" />
+    <!-- <meta property="og:url" content="https://wttdotm.com/blog/bad_apple.html" />
+    <meta property="og:image" content="https://wttdotm.com/assets/link_previews/bad_apple_blog_post.png" /> -->
+    <style type="text/css">
+        html, body {
+            line-height: 1.6;
+            max-width: 90vw;
+            align-items: center;
+        }
+
+        iframe {
+
+            max-width: 90%;
+        }
+         img {
+            max-width: 40vw;
+         }
+
+         code {
+            background-color: lightgray;
+         }
+
+         pre {
+            background-color: lightgray;
+            max-width: 80vw ;
+            overflow-x: auto;
+        }
+
+         .textArea {
+            max-width: 100vw;
+            text-align: left;
+         }
+
+         @media screen and (max-width: 768px) {
+
+            .textArea {
+                margin-top: 0vh; 
+                font-size: small;
+                box-sizing: border-box;
+            }
+
+            img {
+                max-width: 90vw;
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="textArea">
+      <h1>The Making of Traffic Cam Photobooth Part 3:<br/>Making The Site</h1>
+      
+      <p>In light of Traffic Cam Photobooth being nominated for a Webby (a <a href="trafficcamphotobooth.com">voting link is live on my site</a>), I wanted to do some small write-ups on how I made it. This is the third one, here is the <a href="./tcpb_part_1.html">first one about the initial idea</a> and the <a href="./tcpb_part_2.html">second one about the data scraping process</a>.</p>
+
+      <p>When we last talked about the main arc of Traffic Cam Photobooth's development, we had just gotten to the idea for it: a website that lets people take selfies with surveillance. This post is about finally building that.</p>
+      
+      <h3>Static Sites: Free, Easy, Useful</h3>
+
+      <p>Before we even begin to discuss the site itself, let's talk about how I wanted it to live. For the majority of its time in the internet limelight, Traffic Cam Photobooth's entire site was statically generated and hosted as plain HTML files on <a href="https://pages.github.com">GitHub Pages</a>. I chose this approach for a few reasons:</p>
+      <ol>
+        <li><b>It’s easy.</b> I love GitHub Pages. If there is one thing I wish I could convey to Tumblr generation, many of whom yearn for a site of their own like they used to have while being (understandably) daunted by the prospect of going about putting something online, it would be just how easy it is to use GH Pages to do so. The site itself now has its own repo, but you can see that at the beginning I just threw it in my own personal repo (the same one this blog lives on, also using GH Pages) to get the basic skeleton up and running. The time-to-live, while not unmatched by other methods, is fast enough there’s no need to consider them.  </li>
+        <li><b>It’s free.</b> Sites of mine have gone viral before, and while I do not expect every site I make to go viral, I do consider the potential consequences of it doing so. A few weeks ago, my friend Nolen launched his now-famous site One Million Checkboxes, and was a few key conversations <a href="#"> link to Nolen’s blog </a> away from getting reamed on server cost. Using GH Pages means that, while I cannot achieve the functionality that he did, I can make sure that the only cost I ever have associated with my site is my yearly tithe to GoDaddy to keep the domain name. </li>
+        <li><b>It forces better design.</b> The obvious problem with a static hosting service is that there is no backend, no server, no anything. Every bit of functionality must be executable on the user’s device entirely independently of anything else. Worse, these devices will be almost exclusively phones. I’ll point out the few places where this constraint gets dealt with in the actual code of the website, but I think its benefits are more evident in what it made me <i>not</i> have to code. Without a server, I was forced to throw out idea of caching images of traffic cameras to serve them to users that I detail in the proof-of-concept stage in <a href="./tcpb_part_1.html">part 1</a> of this series. I was also prevented from from making the photobooth interface out of a P5.js canvas because the DoT website would be serving the images instead of myself, and you can't import external images to a canvas. Lastly, it set a kind of effort-cap on caring about future iteration. With a server, you can add a LOT more functionality to add new cities than you can with just a browser, but I didn’t know how much I wanted to open that door (I have since opened it, and it's a pain in the ass and costs me money).</li>
+      </ol>
+
+      <h3>Building Fast To Build At All</h3>
+      <p>Those bullets are all subsets of a much bigger concept in development for me, which is <i>momentum.</i></p>
+      <p>Ideas are free. This thing was theoretically cool in concept, it would only be <i>actually</i> cool if it was live. In order to make that happen, I have to manage my own motivation as much as I do my codebase. There is a time for picking up new frameworks, pushing myself on functionality, or generally going above and beyond (in fact, I have <a href="../../69suite.html">a page on my site that talks about my own favorite personal method of skill acquisition</a>). </p>
+      <p>This site, however, did not need to go above and beyond, it just needed to exist. To that end, things that were in other context learning opportunities here constituted potential stumbling blocks and shiny distractions. Keeping it moving meant keeping it simple.</p>
+      <p>Anyway, as that would lend you to presume, the site I ended up building was very basic. It’s pretty much just a 4-page flow, but each page has at least one interesting thing to talk about. Let’s go through them one by one. I wrote this section before it blew up, so there’s more on this later.</p>
+      <ul>
+        <li>  
+          <b>The home page and lazy styling.</b> I’m a big fan of the centered, clean, monospaced courier layout. Minimalism, while not winning you any web design awards, sets the lower bound on how bad your website can look extremely high. It also means that you get to spend less time thinking about CSS, and nothing kills my momentum like constantly editing and reloading incremental CSS changes.
+          <br/>
+          <img src="# home page" class="expandableimage">
+        </li>
+        <li>  
+          <b>The “find your camera” page and computers being fast.</b> One of the benefits of not having a server is I get to structurally separate myself from ever touching a user’s location data, which for a site about surveillance seems important. It does, however, mean that the user’s device must figure that out for themselves where the nearest camera is. Luckily, text is small, phones are fast, and bandwidth is cheap, so I just send the locations of every single camera (all 900+ of them) over as one big `const allCameras = [literally all of them]`. Should I separate this out into its own separate file? Maybe. But I like that there is only ever one request the user’s browser has to make for the page to be functional and that’s the page itself. This is also the first page where my hacky cache-busting solution comes into play. Traffic cameras stay live by constantly updating the image hosted at a unique and static URL. Combine this with the fact that browsers will cache images by URL to avoid reloading the same one multiple times, and you get an inability to update or refresh the traffic camera the user sees on screen. Even if I deleted and then remade the image tag, I still ran into caching problems. It is neither novel nor particularly genius, but the simplest solution I found was to make the URLs look different to the browser by adding a completely random URL parameter at the end of each image source. On this page and every successive one, that’s how I’m able to constantly get the most up-to-date image from a single location. 
+          <br/>
+          <img src="# find camera" class="expandableimage">
+        </li>
+        <li>  
+          <b>The “interstitial” page and user testing.</b> This was the last page I made, and was the result of the experience of the one (1) person in the group chat I sent this to for beta testing that actually got back to me — she had trouble actually seeing herself! As someone who was familiar with the cameras and how to deal with their graininess, I hadn’t considered the way an inexperienced user would approach them, and that there might actually need to be a bit of onboarding. Prior to software engineering, my background was in performance marketing (which will become somewhat relevant later) so I <i>really</i> did not want to add another page/step in the funnel if I didn’t have to, but it seemed necessary to ensure that every user knew how to operate the tool they were there to have fun with. Also, this page is where the only aspect of state that this site deals with comes into play: I pass the camera id & image link as url parameters from one page to the next for both this and the photobooth page. 
+          <br/>
+          <img src="# faith screenshot" class="expandableimage"/>
+          <p style="font-size: small;">Mind you, she's a Yale grad.</p>
+        </li>
+        <li>  
+          <b>The photobooth page and UX for social.</b> As I mentioned above, I originally wanted this page to be just one big p5 canvas, like <a href="https://wttdotm.com/cowStars">others I had done before</a>. As mentioned however, due to CORS restrictions, browsers will not let you bring images from other sites into your own canvas contexts, and I kept just getting a lot of “tainted canvas” errors. No canvas not only means that I can’t freely manipulate the images to my liking, it also means that I can’t let users easily download whatever I present to them. That's a problem. This thing <i>had</i> to he sharable, and for that it <i>had</i> to go easily into the user’s camera roll. In lieu of a download, then, I had to design for it to be screenshotted — <i>the page must also be the product</i>. I ripped some film strip CSS from a <a href="https://css-shape.com/film-strip">free resource site</a> (which, in writing this, I went back to throw some cash at his ko-fi) and got it working pretty quickly. I’m also a <a href="../../solLeWittQRCodes">fan of hiding / unhiding divs</a> as a way of slapping together a SPA experience, and so if you dig into <a href="# [here LINK TO SPECIFIC LINE]()">the source you can see the implementation of the polaroid feature does exactly that</a>. 
+          <br/>
+          <img src="# photobooth page" class="expandableimage">
+        </li>
+      </ul>
+
+      <p>Together, all of this took just a few days to put together. In classic 80/20 fashion, the main functionality was completed in a number of hours while the actual launch took more time to polish. </p>
+
+      <h3>Launch Prep</h3>
+
+      <p>Two real things needed to be done before this could go live. First, I needed to figure out a way to track how many users I got. Second, I needed to make a video.</p>
+
+      <p>The thing about making a site against surveillance is that it would be pretty ironic to track users with, say, Google Analytics. “Let me just make a site about how you should pay more attention to the cameras all around you, but pay no mind to the tag sending your data over to Mr. Pichai so that I can see how many hits I get.” So, I did what anyone sufficiently robust about this issue (or pedantic, you choose) would do, I <a href="# need link">rolled my LINKKKK own pixel</a>. It's not pretty, but it works!</p>
+
+      <p>The benefit of doing that is that it means I know (and users can verify) exactly what is being tracked, and how narrow that scope is. Whenever someone loads the home page of TrafficCamPhotobooth.com, the site fires off a ping to the <a href="https://WeMakeInter.net">WeMakeInter.net</a> PHP server that my pixel's database lives on. The same thing happens when a they take a picture. Aside from a referring URL to differentiate the two events, which frame a user is using for a picture, an IP address to determine unique users, and a timestamp, nothing else is captured. I <i>can’t even tell where the pictures are being taken</i> (again, I do not want know user’s locations if I don’t have to) which became a funny but topical problem when news outlets started asking which cameras were most popular. More on that in the next post.</p>
+      
+      <p>With literally everything code-wise done, I spent that Sunday filming a video that would officially launch the project. I agonized over what to cover and how to make it engaging. I agonized even more about the lighting in my basement/studio, which I still don’t think I have right. Ultimately, however, the hours of 12am-3am tend to be something of a <a href="# DBZ LINK">hyperbolic time DBZ LINK chamber</a> for me when it comes to the production process, and I ended the evening with everything I needed for launch in hand. I’m trying to “open source” this part of my process too, so you can see the entire footage from my camera that I cut to make the <a href="https://drive.google.com/drive/folders/1XvCKJ3vykthwZEYrTSgwpedFsmKp6-jn?usp=drive_link">final video here</a>, compressed in resolution from the raw for space.</p>
+      <img src="# gif of raw video">
+
+      <p>At this point, the site is built and the video is made. TrafficCamPhotobooth.com is ready to go live. See you in Part 4, when we'll hit "Post."</p>
+
+      <hr/>
+
+      <p>If you liked this post, please support me by voting for Traffic Cam Photobooth to win a Webby! Here's a big green button that brings you right to the voting page :)</p>
+      <div style="background-color: lime; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10vh;">
+        <p><b>Now nominated for a <a href="https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird" target="_blank">Webby!</a><br/>Total Votes: <span id="totalVotes">loading...</span></b></p>
+        <span>➡️ ➡️ ➡️ <button 
+          onclick="window.open('https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird', '_blank')"
+          ontouchstart="this.style.backgroundColor='#00cc00'"
+          ontouchend="this.style.backgroundColor='lime'"
+          onmouseover="this.style.backgroundColor='#00cc00'; this.style.cursor='pointer'" 
+          onmouseout="this.style.backgroundColor='lime'"
+          style="background-color: lime; color: black; border-radius: 10px; border: 3px solid black; padding: 10px; font-size: 1.2em; font-weight: bolder; margin-bottom: 10px; -webkit-tap-highlight-color: transparent;">VOTE HERE</button> ⬅️ ⬅️ ⬅️</span>
+          <p style="font-size: small;">vote and reload to see it change :)</p>
+      </div>
+      </div>
+        <script>
+            allLinks = document.getElementsByTagName("a")
+            for (let link of allLinks) {
+                link.target = "_blank"
+            }
+        </script>
+  </body>
