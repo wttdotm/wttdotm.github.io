@@ -1,0 +1,196 @@
+<head>
+    <title>TCPB Part 2: Scraping Government Data</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="../articleStyles.css" rel="stylesheet"/>
+    <meta property="og:title" content='TCPB Part 2: Scraping Government Data' />
+    <meta property="og:type" content="website" />
+    <!-- <meta property="og:url" content="https://wttdotm.com/blog/bad_apple.html" />
+    <meta property="og:image" content="https://wttdotm.com/assets/link_previews/bad_apple_blog_post.png" /> -->
+    <style type="text/css">
+        html, body {
+            line-height: 1.6;
+            max-width: 90vw;
+            align-items: center;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        iframe {
+
+            max-width: 90%;
+        }
+        img {
+          justify-self: center;
+          align-self: center;
+          max-width: 40vw;
+         }
+
+         code {
+            background-color: lightgray;
+         }
+
+         pre {
+            background-color: lightgray;
+            max-width: 80vw ;
+            overflow-x: auto;
+        }
+
+         .textArea {
+            max-width: 100vw;
+            text-align: left;
+         }
+
+         @media screen and (max-width: 768px) {
+
+            .textArea {
+                margin-top: 0vh; 
+                font-size: small;
+                box-sizing: border-box;
+            }
+
+            img {
+                max-width: 60vw;
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="textArea">
+      <h1>The Making of Traffic Cam Photobooth Part 2:<br/>Scraping Government Data</h1>
+      
+      <p>In light of Traffic Cam Photobooth being nominated for a Webby (a <a href="https://trafficcamphotobooth.com">voting link is live on my site</a>), I wanted to do some small write-ups on how I made it. This is the second one, which previously appeared as a <a href="https://twitter.com/wttdotm">Twitter thread</a>, and it's all about working with undocumented data.</p>
+
+      <p>TrafficCamPhotobooth.com currently supports taking selfies at over 2,000 traffic cameras internationally (well, 4 states and one camera in Ireland). When it blew up, however it only had 900 -- all of the ones in New York City. In <a href="./tcpb_part_1.html">Part 1</a>, I briefly mentioned that <i>"the NYC Department of Transportation hosted regularly updating, publicly available image <a href="https://webcams.nyctmc.org/map">feeds of their traffic cameras</a>"</i>. This is not common knowledge. It's not an "Open Data" initiative, nor is there any information about them anywhere. How, then, was I able to get my hands on these feeds? The answer is a great (and accessible for beginners!) guide to data scraping.</p>
+
+      <h3>All Their Data Are Belong To You</h3>
+
+      <p>I think the biggest thing I wish I could get into people's heads is that they have more access to data than they realize. You own your computer. If there is data being displayed on your computer, you have access to it. This is true across anything that appears in your browser: website browser source code, user data, media, etc. It might not be pretty, it could be obscured, minified, hid behind auth, whatever, but it's definitely there.</p>
+      <p>Once you internalize this, you realize that you have a LOT more access to data than you thought. This truth is behind so many of my projects:</p>
+      <ul>
+        <li><a href="https://www.tiktok.com/@wttdotm/video/7247952699814202667">The TikTok Clock</a>, which scrapes the webpage of my TikTok analytics data to get the cumulative view-hours of my channel and compare it to my lifespan.</li>
+        <li>blueNoteScrape, which monitors the Blue Note website for new ticket drops before they get announced.</li>
+        <li><a href="https://github.com/wttdotm/sheetMusicToVideoPDF">sheetMusicToVideoPDF</a>, which converts youtube videos of sheet music into PDFs for me to use in practice.</li>
+        <li>and more</li>
+      </ul>
+
+      <p>Traffic Cam Photobooth is the same way, let's dive into how! If you want to, you can follow along with this guide yourself by opening the <a href-"https://webcams.nyctmc.org">NYC DoT traffic camera website</a>.</p>
+
+      <h3>Scraping Government Data</h3>
+      <p>Let's start at the beginning. Here's a screenshot of the <a href="https://webcams.nyctmc.org/map">NYC DoT Traffic Camera map</a>.</p>
+      <img src="../assets/tcpb_blogs/map.png">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>What do we notice here? Even without zooming, what can we figure out? Well we can see that...</p>
+      <ol>
+        <li>There are a bunch of markers on a map, which is appearing in a browser tab on our own computer, which means there is probably some big dataset on our device right now that holds each marker and its coordinates.</li>
+        <li>Most of the markers are bunched together for ease of rendering, but there's a marker that's just a camera.  </li>
+      </ol>
+      <p>(1) tells us what to look for, and (2) gives us a good starting point for how to dig in. Let's follow the camera. If we click on the camera marker, we get this popup.</p>
+      <img src="../assets/tcpb_blogs/caminmap.png">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Again, what do we notice here? The things that stand out are...</p>
+      <ol>
+        <li>A location, "Hyland Blvd @ Guyon Ave"</li>  
+        <li>An image that has:<ul>
+          <li>A picture from the traffic camera with...  </li>
+          <li>A timestamp on top of the picture</li>
+          </ul>
+        </li>
+      </ol>
+      <p>But wait... there's something else. If you're truly following along on the website, you'll notice something. The image is updating! Pretty frequently!</p>
+      <img src="../assets/tcpb_blogs/webcamgif.gif">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Wait, so is this an image, or is a like sub-1 FPS video feed? Well, one way to find out. Let's right click on it and see what options we have. Do so and it says "open image." Cool, so it's indeed an image. It just gets updated every few seconds. </p>
+      <p>Hold up though, that's a bigger deal than it sounds. Our computer is getting pictures of a traffic camera at a fast and regular interval. That means, _we_ can get pictures of these traffic cameras at fast and regular intervals. This is the entire MO of TrafficCamPhotobooth.com! </p>
+      <p>But our browser getting these images for us and us grabbing them ourselves are two different things. How do we take this data into our own hands? Well, the data is right there in front of us, let's open the image in a new tab.</p>
+      <img src="../assets/tcpb_blogs/1camfirstload.png">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Alright, at this point, you know the drill: looking at our browser, what do we see?</p>
+      <ol>
+        <li>The image, as was to be expected</li>
+        <li>A pretty long address in the URL bar: "<a href="https://webcams.nyctmc.org/api/cameras/907af141-b289-47d3-9f41-edc7667cff7e/image?t=1743798376819">https://webcams.nyctmc.org/api/cameras/907af141-b289-47d3-9f41-edc7667cff7e/image?t=1743798376819</a>"</li>
+      </ol>
+      <p>URLs can tell you so much about accessing data. Let's break this one down. </p>
+      <ul>
+        <li>`webcams.nyctmc.org`, the domain</li>
+        <li>`/api`, an API route, which appears to be public seeing that we have no trouble loading it</li>
+        <li>`/cameras`, so there's an API route specifically for camera</li>
+        <li>`907af141-b289-47d3-9f41-edc7667cff7e`, this looks like an id</li>
+        <li>`/image`, requests the image specifically from the ID</li>
+        <li>`?t=1743798376819`, a timestamp</li>
+      </ul>
+      <p>My normal approach when I see a URL like this is just to delete stuff and see what changes or breaks. This helps me get information about what different parts of that URL do. We can get our first piece of information without deleting anything though. Just reload the page.</p>
+      <img src="../assets/tcpb_blogs/1camreload.png">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Notice anything? We reloaded the same URL, but the image changed! So that tells me that our timestamp parameter (`?t=1743798376819`) doesn't access an image from a specific time, and is probably just used on the backend for logging which images get requested when.</p>
+      <p>Again, this innocuous fact conceals a much more useful truth: these URLs are static! They don't change! It's always the same URL (`https://webcams.nyctmc.org/api/cameras/[camera_id]/image[optional_time_parameter]`)! Every traffic camera has a publicly accessible and unchanging URL that you can request at any time to get its most recent (to the near second) image.</p>
+      <p>Great, so we can get this camera's picture whenever we want. Big W for us. Can we get any other stuff?  Let's chop off the "/image" path: "<a href="https://webcams.nyctmc.org/api/cameras/907af141-b289-47d3-9f41-edc7667cff7e">https://webcams.nyctmc.org/api/cameras/907af141-b289-47d3-9f41-edc7667cff7e</a>"</p>
+      <img src="../assets/tcpb_blogs/1camjson.png">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Oh hey, we get a JSON! What's in here?</p>
+      <ul>
+        <li>`id`: the same ID we see in the url</li>
+        <li>`name`: the name of the camera</li>
+        <li>`latitude` and `longitude`: we knew these were gonna show up, these coordinates are how the icons are placed on the map.</li>
+        <li>`area`: NYC borough</li>
+        <li>`isOnline`: online status (they go down for maintenance)</li>
+        <li>`imageURL`: slightly redundant, given that we already know it's just "this URL + /image" but nice to have</li>
+      </ul>
+      <p>So now we know how to get all the available data and current image for *this* camera, how do we do it for *any* camera?  You guessed it, let's lop off the next part of the URL (the ID) and see what happens: "<a href="https://webcams.nyctmc.org/api/cameras">https://webcams.nyctmc.org/api/cameras"</a></p>
+      <img src="../assets/tcpb_blogs/fulljsongif.gif">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>Oh hey, a bigger JSON! This looks to be the motherload. It's an array of hundreds of camera objects, probably every one available on the DOT's website, which means every one in the city. Can I go any further? Can I lop off "/cameras"? </p>
+      <img src="../assets/tcpb_blogs/api404.png">
+      <p style="font-size: x-small;"><i>Click to expand.</i></p>
+      <p>No, I cannot, I get 404d, but I've gotten what I needed. In just 5 page loads, I have access to coordinates, image URLs, online status, and more for every traffic camera in the city.</p>
+      <p>That's a stat that's worth reinforcing. Let's recount each page load:</p>
+      <ol>
+        <li>load the map at <a href="https://webcams.nyctmc.org/map">https://webcams.nyctmc.org/map</a></li>
+        <li>open the image from one of the icons in a new tab</li>
+        <li>reload the image to see if the timestamp parameter in the URL matters</li>
+        <li>remove the image path to see what other data the camera at that ID has</li>
+        <li>remove the specific ID and see that information repeated for every ID</li>
+      </ol>
+
+      <p>If I wanted to, say, make a site that allowed anyone to find their nearest traffic camera and take a picture with it, the data produced by this process would be sufficient. And it was! For the first several months of <a href="https://trafficCamPhotobooth.com">TrafficCamPhotobooth.com</a>'s existence I literally just pasted this entire JSON object at the top of the `script` tag. Check it out in the <a href="https://github.com/wttdotm/traffic_cam_photobooth/commit/21503765ceaffad8e63f74b1f4df41ea151c06f8#diff-79af1cd54a6366a52a6eec071c20a6a3ee4e544560e09aacaea9a9b403ddef0f">commit history</a>. Ugly? Sure. An extremely performant way to give the user's device everything it needs to run the site and find all the relevant traffic cameras locally? You bet your ass.</p>
+
+      <h3>Conclusion</h3>
+      <p>I want to highlight that <i>this is not a technical task</i>. I didn't open any developer tools, nor did I write a single line of code. All I did was open an image, make observations, and delete stuff!</p>
+      <p>For years, my Twitter display name has been "No More Docile Users," and this is a great example of what I mean. Our browsers don't just _display_ the internet, they _request and interpret_ it. To render the map page, my browser had to ping the DoT's API and ask for all the data of all the cameras to put on the map. Because I can do anything my browser can do, I can get that information too. There are many ways to achieve that, and this is definitely one of the simpler ones, but the broader point is this: <b>the data on your screen is always in your hands.</b></p>
+      <p>So go open up some images, mess with some URLs, and let me know what you find. The more active a participant you are in the way your devices and programs interact with the internet, the higher your agency on the web.</p>
+
+      <hr/>
+
+      <p>If you liked this post, please support me by voting for Traffic Cam Photobooth to win a Webby! Here's a big green button that brings you right to the voting page :)</p>
+      <div style="background-color: lime; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10vh;">
+        <p><b>Now nominated for a <a href="https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird" target="_blank">Webby!</a><br/>Total Votes: <span id="totalVotes">loading...</span></b></p>
+        <span>➡️ ➡️ ➡️ <button 
+          onclick="window.open('https://vote.webbyawards.com/PublicVoting#/2025/websites-and-mobile-sites/general-desktop-mobile-sites/weird', '_blank')"
+          ontouchstart="this.style.backgroundColor='#00cc00'"
+          ontouchend="this.style.backgroundColor='lime'"
+          onmouseover="this.style.backgroundColor='#00cc00'; this.style.cursor='pointer'" 
+          onmouseout="this.style.backgroundColor='lime'"
+          style="background-color: lime; color: black; border-radius: 10px; border: 3px solid black; padding: 10px; font-size: 1.2em; font-weight: bolder; margin-bottom: 10px; -webkit-tap-highlight-color: transparent;">VOTE HERE</button> ⬅️ ⬅️ ⬅️</span>
+          <p style="font-size: small;">vote and reload to see it change :)</p>
+      </div>
+      </div>
+        <script>
+            allLinks = document.getElementsByTagName("a")
+            for (let link of allLinks) {
+                link.target = "_blank"
+            }
+
+            let allImgs = document.getElementsByTagName("img")
+            for (let img of allImgs) {
+                // set max height to 80px
+                // add an onclick event that makes the max height 50vh or back to 80px
+                img.style.maxHeight = "160px"
+                img.onclick = function() {
+                    if (img.style.maxHeight === "160px") {
+                        img.style.maxHeight = "50vh"
+                    } else {
+                        img.style.maxHeight = "160px"
+                    }
+                }
+            }
+        </script>
+  </body>
