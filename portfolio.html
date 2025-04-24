@@ -27,23 +27,38 @@
     .projectHeaderImage {
       max-width: 50%;
     }
+
+    @media only screen and (max-width: 600px) {
+      .projectHeader {
+        flex-direction: column;
+      }
+      .projectHeaderText, 
+      .projectHeaderImage {
+        max-width: 100%;
+        min-width: 100%;
+      }
+      iframe,
+      img.mainImage {
+        height: 200px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="textArea" style="text-align: left;">
     <h1>Portfolio</h1>
 
-
+    <!-- <h3>Sort By: <span id="dateSort" onclick="dateSort()">Date</span>, <span id="mediumSort" onclick="mediumSort()">Medium</span>, <span id="titleSort" onclick="titleSort()">Title</span></h3> -->
     <h2>Major Work:</h2>
 
 
     <div class="project">
+      <h2>Mr. Beast Saying Increasingly Large Amounts of Money</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>Mr. Beast Saying Increasingly Large Amounts of Money</h3>
           <p><i><span id="medium">Film</span> <br/>
             Mr. Beast Videos and Python<br/>
-            <span id="date">2024</i></span></p>
+            <span class="date">2024</i></span></p>
         </div>
         <iframe class="projectHeaderImage" width="1189" height="669" src="https://www.youtube.com/embed/umPvpcClzE0" title="Mr. Beast Saying Increasingly Large Amounts of Money (Unabridged)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
@@ -59,12 +74,12 @@
     </div>
 
     <div class="project">
+      <h2>Traffic Cam Photobooth</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>Traffic Cam Photobooth</h3>
           <p><i><span id="medium">Website</span> <br/>
             HTML, CSS, and JavaScript<br/>
-            <span id="date">2024</i></span></p>
+            <span class="date">2024</i></span></p>
         </div>
         <img class="projectHeaderImage" src="https://trafficcamphotobooth.com/linkPreview.png"/>
       </div>
@@ -83,12 +98,12 @@
       <hr/>
     </div>
     <div class="project">
+      <h2>Are You The Asshole</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>Are You The Asshole</h3>
           <p><i><span id="medium">Website</span> <br/>
             Python, HTML, CSS, and JavaScript<br/>
-            <span id="date">2022</i></span></p>
+            <span class="date">2022</i></span></p>
         </div>
         <img class="projectHeaderImage" src="assets/portfolio_assets/ayta/AYTA.png"/>
       </div>
@@ -112,12 +127,12 @@
     </div>
 
     <div class="project">
+      <h2>First Light</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>First Light</h3>
           <p><i><span id="medium">Envelopes, Paper, Website</span> <br/>
             Python, HTML, CSS, and JavaScript<br/>
-            <span id="date">2025</i></span></p>
+            <span class="date">2025</i></span></p>
         </div>
         <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/>
       </div>
@@ -131,12 +146,12 @@
     </div>
 
     <div class="project">
+      <h2>TikTok Clock</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>TikTok Clock</h3>
           <p><i><span id="medium">Digital Clock</span> <br/>
             Python, Rasbperry Pi<br/>
-            <span id="date">2022</i></span></p>
+            <span class="date">2022</i></span></p>
         </div>
         <img class="projectHeaderImage" src="./assets/portfolio_assets/tiktokclock.png"/>
       </div>
@@ -149,12 +164,12 @@
     </div>
 
     <div class="project">
+      <h2>Sol LeWitt QR Code Generator</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>Sol LeWitt QR Code Generator</h3>
           <p><i><span id="medium">Paper, Website</span> <br/>
             HTML, CSS, and JavaScript<br/>
-            <span id="date">2024</i></span></p>
+            <span class="date">2024</i></span></p>
         </div>
         <img class="projectHeaderImage" src="assets/portfolio_assets/lewitt/lewittpreview.png"/>
       </div>
@@ -166,12 +181,12 @@
     </div>
 
     <div class="project">
+      <h2>The Little Tok of Horrors</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
-          <h3>The Little Tok of Horrors</h3>
           <p><i><span id="medium">Film</span> <br/>
             The Little Shop of Horrors and HexEdit<br/>
-            <span id="date">2021</i></span></p>
+            <span class="date">2021</i></span></p>
         </div>
         <img class="projectHeaderImage" src="./images/hexEditor.png"/>
       </div>
@@ -189,18 +204,13 @@
         <hr/>
     </div>
 
-
-
-
-    <h2>Minor Work:</h2>
-
     <div class="project">
       <div class="projectHeader">
         <div class="projectHeaderText">
           <h3>Twice As Many Stars, after Laura Giplin</h3>
           <p><i><span id="medium">Website, Poem</span> <br/>
             HTML, CSS, and JavaScript<br/>
-            <span id="date">2023</i></span></p>
+            <span class="date">2023</i></span></p>
         </div>
         <img onclick="window.open('https://wttdotm.com/cowStars', '_blank')" class="projectHeaderImage" src="./assets/portfolio_assets/cowStarsPreview.gif">
       </div>
@@ -219,7 +229,7 @@
           <h3>Bad Apple But It's My Finder Window</h3>
           <p><i><span id="medium">Video</span> <br/>
             Python and AppleScript<br/>
-            <span id="date">2024</i></span></p>
+            <span class="date">2024</i></span></p>
         </div>
         <iframe class="projectHeaderImage" width="1131" height="698" src="https://www.youtube.com/embed/Vgqqeuf2-8g" title="Bad Apple But It&#39;s My Finder Window" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
@@ -238,7 +248,7 @@
           <h3>Nubmoan</h3>
           <p><i><span id="medium">Application</span> <br/>
             C<br/>
-            <span id="date">2024</i></span></p>
+            <span class="date">2024</i></span></p>
         </div>
         <img class="projectHeaderImage" src="https://raw.githubusercontent.com/wttdotm/nubmoan/refs/heads/main/nubmoanBanner.png">
       </div>
@@ -256,7 +266,7 @@
           <h3>Super Fungible Token, 2022</h3>
           <p><i><span id="medium">Website</span> <br/>
             HTML, CSS, and JavaScript<br/>
-            <span id="date">2022</i></span></p>
+            <span class="date">2022</i></span></p>
         </div>
         <img class="projectHeaderImage" src="./assets/portfolio_assets/superfungibletoken.png">
       </div>
@@ -275,7 +285,7 @@
           <h3>Desktop Clock, 2024</h3>
           <p><i><span id="medium">Website</span> <br/>
             Python and AppleScript<br/>
-            <span id="date">2022</i></span></p>
+            <span class="date">2024</i></span></p>
         </div>
         <img class="projectHeaderImage" src="./assets/portfolio_assets/desktopclock.png">
       </div>
@@ -285,50 +295,41 @@
         <hr/>
       </div>
 
+
     <div class="project">
-      <h3>The Bull 3D</h3>
-      <p>As an update to Picasso's Le Taureau ("The Bull") - which is an experiment in the steps of abstraction - I re-created his process with a 3D model and a Python script. The script takes the model and abstracts it through 11 steps, each one removing 40% of the model's remaining polygons.
+      <h2>Guess We Doin Games Now</h2>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Website</span> <br/>
+            P5.js<br/>
+            <span class="date">2024</i></span></p>
+        </div>
+        <img class="projectHeaderImage" src="https://wttdotm.com/guess_we_doin_games_now/link_preview.png">
+      </div>
+      <p>I took the <a href="https://knowyourmeme.com/memes/a-circle-in-the-triangle-factory-i-guess-we-doin-circles-now" target="_blank">Triangle Factory meme</a> and made it into a game where you could draw the shapes coming out of the machine. I also made it include a very backwards means of drawing illustrations, and a lot of people had fun with it.
+        <h4>Links</h4>
+        <a href="https://wttdotm.com/guess_we_doin_games_now">Play the game</a>
         <br/>
         <br/>
         <hr/>
+    </div>
+
+    <div class="project">
+      DoesMyIPAddressHave69InIt.com
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Website</span> <br/>
+            PHP<br/>
+            <span class="date">2021</i></span></p>
+        </div>
+        <img class="projectHeaderImage" src="https://i.imgur.com/JRmD1Og.png">
       </div>
-
-
-
-    Writing:
-
-
-
-    Meme Work:
-
-
-
-    <h2>Drivel:</h2>
-
-
-    <div class="project">
-      <h3>69 Cent Hall of Fame</h3>
-      <p>A project about deep links, suggestible audiences, and extremely low-friction funnels. I printed out dozens of stickers with a QR code holding a venmo deep link that would pull up a transaction page pre-filled with a transaction for $0.69 and set up a server to monitor and update a website called 69centhalloffame.com whenever someone fulfills it. Then, I put the stickers in bar bathrooms around New York City. The potential audience is typically drunk, bored, and on their phone, meaning that 69 cents for their picture on some website can be a sufficiently meaningless and entertaining deal.
-    </div>
-
-    <div class="project">
-      <h3>Guess We Doin Games Now</h3>
-      <p>I took the Triangle Factory meme and made it into a game where you could draw the shapes coming out of the machine. I also made it include a very backwards means of drawing illustrations, and a lot of people had fun with it.
-    </div>
-
-    <div class="project">
-      <h3><a href="https://doesmyipaddresshave69init.com">DoesMyIPAddressHave69InIt.com</a></h3>
       <p>My first website ever. Does what you think it does.
-    </div>
-
-    <div class="project">
-      <h3>Test Ignore</h3>
-      <p>The digital version of digging through someone's trash. This site shows the latest YouTube results for the search "test ignore." A reasonable request to which we respond in the negative.
-    </div>
-
-    <div class="project">
-      <h3>Looo.lol</h3>
-      <p>A work-in-progress site to reach people binary math by having them figure out the binary for silly numbers. If you visit the site, you've already been given the hint for the first level.
+        <h4>Links</h4>
+        <a href="https://doesmyipaddresshave69init.com">Find out</a>
+        <br/>
+        <br/>
+        <hr/>
     </div>
 
   
@@ -338,6 +339,29 @@
   for (let i = 0; i < allLinks.length; i++) {
     allLinks[i].setAttribute("target", "_blank")
   }
+
+  const dateSort = () => {
+    // Get all project divs
+    const projects = Array.from(document.getElementsByClassName("project"));
+    
+    // Sort projects by date
+    projects.sort((a, b) => {
+      const dateA = parseInt(a.querySelector(".date").textContent);
+      const dateB = parseInt(b.querySelector(".date").textContent);
+      return dateB - dateA;
+    });
+
+    // Get parent element
+    const parent = projects[0].parentNode;
+
+    // Remove existing projects
+    projects.forEach(project => project.remove());
+
+    // Re-append in sorted order
+    projects.forEach(project => parent.appendChild(project));
+  }
+
+
   // allLinks.forEach(link => {
   //   link.setAttribute("target", "_blank")
   // })
