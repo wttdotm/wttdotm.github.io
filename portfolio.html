@@ -3,6 +3,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <script src="wttdotmBespokePixel.js"></script>
   <link href="styles.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
   <style type="text/css">
     body {
       align-items: start;
@@ -32,6 +34,13 @@
       max-width: 50%;
     }
 
+    .sort_button {
+      cursor: pointer;
+    }
+    .sort_button:hover {
+      text-decoration: underline;
+    }
+
     @media only screen and (max-width: 600px) {
       .projectHeader {
         flex-direction: column;
@@ -47,15 +56,67 @@
       }
     }
   </style>
+  <script>
+    //FIRSTLIGHT CANVAS STUFF
+    const sortPage = (method) => {
+      const majorWork = document.getElementsByClassName("major_work");
+      const sideProject = document.getElementsByClassName("side_project");
+      if (method === "major_work") {
+        Array.from(majorWork).forEach(project => project.style.display = "block");
+        Array.from(sideProject).forEach(project => project.style.display = "none");
+
+      } else if (method === "side_project") {
+        Array.from(majorWork).forEach(project => project.style.display = "none");
+        Array.from(sideProject).forEach(project => project.style.display = "block");
+
+      } else if (method === "all") {
+        Array.from(majorWork).forEach(project => project.style.display = "block");
+        Array.from(sideProject).forEach(project => project.style.display = "block");
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="textArea" style="text-align: left;">
     <h1>Portfolio</h1>
 
+    <h3>Sort: 
+      <span class="sort_button" onclick="sortPage('major_work')">Major Work</span> | <span class="sort_button" onclick="sortPage('side_project')">Side Projects</span> | <span class="sort_button" onclick="sortPage('all')">All</span></h3>
+
     <!-- <h3>Sort By: <span id="dateSort" onclick="dateSort()">Date</span>, <span id="mediumSort" onclick="mediumSort()">Medium</span>, <span id="titleSort" onclick="titleSort()">Title</span></h3> -->
 
 
-    <div class="project">
+    <div class="project major_work">
+      <h2>Heavyweight</h2>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">HTML, JavaScript, CSS</span> <br/>
+
+            <span class="date">2025</i></span></p>
+        </div>
+        <img class="projectHeaderImage" src="assets/portfolio_assets/heavyweight_portfolio.png"/>
+      </div>
+      <p><a href="heavyweight.cc" target="_blank">Heavyweight</a> is s project created in collaboration with the technology lawyer
+         <a href="https://kendraalbert.com/" target="_blank">Kendra Albert</a> for the 2025 iteration of 
+         <a href="https://rhizome.org/editorial/2025/jul/21/please-confirm-receipt-documentation-from-morry-kolman-and-kendra-alberts-7x7-collaboration-is-now-online/" target="_blank">
+          Rhizome's annual 7x7 series</a>. 
+          It is meditation on the way the law, a profession proudly characterized by its attention to language, often 
+          nonetheless exerts its power asethetically. At <a href="heavyweight.cc" target="_blank">Heavyweight.cc</a>, anyone can create their own legal-looking demand letters
+          without ever actually claiming to have any legal backing. By avoiding specific language such as "Esq," "Associate," "LLP," 
+          "Bar," and more, the project illustrates just how much influence remains sans actual legal authority, and thus how 
+          much weight and fear can be conveyed through the simple practice of plain old document formatting.
+            You can even control things like the snootiness, number of partners, floor, and age of the law firm on your letterhead! 
+        <h4>Links</h4>
+        <a href="heavyweight.cc" target="_blank">Heavyweight Website</a>, <a href="https://kendraalbert.com/2025/07/21/lawyer-letters-without-lawyers.html">Kendra's Legal Blog Post</a>, <a href="https://video.rhizome.org/w/cWgMjxRWG824mcUQEjoPSA">Presentation at Cornell Tech</a>, <a href="https://rhizome.org/editorial/2025/jul/21/please-confirm-receipt-documentation-from-morry-kolman-and-kendra-alberts-7x7-collaboration-is-now-online/">Rhizome's documentation</a>
+        <h4>Press</h4>
+        <a href="https://www.newsweek.com/artist-lawyer-develop-website-challenging-legal-aesthetics-heavyweight-2104148" target="_blank">Newsweek,</a> <a target="_blank" href="https://www.fastcompany.com/91373658/this-tool-lets-users-send-fake-legal-letters-that-look-real-without-a-lawyer">Fast Company</a>
+        <br/>
+        <br/>
+        <br/>
+        <hr/>
+    </div>
+
+    <div class="project major_work">
       <h2>First Light</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -63,40 +124,102 @@
             Python, HTML, CSS, and JavaScript<br/>
             <span class="date">2025</i></span></p>
         </div>
-        <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/>
+        <iframe class="projectHeaderImage" src="/assets/portfolio_assets/firstLight/3d_iframe.html" target="_blank" frameborder="0"></iframe>
+        <!-- <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/> -->
       </div>
-      <p>First Light is a gift-based project that gives people the opportunity to be the first person in the world to see a specific star. At the current scale of astronomical knowledge (1.8 billion+ celestial objects), most newly-discovered stars are found by computerized telescopes, processed for their quantifiable characteristics, and stored in huge databases to be later fed into models by researchers. Because these tens of thousands of new stars discovered every day are (a) barely incremental (b) uninteresting individually and (c) visually boring, the vast majority of them will never actually be seen, only calculated with. The story of modern starlight is one where photons originate trillions and trillions of miles away, spend countless millennia getting to our solar system, and end up as numbers in a row of data instead rather than a glint in someone's eye.
-      <p>I use a series of scripts to scrape astronomy research databases, find the newest unremarkable and academically ignorable stars, and cross-reference them with literature archives to ensure that they have never been covered in any research. With the resulting dataset, I print out large stacks of the original pictures of these stars upside down and - without looking at them - fold them up and seal them. The result is First Light, a collection of envelopes that let the opener be the first witness to the star, and through the act of looking at it fasten it as real against the cosmos.
+      <p>First Light project that gives people the opportunity to be the first person in the world to see a specific star. At the current scale of astronomical knowledge (1.8 billion+ celestial objects), most newly-discovered stars are found by computerized telescopes, processed for their quantifiable characteristics, and stored in huge databases to be later fed into models by researchers. Because these tens of thousands of new stars discovered every day are (a) barely incremental (b) uninteresting individually and (c) visually boring, the vast majority of them will never actually be seen, only calculated with. The story of modern starlight is one where photons originate trillions and trillions of miles away, spend countless millennia getting to our solar system, and end up as numbers in a row of data instead rather than a glint in someone's eye.
+        <p>I use a series of scripts to scrape astronomy research databases, find the newest unremarkable and academically ignorable stars, and cross-reference them with literature archives to ensure that they have never been covered in any research.
+          
+          <h3>First Light: Envelopes</h3>
+          <div class="projectHeader">
+            <div class="projectHeaderText">
+              <p><i><span id="medium">Envelopes, Paper, Website</br>
+                <span class="date">2025</i></span></p>
+            </div>
+            <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/>
+          </div>
+          I print out large stacks of the original pictures of these stars upside down and - without looking at them - fold them up and seal them. The result is First Light, a collection of envelopes that let the opener be the first witness to the star, and through the act of looking at it fasten it as real against the cosmos.
+          You can buy one yourself at <a href="https://firstlightstars.com" target="_blank">FirstLightStars.com</a>.
+          <br/>
+          <br/>
+          <h3>First Light: Emergence</h3>
+          <div class="projectHeader">
+            <div class="projectHeaderText">
+              <p><i>Python, HTML, CSS, and JavaScript<br/>
+                <span class="date">2025</i></span></p>
+            </div>
+            <iframe class="projectHeaderImage" src="https://wttdotm.com/spaceStuff" target="_blank"></iframe>
+          </div>
+        A project currently on display on the online gallery <a href="externalpages.org" target="_blank">External Pages</a> and visible in the iframe above. <i>First Light: Emergence</i> uses Python scripts to request and fetch the coordinates of disregarded and unseen stars from web-based sky atlases such as Gaia, SIMBAD, and VizieR. It then collects the images of that portion of sky found in three sky surveys - DSS2, SDSS9, and PanSTARRS - each more recent and showcasing the star in greater detail than the last. Every hour, these surveys slowly fade into each other, channel by channel. This careful, unhurried passage from raw color band data to full visual representation does not reject the biases inherited by computer-generated imagery, such as sensor noise and resolution limits: here those artifacts are vital reminders of the images’ origins as aftereffects of data collection. After all, with each passing second, the always-improving image on the screen becomes the best picture of that star that anybody has ever seen. The embracing of imperfection and inherent slowness of First Light is crucial to the project, rejecting instant gratification and encouraging viewers to dwell on the question of what constitutes an image and how we decide what is worth seeing.
+ 
         <h4>Links</h4>
-        <a href="https://firstlightstars.com" target="_blank">First Light Website</a>
+        <a href="https://firstlightstars.com" target="_blank">First Light Website</a>, <a href="externalpages.org" target="_blank">External Pages</a>
         <br/>
         <br/>
         <hr/>
     </div>
 
-    <div class="project">
+    <div class="project side_project">
+      <h2>Dudes Hanging Out in Art</h2>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Chrome Extension</span> <br/>
+            JavaScript<br/>
+            <span class="date">2025</i></span></p>
+        </div>
+        <img class="projectHeaderImage" src="assets/portfolio_assets/DHA_preview.png"/>
+      </div>
+      <h4>Description</h4>
+      <p>Dudes Hanging Out in Art is a Chrome extension that replaces the word "Two Men" with "Dudes Hanging Out" in the titles of artworks on the Met Museum's website. A shitpost, to be sure, but it does get at the overly serious nature of how art is titled.</p>
+      <h4>Links</h4>
+      <a href="hhttps://chromewebstore.google.com/detail/dudes-hanging-out-in-art/eanfdbfaanjgniplfofgcbhdmdhghamc" target="_blank">Install the extension</a>
+      <br/>
+      <br/>
+      <hr/>
+    </div>
+
+        <div class="project side_project">
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <h3>Twice As Many Stars, after Laura Giplin</h3>
+          <p><i><span id="medium">Website, Poem</span> <br/>
+            HTML, CSS, and JavaScript<br/>
+            <span class="date">2023</i></span></p>
+        </div>
+        <img onclick="window.open('https://wttdotm.com/cowstars', '_blank')" class="projectHeaderImage" src="assets/portfolio_assets/cowStarsPreview.gif">
+      </div>
+      <p>Twice As Many Stars is a microsite made for Laura Giplin's poem "Two-Headed Calf." Press the button and see what happens.
+        <h4>Links</h4>
+        <a href="https://wttdotm.com/cowStars">Webpage</a>, <a href="http://github.com/wttdotm/cowStars" target="_blank">GitHub Repo</a>
+        <br/>
+        <br/>
+        <hr/>
+    </div>
+
+    <div class="project major_work">
       <h2>Traffic Cam Photobooth</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
           <p><i><span id="medium">Website</span> <br/>
             HTML, CSS, and JavaScript<br/>
             <span class="date">2024</i></span></p>
+            <span>🥇 Webby Award Winner, 2025</span>
         </div>
         <img class="projectHeaderImage" src="https://trafficcamphotobooth.com/linkPreview.png"/>
       </div>
       <h4>Description</h4>
       <p>Traffic Cam Photobooth is a website that allows anybody to locate their nearest publicly available traffic camera and use it to take pictures of themselves. While these cameras are ostensibly intended for traffic, they also serve to acclimate us to the idea that constant monitoring is an everyday part life. No matter the target of this surveillance, it's clear from looking at the map that most New Yorkers (and since its launch, now people in many other locations) get unconsentingly captured by the lens of at least one camera - if not several - every day. TCP offers visitors an engaging and lighthearted way to engage with this very serious topic by drawing attention to these easily ignored cameras. People can use their feeds, which their tax dollars help fund, to take pictures of themselves, spreading the knowledge of this sprawling surveillance apparatus through fun self-portraits designed to be sharable online.</p>
       <h4>Links</h4>
-      <a href="https://trafficcamphotobooth.com" target="_blank">Traffic Cam Photobooth</a>, <a href="https://trafficcamphotobooth.com/assets/CeaseAndDesist.pdf" target="_blank">Cease and Desist</a>, <a href="https://winners.webbyawards.com/winners/websites-and-mobile-sites/general-desktop-mobile-sites/weird?years=0" target="_blank">Webby Nomination</a>
+      <a href="https://trafficcamphotobooth.com" target="_blank">Traffic Cam Photobooth</a>, <a href="https://trafficcamphotobooth.com/assets/CeaseAndDesist.pdf" target="_blank">Cease and Desist</a>, <a href="https://winners.webbyawards.com/winners/websites-and-mobile-sites/general-desktop-mobile-sites/weird?years=0">Webby Award</a>
       <h4>Press</h4>
-      <a href="https://www.fastcompany.com/91176990/surveillance-cameras-self-photo-nyc" target="_blank">Fast Company,</a> <a target="_blank" href="https://www.pcmag.com/articles/nyc-wants-you-to-stop-taking-traffic-cam-selfies-but-heres-how-to-do-it">PC Mag</a>, <a target="_blank" href="https://www.nbcnews.com/now/video/new-york-artist-creates-website-to-capture-selfies-using-traffic-cameras-217354821851/">NBC</a>, <a target="_blank" href="https://ny1.com/nyc/all-boroughs/mornings-on-1/2024/08/13/brooklyn-artist-uses-traffic-cameras-for-unique-selfies-across-nyc">New York 1</a>, <a target="_blank" href="https://abc7ny.com/videoClip/fire-commissioner-fdny-robert-tucker-nyc/15178890/">ABC</a>, <a target="_blank" href="https://www.fox5ny.com/news/nyc-traffic-cam-photobooth-selfie">Fox 5 NY</a>, <a target="_blank" href="https://www.youtube.com/watch?v=-mUpocDoQZ8">PIX 11</a>, <a target="_blank" href="https://www.nbcnewyork.com/news/local/how-to-take-selfies-with-new-york-citys-traffic-cameras/5698806/">NBC NY</a>, <a target="_blank" href="https://nypost.com/2024/08/11/us-news/new-web-site-lets-nyers-use-traffic-cams-to-turn-streets-into-instant-photo-booths/">NY Post</a>, <a target="_blank" href="https://omny.fm/shows/winsam-on-demand/brooklyn-man-launches-traffic-cam-selfie-website">1010 WINS</a>, <a target="_blank" href="https://petapixel.com/2024/08/12/website-turns-traffic-cameras-into-photobooths-on-the-street/">Petapixel</a>, <a target="_blank" href="https://jalopnik.com/art-project-turns-new-yorks-dystopian-traffic-surveilla-1851619333">Jalopnik</a>
+      <a href="https://www.fastcompany.com/91176990/surveillance-cameras-self-photo-nyc" target="_blank">Fast Company,</a> <a href="https://www.404media.co/traffic-cam-photobooth-cease-and-desist/">404 News</a>, <a target="_blank" href="https://www.pcmag.com/articles/nyc-wants-you-to-stop-taking-traffic-cam-selfies-but-heres-how-to-do-it">PC Mag</a>, <a target="_blank" href="https://www.nbcnews.com/now/video/new-york-artist-creates-website-to-capture-selfies-using-traffic-cameras-217354821851/">NBC</a>, <a target="_blank" href="https://ny1.com/nyc/all-boroughs/mornings-on-1/2024/08/13/brooklyn-artist-uses-traffic-cameras-for-unique-selfies-across-nyc">New York 1</a>, <a target="_blank" href="https://abc7ny.com/videoClip/fire-commissioner-fdny-robert-tucker-nyc/15178890/">ABC</a>, <a target="_blank" href="https://www.fox5ny.com/news/nyc-traffic-cam-photobooth-selfie">Fox 5 NY</a>, <a target="_blank" href="https://www.youtube.com/watch?v=-mUpocDoQZ8">PIX 11</a>, <a target="_blank" href="https://www.nbcnewyork.com/news/local/how-to-take-selfies-with-new-york-citys-traffic-cameras/5698806/">NBC NY</a>, <a target="_blank" href="https://nypost.com/2024/08/11/us-news/new-web-site-lets-nyers-use-traffic-cams-to-turn-streets-into-instant-photo-booths/">NY Post</a>, <a target="_blank" href="https://omny.fm/shows/winsam-on-demand/brooklyn-man-launches-traffic-cam-selfie-website">1010 WINS</a>, <a target="_blank" href="https://petapixel.com/2024/08/12/website-turns-traffic-cameras-into-photobooths-on-the-street/">Petapixel</a>, <a target="_blank" href="https://jalopnik.com/art-project-turns-new-yorks-dystopian-traffic-surveilla-1851619333">Jalopnik</a>
       <br/>
       <br/>
       <hr/>
     </div>
 
 
-    <div class="project">
+    <div class="project major_work">
       <h2>Mr. Beast Saying Increasingly Large Amounts of Money</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -118,7 +241,7 @@
         <hr/>
     </div>
 
-    <div class="project">
+    <div class="project side_project">
       <h2>Sol LeWitt QR Code Generator</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -135,7 +258,7 @@
       <hr/>
     </div>
 
-    <div class="project">
+    <div class="project side_project">
       <div class="projectHeader">
         <div class="projectHeaderText">
           <h3>Bad Apple But It's My Finder Window</h3>
@@ -154,7 +277,7 @@
         <hr/>
     </div>
 
-    <div class="project">
+    <div class="project side_project">
       <div class="projectHeader">
         <div class="projectHeaderText">
           <h3>Nubmoan</h3>
@@ -172,7 +295,7 @@
         <hr/>
       </div>
 
-      <div class="project">
+      <div class="project side_project">
         <div class="projectHeader">
           <div class="projectHeaderText">
             <h3>Desktop Clock, 2024</h3>
@@ -189,7 +312,7 @@
         </div>
   
   
-      <div class="project">
+      <div class="project side_project">
         <h2>Guess We Doin Games Now</h2>
         <div class="projectHeader">
           <div class="projectHeaderText">
@@ -207,25 +330,9 @@
           <hr/>
       </div>
 
-    <div class="project">
-      <div class="projectHeader">
-        <div class="projectHeaderText">
-          <h3>Twice As Many Stars, after Laura Giplin</h3>
-          <p><i><span id="medium">Website, Poem</span> <br/>
-            HTML, CSS, and JavaScript<br/>
-            <span class="date">2023</i></span></p>
-        </div>
-        <img onclick="window.open('https://wttdotm.com/cowStars', '_blank')" class="projectHeaderImage" src="assets/portfolio_assets/cowStarsPreview.gif">
-      </div>
-      <p>Twice As Many Stars is a microsite made for Laura Giplin's poem "Two-Headed Calf." Press the button and see what happens.
-        <h4>Links</h4>
-        <a href="https://wttdotm.com/cowStars">Webpage</a>, <a href="http://github.com/wttdotm/cowStars" target="_blank">GitHub Repo</a>
-        <br/>
-        <br/>
-        <hr/>
-    </div>
 
-    <div class="project">
+
+    <div class="project major_work">
       <h2>Are You The Asshole</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -254,7 +361,7 @@
       <hr/>
     </div>
 
-    <div class="project">
+    <div class="project major_work">
       <h2>TikTok Clock</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -274,7 +381,7 @@
 
 
 
-    <div class="project">
+    <div class="project major_work">
       <div class="projectHeader">
         <div class="projectHeaderText">
           <h3>Super Fungible Token, 2022</h3>
@@ -294,7 +401,7 @@
       </div>
 
 
-    <div class="project">
+    <div class="project side_project">
       Deface Your Data
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -302,7 +409,7 @@
             JavaScript, HTML, CSS<br/>
             <span class="date">2021</i></span></p>
         </div>
-        <img class="projectHeaderImage" src="https://lh3.googleusercontent.com/Pdpepj3BBgn6tnrqEB2jjIzMN9Yp2sGBVCp3ipFjHwTGUg7G8he7SDPMJO8lja9ILN4uT3neWbcA_3EO1R8BDChMNA=s1280-w1280-h800">
+        <img class="projectHeaderImage" src="assets/portfolio_assets/DYD_Preview.png">
       </div>
       <p>Replaces tracking parameters embedded in URLs you visit with your own message for people scraping your data.
 
@@ -318,7 +425,7 @@
         <hr/>
     </div>
 
-    <div class="project">
+    <div class="project major_work">
       <h2>The Little Tok of Horrors</h2>
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -342,7 +449,7 @@
         <hr/>
     </div>
 
-    <div class="project">
+    <div class="project side_project">
       DoesMyIPAddressHave69InIt.com
       <div class="projectHeader">
         <div class="projectHeaderText">
@@ -362,6 +469,7 @@
 
   
   </div>
+
 <script>
   let allLinks = document.getElementsByTagName("a")
   for (let i = 0; i < allLinks.length; i++) {
