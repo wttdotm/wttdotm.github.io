@@ -41,38 +41,6 @@
             display: none;
         }
 
-        #upload-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 50;
-        }
-
-        #upload-container.hidden {
-            display: none;
-        }
-
-        #file-input {
-            display: none;
-        }
-
-        #upload-btn {
-            background: #ff0000;
-            color: #000;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-
-        #upload-btn:hover {
-            background: #cc0000;
-        }
-
         .instructions {
             color: #ff0000;
             margin-top: 20px;
@@ -84,24 +52,25 @@
 <body>
     <canvas id="canvas"></canvas>
 
-    <div id="upload-container">
-        <input type="file" id="file-input" accept="image/*">
-        <button id="upload-btn">Upload Image for Vibe Shift CROUCH</button>
-        <div class="instructions">Press W to toggle UI | Press S to toggle symmetry</div>
-    </div>
-
     <div class="ui-overlay" id="ui-overlay">
         <div>Drag corners to adjust perspective</div>
         <div>Drag edge midpoints to redistribute spacing</div>
-        <div>W: Toggle UI | S: <span id="symmetry-status">OFF</span></div>
+        <div>W: Toggle UI | S: <span id="symmetry-status">ON</span></div>
+        <br/>
+        <div><b>HOW TO SET UP:</b></div>
+            <ol>
+                <li>Project on wall</li>
+                <li>Crouch at base of wall and point phone up at code<br/>at a steep angle from below</li>
+                <li>Move edges of image to adjust <br/>perspective until image looks square in phone</li>
+                <li>Image should be scannable while crouched<br/>and unscannable from a normal perspective</li>
+                <li>When done, press W to toggle UI off for display</li>
+            </ol>
+        </div>
     </div>
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const uploadContainer = document.getElementById('upload-container');
-        const uploadBtn = document.getElementById('upload-btn');
-        const fileInput = document.getElementById('file-input');
         const uiOverlay = document.getElementById('ui-overlay');
         const symmetryStatus = document.getElementById('symmetry-status');
 
@@ -110,7 +79,7 @@
         let edgeMidpoints = [];
         let dragging = null;
         let uiVisible = true;
-        let symmetryMode = false;
+        let symmetryMode = true;
         let centerX = 0;
 
         function resizeCanvas() {
@@ -122,24 +91,17 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        uploadBtn.addEventListener('click', () => fileInput.click());
+        // Automatically load the image from ./assets/crouch.png
+        function loadDefaultImage() {
+            img = new Image();
+            img.onload = () => {
+                initializeCorners();
+                draw();
+            };
+            img.src = './assets/crouch.png';
+        }
 
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    img = new Image();
-                    img.onload = () => {
-                        initializeCorners();
-                        uploadContainer.classList.add('hidden');
-                        draw();
-                    };
-                    img.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+        loadDefaultImage();
 
         function initializeCorners() {
             const scale = Math.min(
