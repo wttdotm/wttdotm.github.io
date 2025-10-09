@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Shift CROUCH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        #canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            cursor: crosshair;
+        }
+
+        .ui-overlay {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #ff0000;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 100;
+            text-shadow: 0 0 4px #000;
+            line-height: 1.6;
+        }
+
+        .ui-overlay.hidden {
+            display: none;
+        }
+
+        #upload-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 50;
+        }
+
+        #upload-container.hidden {
+            display: none;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #upload-btn {
+            background: #ff0000;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        #upload-btn:hover {
+            background: #cc0000;
+        }
+
+        .instructions {
+            color: #ff0000;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div id="upload-container">
+        <input type="file" id="file-input" accept="image/*">
+        <button id="upload-btn">Upload Image for Vibe Shift CROUCH</button>
+        <div class="instructions">Press W to toggle UI | Press S to toggle symmetry</div>
+    </div>
+
+    <div class="ui-overlay" id="ui-overlay">
+        <div>Drag corners to adjust perspective</div>
+        <div>Drag edge midpoints to redistribute spacing</div>
+        <div>W: Toggle UI | S: <span id="symmetry-status">OFF</span></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const uploadContainer = document.getElementById('upload-container');
+        const uploadBtn = document.getElementById('upload-btn');
+        const fileInput = document.getElementById('file-input');
+        const uiOverlay = document.getElementById('ui-overlay');
+        const symmetryStatus = document.getElementById('symmetry-status');
+
+        let img = null;
+        let corners = [];
+        let edgeMidpoints = [];
+        let dragging = null;
+        let uiVisible = true;
+        let symmetryMode = false;
+        let centerX = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            if (img) draw();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        uploadBtn.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    img = new Image();
+                    img.onload = () => {
+                        initializeCorners();
+                        uploadContainer.classList.add('hidden');
+                        draw();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function initializeCorners() {
+            const scale = Math.min(
+                (canvas.width * 0.8) / img.width,
+                (canvas.height * 0.8) / img.height
+            );
+            const w = img.width * scale;
+            const h = img.height * scale;
+            const x = (canvas.width - w) / 2;
+            const y = (canvas.height - h) / 2;
+
+            corners = [
+                { x: x, y: y },           // top-left
+                { x: x + w, y: y },       // top-right
+                { x: x + w, y: y + h },   // bottom-right
+                { x: x, y: y + h }        // bottom-left
+            ];
+
+            centerX = (corners[0].x + corners[1].x) / 2;
+
+            // Initialize edge midpoints at actual midpoints
+            edgeMidpoints = [
+                { x: (corners[0].x + corners[1].x) / 2, y: (corners[0].y + corners[1].y) / 2 }, // top
+                { x: (corners[1].x + corners[2].x) / 2, y: (corners[1].y + corners[2].y) / 2 }, // right
+                { x: (corners[2].x + corners[3].x) / 2, y: (corners[2].y + corners[3].y) / 2 }, // bottom
+                { x: (corners[3].x + corners[0].x) / 2, y: (corners[3].y + corners[0].y) / 2 }  // left
+            ];
+        }
+
+        function draw() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (!img) return;
+
+            ctx.save();
+            drawWarpedImage();
+            ctx.restore();
+
+            if (uiVisible) {
+                // Draw grid lines
+                ctx.strokeStyle = '#ff0000';
+                ctx.lineWidth = 1;
+
+                // Draw horizontal midline
+                ctx.beginPath();
+                ctx.moveTo(edgeMidpoints[3].x, edgeMidpoints[3].y);
+                ctx.lineTo(edgeMidpoints[1].x, edgeMidpoints[1].y);
+                ctx.stroke();
+
+                // Draw vertical midline
+                ctx.beginPath();
+                ctx.moveTo(edgeMidpoints[0].x, edgeMidpoints[0].y);
+                ctx.lineTo(edgeMidpoints[2].x, edgeMidpoints[2].y);
+                ctx.stroke();
+
+                // Draw outline
+                ctx.strokeStyle = '#ff0000';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(corners[0].x, corners[0].y);
+                ctx.lineTo(corners[1].x, corners[1].y);
+                ctx.lineTo(corners[2].x, corners[2].y);
+                ctx.lineTo(corners[3].x, corners[3].y);
+                ctx.closePath();
+                ctx.stroke();
+
+                // Draw corner handles
+                corners.forEach((corner) => {
+                    ctx.fillStyle = '#ff0000';
+                    ctx.beginPath();
+                    ctx.arc(corner.x, corner.y, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+
+                // Draw edge midpoint handles
+                edgeMidpoints.forEach(mid => {
+                    ctx.fillStyle = '#ff0000';
+                    ctx.beginPath();
+                    ctx.arc(mid.x, mid.y, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Draw symmetry line if enabled
+                if (symmetryMode) {
+                    ctx.strokeStyle = 'rgba(255, 0, 0, 0.3)';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, 0);
+                    ctx.lineTo(centerX, canvas.height);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
+        }
+
+        function drawWarpedImage() {
+            const subdivisions = 30;
+
+            for (let row = 0; row < subdivisions; row++) {
+                for (let col = 0; col < subdivisions; col++) {
+                    const u1 = col / subdivisions;
+                    const v1 = row / subdivisions;
+                    const u2 = (col + 1) / subdivisions;
+                    const v2 = (row + 1) / subdivisions;
+
+                    const srcTL = [u1 * img.width, v1 * img.height];
+                    const srcTR = [u2 * img.width, v1 * img.height];
+                    const srcBR = [u2 * img.width, v2 * img.height];
+                    const srcBL = [u1 * img.width, v2 * img.height];
+
+                    const dstTL = getWarpedPoint(u1, v1);
+                    const dstTR = getWarpedPoint(u2, v1);
+                    const dstBR = getWarpedPoint(u2, v2);
+                    const dstBL = getWarpedPoint(u1, v2);
+
+                    drawQuad(
+                        [srcTL, srcTR, srcBR, srcBL],
+                        [dstTL, dstTR, dstBR, dstBL]
+                    );
+                }
+            }
+        }
+
+        function getWarpedPoint(u, v) {
+            // Calculate where this point should be based on the edge midpoints
+            // The midpoint divides each edge into two segments that map to 0-0.5 and 0.5-1.0
+
+            let adjustedU, adjustedV;
+
+            // Adjust horizontal position based on top and bottom edge midpoints
+            if (u < 0.5) {
+                // Left half
+                const topLeftRatio = getEdgeRatio(corners[0], edgeMidpoints[0], corners[1]);
+                const bottomLeftRatio = getEdgeRatio(corners[3], edgeMidpoints[2], corners[2]);
+                const ratio = topLeftRatio + (bottomLeftRatio - topLeftRatio) * v;
+                adjustedU = u / 0.5 * ratio;
+            } else {
+                // Right half
+                const topRightRatio = 1 - getEdgeRatio(corners[0], edgeMidpoints[0], corners[1]);
+                const bottomRightRatio = 1 - getEdgeRatio(corners[3], edgeMidpoints[2], corners[2]);
+                const ratio = topRightRatio + (bottomRightRatio - topRightRatio) * v;
+                adjustedU = getEdgeRatio(corners[0], edgeMidpoints[0], corners[1]) + (u - 0.5) / 0.5 * ratio;
+            }
+
+            // Adjust vertical position based on left and right edge midpoints
+            if (v < 0.5) {
+                // Top half
+                const leftTopRatio = getEdgeRatio(corners[0], edgeMidpoints[3], corners[3]);
+                const rightTopRatio = getEdgeRatio(corners[1], edgeMidpoints[1], corners[2]);
+                const ratio = leftTopRatio + (rightTopRatio - leftTopRatio) * u;
+                adjustedV = v / 0.5 * ratio;
+            } else {
+                // Bottom half
+                const leftBottomRatio = 1 - getEdgeRatio(corners[0], edgeMidpoints[3], corners[3]);
+                const rightBottomRatio = 1 - getEdgeRatio(corners[1], edgeMidpoints[1], corners[2]);
+                const ratio = leftBottomRatio + (rightBottomRatio - leftBottomRatio) * u;
+                adjustedV = getEdgeRatio(corners[0], edgeMidpoints[3], corners[3]) + (v - 0.5) / 0.5 * ratio;
+            }
+
+            // Bilinear interpolation on the quad
+            const top = lerp2D(corners[0], corners[1], adjustedU);
+            const bottom = lerp2D(corners[3], corners[2], adjustedU);
+            return lerp2D(top, bottom, adjustedV);
+        }
+
+        function getEdgeRatio(p1, mid, p2) {
+            // Calculate what ratio the midpoint is at along the edge from p1 to p2
+            const totalDist = Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
+            const midDist = Math.sqrt((mid.x - p1.x) ** 2 + (mid.y - p1.y) ** 2);
+            return totalDist > 0 ? midDist / totalDist : 0.5;
+        }
+
+        function lerp2D(p1, p2, t) {
+            return {
+                x: p1.x + (p2.x - p1.x) * t,
+                y: p1.y + (p2.y - p1.y) * t
+            };
+        }
+
+        function drawQuad(src, dst) {
+            const [srcTL, srcTR, srcBR, srcBL] = src;
+            const [dstTL, dstTR, dstBR, dstBL] = dst;
+
+            // Draw as two triangles
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(dstTL.x, dstTL.y);
+            ctx.lineTo(dstTR.x, dstTR.y);
+            ctx.lineTo(dstBL.x, dstBL.y);
+            ctx.closePath();
+            ctx.clip();
+
+            const matrix = getTriangleTransform(
+                [srcTL, srcTR, srcBL],
+                [dstTL, dstTR, dstBL]
+            );
+            ctx.transform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
+            ctx.drawImage(img, 0, 0);
+            ctx.restore();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(dstTR.x, dstTR.y);
+            ctx.lineTo(dstBR.x, dstBR.y);
+            ctx.lineTo(dstBL.x, dstBL.y);
+            ctx.closePath();
+            ctx.clip();
+
+            const matrix2 = getTriangleTransform(
+                [srcTR, srcBR, srcBL],
+                [dstTR, dstBR, dstBL]
+            );
+            ctx.transform(matrix2[0], matrix2[1], matrix2[2], matrix2[3], matrix2[4], matrix2[5]);
+            ctx.drawImage(img, 0, 0);
+            ctx.restore();
+        }
+
+        function getTriangleTransform(src, dst) {
+            const [x1, y1] = src[0];
+            const [x2, y2] = src[1];
+            const [x3, y3] = src[2];
+            const [u1, v1] = [dst[0].x, dst[0].y];
+            const [u2, v2] = [dst[1].x, dst[1].y];
+            const [u3, v3] = [dst[2].x, dst[2].y];
+
+            const delta = (x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3);
+
+            const a = ((u1 - u3) * (y2 - y3) - (u2 - u3) * (y1 - y3)) / delta;
+            const b = ((x1 - x3) * (u2 - u3) - (x2 - x3) * (u1 - u3)) / delta;
+            const c = u1 - a * x1 - b * y1;
+            const d = ((v1 - v3) * (y2 - y3) - (v2 - v3) * (y1 - y3)) / delta;
+            const e = ((x1 - x3) * (v2 - v3) - (x2 - x3) * (v1 - v3)) / delta;
+            const f = v1 - d * x1 - e * y1;
+
+            return [a, d, b, e, c, f];
+        }
+
+        function getDistance(p1, p2) {
+            return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+        }
+
+        function mirrorPoint(point) {
+            return {
+                x: 2 * centerX - point.x,
+                y: point.y
+            };
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (!img || !uiVisible) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+
+            // Check corners
+            for (let i = 0; i < corners.length; i++) {
+                if (getDistance({ x: mx, y: my }, corners[i]) < 15) {
+                    dragging = { type: 'corner', index: i };
+                    return;
+                }
+            }
+
+            // Check edge midpoints
+            for (let i = 0; i < edgeMidpoints.length; i++) {
+                if (getDistance({ x: mx, y: my }, edgeMidpoints[i]) < 15) {
+                    dragging = { type: 'edge', index: i };
+                    return;
+                }
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!dragging) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+
+            if (dragging.type === 'corner') {
+                corners[dragging.index] = { x: mx, y: my };
+
+                if (symmetryMode) {
+                    // Mirror left/right corners
+                    if (dragging.index === 0) { // top-left
+                        corners[1] = mirrorPoint(corners[0]);
+                    } else if (dragging.index === 1) { // top-right
+                        corners[0] = mirrorPoint(corners[1]);
+                    } else if (dragging.index === 3) { // bottom-left
+                        corners[2] = mirrorPoint(corners[3]);
+                    } else if (dragging.index === 2) { // bottom-right
+                        corners[3] = mirrorPoint(corners[2]);
+                    }
+                }
+            } else if (dragging.type === 'edge') {
+                edgeMidpoints[dragging.index] = { x: mx, y: my };
+
+                if (symmetryMode) {
+                    // Mirror left/right edges
+                    if (dragging.index === 3) { // left edge
+                        edgeMidpoints[1] = mirrorPoint(edgeMidpoints[3]);
+                    } else if (dragging.index === 1) { // right edge
+                        edgeMidpoints[3] = mirrorPoint(edgeMidpoints[1]);
+                    }
+                    // Top and bottom edges maintain their horizontal center
+                    if (dragging.index === 0 || dragging.index === 2) {
+                        edgeMidpoints[dragging.index].x = centerX;
+                    }
+                }
+            }
+
+            draw();
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            dragging = null;
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'w') {
+                uiVisible = !uiVisible;
+                if (uiVisible) {
+                    uiOverlay.classList.remove('hidden');
+                } else {
+                    uiOverlay.classList.add('hidden');
+                }
+                draw();
+            } else if (e.key.toLowerCase() === 's') {
+                symmetryMode = !symmetryMode;
+                symmetryStatus.textContent = symmetryMode ? 'ON' : 'OFF';
+                if (symmetryMode) {
+                    // Update center when enabling symmetry
+                    centerX = (corners[0].x + corners[1].x + corners[2].x + corners[3].x) / 4;
+                }
+                draw();
+            }
+        });
+
+        draw();
+    </script>
+</body>
+
+</html>
