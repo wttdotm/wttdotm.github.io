@@ -194,6 +194,7 @@ background-size: 100%; */
   border: 1px solid rgb(153, 153, 153);
   border-radius: 5px;
   /* padding: 20px; */
+  margin-top: 30px;
   box-shadow: rgba(255, 255, 255, 0.6) 1px 1px 0px inset;
   font-family: Verdana, sans-serif;
   /* min-width: 100vw; */
@@ -291,20 +292,6 @@ background-size: 100%; */
   }
 }
 
-.credits {
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.credits a {
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: underline;
-}
-
-.credits a:hover {
-  color: rgba(255, 255, 255, 1);
-}
 
 </style>
 <script src="fullDex.js"></script>
@@ -328,7 +315,7 @@ let nickname = "";
   <div class="monContainer">
 
     <div class="statbar rstatbar leftstatbar" style="display: flex; flex-direction: column; align-items: center; left: 130px; top: 20px; opacity: 1;">
-      <div id="hazards" style="position: relative; z-index: 3; top: -20px;">
+      <div id="hazards" style="position: relative; z-index: 3;">
         <div id="spikes" class="spikes">
             <img src="https://play.pokemonshowdown.com/fx/caltrop.png" style="display: none; position: absolute; left: -50px; top: 138px; width: 32px; height: 32px; opacity: 1;"> 
             <img src="https://play.pokemonshowdown.com/fx/caltrop.png" style="display: none; position: absolute; left: 25px; top: 148px; width: 32px; height: 32px; opacity: 1;">
@@ -374,13 +361,12 @@ let nickname = "";
             <span id="statSpe" class="good" style="display: none; width: fit-content;">1.0x Spe</span>
         </div>
       </div>
-      <div class="sprite-container" style="position: relative; z-index: 1; min-height: 120px; display: flex; align-items: center; justify-content: center;">
-        <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; opacity: 1; z-index: 2; max-height: 120px; transform: scale(1.3);">
+      <div style="z-index: 1;">
+        <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; margin-top: 15px; opacity: 1; z-index: 2;">
         <!-- <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; height: 115px; margin-top: 15px; opacity: 1; z-index: 2;"> -->
       </div>
     </div>
     </div>
-    <div class="credits">By WTTDOTM! <a href="https://wttdotm.com" target="_blank">Website</a>, <a href="https://twitter.com/wttdotm" target="_blank">Twitter</a>, <a href="https://instagram.com/wttdotm" target="_blank">Instagram</a></div>
 
 
 
@@ -459,56 +445,6 @@ function handleKeyDown(event) {
     updatePokemon();
   }
 }
-
-function resetAll() {
-  // Reset Pokemon to default
-  firstMon = "Quagsire";
-  nickname = "";
-  document.getElementById('pokemonInput').value = "";
-  document.getElementById('nicknameInput').value = "";
-  document.getElementById('autocomplete').textContent = "Quagsire";
-
-  // Reset status effect
-  document.getElementById('statusEffect').value = "none";
-  updateStatus('none');
-
-  // Reset tera type
-  document.getElementById('teraType').value = "none";
-  updateTeraType('none');
-
-  // Reset stat modifiers
-  ['Atk', 'Def', 'SpA', 'SpD', 'Spe'].forEach(stat => {
-    document.getElementById('select' + stat).value = '0';
-    updateStatMod(stat, '0');
-  });
-
-  // Reset hazards
-  numSpikes = 0;
-  numTSpikes = 0;
-  numStickyWeb = 0;
-  numRocks = 0;
-  document.querySelectorAll('select[onchange*="numSpikes"], select[onchange*="numTSpikes"], select[onchange*="numStickyWeb"], select[onchange*="numRocks"]').forEach(select => {
-    select.value = '0';
-  });
-
-  // Reset side/gender/shiny/level
-  document.querySelector('input[name="direction"][value="front"]').checked = true;
-  document.querySelector('input[name="gender"][value="F"]').checked = true;
-  document.getElementById('shinyToggle').checked = false;
-  document.getElementById('levelInput').value = 100;
-  document.getElementById('pokemonLevel').style.display = 'none';
-
-  // Clear custom status text
-  document.querySelectorAll('.status span.good, .status span.bad').forEach(span => {
-    if (span.id !== 'pokemonStatus' && !span.id.startsWith('stat')) {
-      span.remove();
-    }
-  });
-  document.getElementById('statusInput').value = '';
-
-  // Update pokemon to apply all changes
-  updatePokemon();
-}
 </script>
 <div style="margin-bottom: 10px;">
     <label>Change Pokemon:</label>
@@ -518,7 +454,6 @@ function resetAll() {
       <input type="text" id="nicknameInput" placeholder="Nickname (Optional)" style="width: 200px; display: inline-block;" oninput="handleNicknameInput(this.value)">
     </div><br/>
     <button onclick="updatePokemon()">Change Pokemon</button>
-    <button onclick="resetAll()" style="margin-left: 5px;">Reset All</button>
   </div>
 
 <div style="margin-bottom: 10px;">
@@ -895,7 +830,10 @@ function updatePokemon() {
   img.onload = function() {
     // If animated sprite loads successfully, use it
     sprite.src = spriteUrl;
-    // Width is now controlled by CSS max-height on sprite and flexbox centering
+    sprite.style.width = img.width + 'px';
+    if (img.width < 80) {
+      sprite.style.width = '80px';
+    }
   };
   
 //   sprite.src = spriteUrl;
