@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manhattan North Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #map-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-29deg); 
+            transform-origin: center center;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Make sure the Leaflet controls (zoom, attribution) are not rotated */
+        .leaflet-top,
+        .leaflet-bottom {
+            transform: rotate(29deg);
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Central Park coordinates
+        var centralParkLat = 40.7829;
+        var centralParkLng = -73.9654;
+
+        // Initialize the map with Central Park as center
+        var map = L.map('map').setView([centralParkLat, centralParkLng], 12);
+
+        // Load OSM tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Simple fix: intercept DOM events and transform coordinates
+        var rotationAngle = 29 * Math.PI / 180; // Unrotate by 29 degrees
+        var mapContainer = document.getElementById('map-container');
+        var mapElement = document.getElementById('map');
+
+        // Transform mouse coordinates from rotated space to unrotated space
+        function unrotatePoint(screenX, screenY) {
+            var containerRect = mapContainer.getBoundingClientRect();
+            var mapRect = mapElement.getBoundingClientRect();
+            
+            // Get center points
+            var containerCenterX = containerRect.left + containerRect.width / 2;
+            var containerCenterY = containerRect.top + containerRect.height / 2;
+            var mapCenterX = mapRect.left + mapRect.width / 2;
+            var mapCenterY = mapRect.top + mapRect.height / 2;
+            
+            // Mouse relative to container center
+            var dx = screenX - containerCenterX;
+            var dy = screenY - containerCenterY;
+            
+            // Unrotate
+            var cos = Math.cos(rotationAngle);
+            var sin = Math.sin(rotationAngle);
+            var unrotatedX = dx * cos - dy * sin;
+            var unrotatedY = dx * sin + dy * cos;
+            
+            // Convert to screen coordinates relative to map center
+            return {
+                x: mapCenterX + unrotatedX,
+                y: mapCenterY + unrotatedY
+            };
+        }
+
+        // Intercept mouse events and create new ones with transformed coordinates
+        function interceptEvent(eventType) {
+            mapContainer.addEventListener(eventType, function(e) {
+                // Don't process if event already came from our synthetic event
+                if (e.synthetic) return;
+                
+                var transformed = unrotatePoint(e.clientX, e.clientY);
+                
+                // Create new event with transformed coordinates
+                var newEvent = new MouseEvent(eventType, {
+                    clientX: transformed.x,
+                    clientY: transformed.y,
+                    button: e.button,
+                    buttons: e.buttons,
+                    bubbles: e.bubbles,
+                    cancelable: e.cancelable,
+                    view: e.view,
+                    detail: e.detail,
+                    screenX: e.screenX,
+                    screenY: e.screenY,
+                    ctrlKey: e.ctrlKey,
+                    shiftKey: e.shiftKey,
+                    altKey: e.altKey,
+                    metaKey: e.metaKey
+                });
+                newEvent.synthetic = true;
+                
+                // Stop the original event and dispatch the transformed one
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                mapElement.dispatchEvent(newEvent);
+            }, true); // Capture phase
+        }
+
+        // Intercept wheel events for zoom
+        function interceptWheel() {
+            mapContainer.addEventListener('wheel', function(e) {
+                if (e.synthetic) return;
+                
+                var transformed = unrotatePoint(e.clientX, e.clientY);
+                
+                var newEvent = new WheelEvent('wheel', {
+                    clientX: transformed.x,
+                    clientY: transformed.y,
+                    deltaX: e.deltaX,
+                    deltaY: e.deltaY,
+                    deltaZ: e.deltaZ,
+                    deltaMode: e.deltaMode,
+                    bubbles: e.bubbles,
+                    cancelable: e.cancelable,
+                    view: e.view,
+                    screenX: e.screenX,
+                    screenY: e.screenY,
+                    ctrlKey: e.ctrlKey,
+                    shiftKey: e.shiftKey,
+                    altKey: e.altKey,
+                    metaKey: e.metaKey
+                });
+                newEvent.synthetic = true;
+                
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                mapElement.dispatchEvent(newEvent);
+            }, true);
+        }
+
+        // Intercept touch events and transform touch coordinates
+        function interceptTouchEvent(eventType) {
+            mapContainer.addEventListener(eventType, function(e) {
+                if (e.synthetic) return;
+                
+                // Transform touches by creating proxy Touch objects
+                var originalTouches = e.touches;
+                var originalChangedTouches = e.changedTouches;
+                
+                // Create transformed touch arrays
+                var transformedTouches = [];
+                for (var i = 0; i < originalTouches.length; i++) {
+                    var touch = originalTouches[i];
+                    var transformed = unrotatePoint(touch.clientX, touch.clientY);
+                    // Create a proxy object that looks like a Touch
+                    var proxyTouch = {
+                        identifier: touch.identifier,
+                        target: mapElement,
+                        clientX: transformed.x,
+                        clientY: transformed.y,
+                        screenX: touch.screenX,
+                        screenY: touch.screenY,
+                        pageX: transformed.x + window.scrollX,
+                        pageY: transformed.y + window.scrollY,
+                        radiusX: touch.radiusX || 0,
+                        radiusY: touch.radiusY || 0,
+                        rotationAngle: touch.rotationAngle || 0,
+                        force: touch.force || 0
+                    };
+                    transformedTouches.push(proxyTouch);
+                }
+                
+                var transformedChangedTouches = [];
+                for (var i = 0; i < originalChangedTouches.length; i++) {
+                    var touch = originalChangedTouches[i];
+                    var transformed = unrotatePoint(touch.clientX, touch.clientY);
+                    var proxyTouch = {
+                        identifier: touch.identifier,
+                        target: mapElement,
+                        clientX: transformed.x,
+                        clientY: transformed.y,
+                        screenX: touch.screenX,
+                        screenY: touch.screenY,
+                        pageX: transformed.x + window.scrollX,
+                        pageY: transformed.y + window.scrollY,
+                        radiusX: touch.radiusX || 0,
+                        radiusY: touch.radiusY || 0,
+                        rotationAngle: touch.rotationAngle || 0,
+                        force: touch.force || 0
+                    };
+                    transformedChangedTouches.push(proxyTouch);
+                }
+                
+                // Override the event's touch properties
+                try {
+                    Object.defineProperty(e, 'touches', {
+                        get: function() { return transformedTouches; },
+                        configurable: true
+                    });
+                    Object.defineProperty(e, 'changedTouches', {
+                        get: function() { return transformedChangedTouches; },
+                        configurable: true
+                    });
+                    Object.defineProperty(e, 'targetTouches', {
+                        get: function() { return transformedTouches; },
+                        configurable: true
+                    });
+                    e.synthetic = true;
+                } catch(err) {
+                    // If we can't override, try a different approach
+                    // Stop original and create new event
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    
+                    // Create a custom event that Leaflet can handle
+                    var customEvent = new CustomEvent(eventType, {
+                        bubbles: true,
+                        cancelable: true,
+                        detail: {
+                            touches: transformedTouches,
+                            changedTouches: transformedChangedTouches
+                        }
+                    });
+                    customEvent.touches = transformedTouches;
+                    customEvent.changedTouches = transformedChangedTouches;
+                    customEvent.targetTouches = transformedTouches;
+                    customEvent.synthetic = true;
+                    mapElement.dispatchEvent(customEvent);
+                    return;
+                }
+            }, true);
+        }
+
+        // Intercept all mouse events
+        ['mousedown', 'mousemove', 'mouseup', 'click', 'dblclick'].forEach(interceptEvent);
+        interceptWheel();
+        
+        // Intercept all touch events
+        ['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(interceptTouchEvent);
+
+        // Function to calculate and set container size/position
+        function updateMapLayout() {
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var rotationRad = 29 * Math.PI / 180;
+            
+            // Calculate minimum container size needed to cover viewport when rotated
+            // When a square of side S is rotated by angle θ, its bounding box is a square with side:
+            // boundingBoxSize = S * (|cos(θ)| + |sin(θ)|)
+            //
+            // For complete coverage, the bounding box must be at least as large as the larger viewport dimension
+            // boundingBoxSize >= max(vw, vh)
+            // S * (|cos(θ)| + |sin(θ)|) >= max(vw, vh)
+            // S >= max(vw, vh) / (|cos(θ)| + |sin(θ)|)
+            
+            var cos = Math.abs(Math.cos(rotationRad));
+            var sin = Math.abs(Math.sin(rotationRad));
+            var cosPlusSin = cos + sin;
+            
+            // Calculate minimum size so bounding box covers the larger viewport dimension
+            var minSize = Math.max(vw, vh) / cosPlusSin;
+            
+            // Use a generous safety margin to ensure the map overflows and no white shows
+            // Larger margin on desktop, smaller on mobile
+            var isMobile = window.innerWidth < 768;
+            var safetyMargin = isMobile ? 2.0 : 3.0;
+            var containerSize = minSize * safetyMargin;
+            
+            // Set container size
+            mapContainer.style.width = containerSize + 'px';
+            mapContainer.style.height = containerSize + 'px';
+            
+            // Centering is handled by CSS transform: translate(-50%, -50%)
+            
+            // Trigger resize event so Leaflet recalculates tile positions
+            map.invalidateSize();
+            
+            // Wait a tick for the size to be updated, then center on Central Park
+            setTimeout(function() {
+                var currentZoom = map.getZoom() || 12;
+                map.setView([centralParkLat, centralParkLng], currentZoom, { animate: false });
+            }, 0);
+        }
+
+        // Wait for map to be ready before setting up layout
+        map.whenReady(function() {
+            // Initial layout setup
+            updateMapLayout();
+            
+            // Set up resize handler
+            window.addEventListener('resize', updateMapLayout);
+        });
+
+        // Also handle window load in case map is ready before window loads
+        if (document.readyState === 'complete') {
+            // Map might already be ready, but updateMapLayout will handle it
+        } else {
+            window.addEventListener('load', function() {
+                if (map._loaded) {
+                    updateMapLayout();
+                }
+            });
+        }
+    </script>
+     <img style="position: absolute; bottom: 1px; left: 0px; z-index: 8; max-height: 150px; max-width: 150px;" src="./manhattanNorthIcon.png"/>
+</body>
+</html>
