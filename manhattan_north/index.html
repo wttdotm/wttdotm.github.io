@@ -54,23 +54,44 @@
     <div id="map-container">
         <div id="map"></div>
     </div>
-    <a href="https://wttdotm.com" target="_blank" rel="noopener" style="
-        position: fixed;
-        bottom: 18px;
-        right: 18px;
-        z-index: 9999;
-        text-decoration: none;
-        background: rgba(255,255,255,0.92);
-        color: #111;
-        font-size: 15px;
-        font-family: 'sans-serif', Arial, Helvetica;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.13);
-        padding: 5px 12px 5px 12px;
-        transition: background 0.15s;
-        opacity: 0.93;
-    " onmouseover="this.style.background='rgba(255,255,255,1)'" onmouseout="this.style.background='rgba(255,255,255,0.92)'">
-        By WTTDOTM
+    <style>
+        .fixed-link {
+            position: fixed;
+            right: 18px;
+            z-index: 9999;
+            text-decoration: none;
+            background: rgba(255,255,255,0.92);
+            color: #111;
+            font-size: 15px;
+            font-family: 'sans-serif', Arial, Helvetica;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+            padding: 5px 24px 5px 24px;
+            transition: background 0.15s;
+            opacity: 0.93;
+            display: inline-block;
+            min-width: 162px; /* Set to the wider of the two as minimum */
+            text-align: center;
+        }
+        .fixed-link:hover {
+            background: rgba(255,255,255,1);
+            box-shadow: 0 6px 22px rgba(0,0,0,0.15), 0 1.5px 4px rgba(0,0,0,0.08);
+            transform: translateY(-4px) scale(1.045);
+            transition: 
+                background 0.15s,
+                box-shadow 0.18s,
+                transform 0.17s cubic-bezier(.16,.84,.44,1);
+        }
+    </style>
+    <a href="./petition.pdf" target="_blank" rel="noopener"
+       class="fixed-link"
+       style="bottom: 62px;">
+        Read the petition here
+    </a>
+    <a href="https://wttdotm.com" target="_blank" rel="noopener"
+       class="fixed-link"
+       style="bottom: 18px;">
+        Project by WTTDOTM
     </a>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
