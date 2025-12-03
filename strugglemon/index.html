@@ -28,310 +28,296 @@
     /* background-repeat: no-repeat; */
     /* overflow: hidden; */
   }
-/* Inline styles applied directly to .innerbattle */
-.innerbattle {
-font-family: Verdana, sans-serif;
-font-kerning: auto;
-font-optical-sizing: auto;
-font-palette: normal;
-font-size: 13.3333px;
-font-size-adjust: none;
-font-stretch: 100%;
-font-style: normal;
-font-synthesis-small-caps: auto;
-font-synthesis-style: auto;
-font-synthesis-weight: auto;
-font-variant: normal;
-font-variant-alternates: normal;
-font-variant-caps: normal;
-font-variant-east-asian: normal;
-font-variant-emoji: normal;
-font-variant-ligatures: normal;
-font-variant-numeric: normal;
-font-variant-position: normal;
-font-weight: 400;
-grid-auto-columns: auto;
-grid-auto-flow: row;
-grid-auto-rows: auto;
-grid-column-end: auto;
-grid-column-start: auto;
-grid-row-end: auto;
-grid-row-start: auto;
-grid-template-areas: none;
-grid-template-columns: none;
-grid-template-rows: none;
-/* height: 360px; */
-hyphenate-character: auto;
-hyphenate-limit-chars: auto;
-hyphens: manual;
-image-orientation: from-image;
-image-rendering: auto;
-initial-letter: normal;
-inline-size: 640px;
-
-display: flex; 
-flex-direction: column; 
-align-items: center; 
-justify-content: center; 
-
-max-width: 80vw
-/* background-image: url(https://play.pokemonshowdown.com/sprites/gen6bgs/bg-aquacordetown.jpg); 
-background-position: center top -100px;
-background-size: 100%; */
-
-}
-
-
-/* S */
-/* Extracted CSS rules affecting the div */
-.statbar {display: none; width: 154px; min-height: 40px; padding: 2px 4px; }
-.statbar strong { margin: 0px -15px; display: block; text-align: center; color: rgb(34, 34, 34); text-shadow: rgb(255, 255, 255) 1px 1px 0px, rgb(255, 255, 255) 1px -1px 0px, rgb(255, 255, 255) -1px 1px 0px, rgb(255, 255, 255) -1px -1px 0px; }
-.statbar strong small { font-weight: normal; }
-.statbar .hpbar { position: relative; border: 1px solid rgb(119, 119, 119); background: rgb(252, 254, 255); padding: 1px; height: 8px; margin: 0px; width: 151px; border-radius: 4px; }
-.statbar .hpbar .hp { height: 4px; border-top: 2px solid rgb(0, 221, 96); background: rgb(0, 187, 81); border-bottom: 2px solid rgb(0, 119, 52); border-right: 1px solid rgb(0, 119, 52); border-radius: 3px; }
-.statbar .hpbar .prevhp { background: rgb(187, 238, 204); height: 8px; border-radius: 3px; }
-.statbar .hpbar .hptext { position: absolute; background: rgb(119, 119, 119); color: rgb(238, 238, 238); text-shadow: rgb(0, 0, 0) 0px 1px 0px; font-size: 9px; width: 32px; height: 12px; top: -1px; text-align: center; -webkit-text-fill-color: rgb(238, 238, 238); }
-.statbar .hpbar .hptextborder { position: absolute; background: transparent; border-top: 1px solid rgb(119, 119, 119); border-bottom: 1px solid rgb(119, 119, 119); width: 4px; top: -1px; height: 10px; }
-.statbar span {
-    padding: 0px 1px;
-    border: 1px solid rgb(255, 68, 0);
-    border-radius: 3px;
-}
-
-.statbar span.bad {
-    background: rgb(255, 229, 224);
-    color: rgb(255, 68, 0);
-    border-color: rgb(255, 68, 0);
-    -webkit-text-fill-color: rgb(255, 68, 0);
-}
-
-.statbar span.good {
-    background: rgb(229, 255, 224);
-    color: rgb(51, 170, 0);
-    border-color: rgb(51, 170, 0);
-    -webkit-text-fill-color: rgb(51, 170, 0);
-}
-
-.statbar span.brn, .statbar span.psn, .statbar span.slp, .statbar span.par, .statbar span.frz, .statbar span.tox {
-    padding: 1px 2px;
-    border: 0px;
-    border-radius: 3px;
-    -webkit-text-fill-color: rgb(255, 255, 255);
-}
-
-.statbar span.brn {
-    background: rgb(238, 85, 51);
-    color: rgb(255, 255, 255);
-    -webkit-text-fill-color: rgb(255, 255, 255);
-}
-
-.statbar span.psn, span.tox {
-	background: #A4009A;
-}
-.statbar span.par {
-	background: #9AA400;
-}
-.statbar span.slp {
-	background: #AA77AA;
-}
-.statbar span.frz {
-	background: #009AA4;
-}
-
-
-.statbar .status {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
-    min-height: 10px;
-    font-size: 7pt;
-}
-
-.statbar .status img {
-    vertical-align: top;
-    top: -2px;
-    position: relative;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-    .pixelated, .itemicon, .picon, .trainersprite {
-        image-rendering: pixelated;
-    }
-}
-
-.rstatbar .hpbar .hptext { right: -32px; border-radius: 0px 4px 4px 0px; }
-.rstatbar .hpbar .hptextborder { right: -3px; }
-.messagebar { position: absolute; display: none; bottom: 10px; left: 110px; right: 110px; color: rgb(204, 204, 204); background: rgba(0, 0, 0, 0.75); border-radius: 6px; padding: 4px 6px 0px; overflow: hidden; }
-.messagebar strong { color: rgb(255, 255, 255); font-size: 12pt; }
-.messagebar p { display: none; margin: 0px; padding: 0px; }
-.weather { position: absolute; display: block; inset: 0px; text-shadow: rgb(255, 255, 255) 1px 1px 0px, rgb(255, 255, 255) 1px -1px 0px, rgb(255, 255, 255) -1px 1px 0px, rgb(255, 255, 255) -1px -1px 0px; color: black; }
-.weather em { display: block; margin: 24px 0px 0px 115px; font-size: 12pt; }
-.picon { display: inline-block; width: 40px; height: 30px; }
-.trainer .picon { margin: 0px -4px; }
-.pixelated, .itemicon, .picon, .trainersprite { image-rendering: pixelated; }
-.status { color: white; border-radius: 3px; padding: 0px 2px; }
-
-/* New styles for userSelections */
-.userSelections {
-  /* position: fixed;
-  bottom: 20px;
-  left: 25%;
-  transform: translateX(-50%); */
-  background: rgb(218, 229, 240);
-  border: 1px solid rgb(153, 153, 153);
-  border-radius: 5px;
-  /* padding: 20px; */
-  box-shadow: rgba(255, 255, 255, 0.6) 1px 1px 0px inset;
-  font-family: Verdana, sans-serif;
-  /* min-width: 100vw; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 100%;
-}
-
-.userSelections .inner {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: center;
-  /* max-width: 100vw; */
-  width: 100%;
-  margin-top: 20px;
-  margin-left: 30px;
-  /* padding-right: 30px */
-  /* padding-left: 30px;
-  padding-right: 30px; */
-}
-
-.userSelections input[type="text"] {
-  display: block;
-  padding: 1px;
-  margin: 2px 3px 1px 1px;
-  width: 129px;
-  height: 20px;
-  border: 1px solid rgb(170, 170, 170);
-  border-radius: 3px;
-  box-shadow: rgb(204, 204, 204) 0px 1px 2px inset, rgba(255, 255, 255, 0.6) 1px 1px 0px;
-  background: rgb(248, 251, 253);
-}
-
-.userSelections button {
-  background: transparent;
-  border: 1px solid rgb(170, 170, 170);
-  border-radius: 4px;
-  padding: 2px 5px;
-  margin: 0px;
-  font-size: 9pt;
-  font-family: Verdana, sans-serif;
-}
-
-.userSelections label {
-  display: block;
-  font-size: 8pt;
-  font-weight: bold;
-  color: rgb(85, 85, 85);
-  padding-left: 2px;
-  margin-bottom: 2px;
-}
-
-.userSelections input[type="radio"],
-.userSelections input[type="checkbox"] {
-  margin-right: 5px;
-}
-
-.userSelections div {
-  margin-bottom: 10px;
-}
-
-.userSelections input[type="number"] {
-  width: 60px;
-  padding: 1px;
-  border: 1px solid rgb(170, 170, 170);
-  border-radius: 3px;
-  box-shadow: rgb(204, 204, 204) 0px 1px 2px inset, rgba(255, 255, 255, 0.6) 1px 1px 0px;
-  background: rgb(248, 251, 253);
-}
-
-.monContainer {
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-  opacity: 1; 
-  height: 100%;
-  min-height: 40%;
-  width: 100%;
-  background-image: url(https://play.pokemonshowdown.com/sprites/gen6bgs/bg-aquacordetown.jpg); 
-  background-position: center top -100px;
-  background-size: 100%;
-  border-radius: 5px;
-}
-
-.userSelections .inner div {
-    min-width: 0;
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 700px) {
-  .monContainer {
-    background-position: center top -70px;
-    background-size: auto;
-
-  }
-
-  .badAppleButton {
-    display: none;
-  }
-
-  .kevinBlasting {
-    display: none;
-  }
-
-  
-  body {
-    justify-content: flex-start;
-  }
-  
+  /* Inline styles applied directly to .innerbattle */
   .innerbattle {
-    margin-top: 5vh;
+    font-family: Verdana, sans-serif;
+    font-kerning: auto;
+    font-optical-sizing: auto;
+    font-palette: normal;
+    font-size: 13.3333px;
+    font-size-adjust: none;
+    font-stretch: 100%;
+    font-style: normal;
+    font-synthesis-small-caps: auto;
+    font-synthesis-style: auto;
+    font-synthesis-weight: auto;
+    font-variant: normal;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-emoji: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-weight: 400;
+    grid-auto-columns: auto;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    grid-column-end: auto;
+    grid-column-start: auto;
+    grid-row-end: auto;
+    grid-row-start: auto;
+    grid-template-areas: none;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    /* height: 360px; */
+    hyphenate-character: auto;
+    hyphenate-limit-chars: auto;
+    hyphens: manual;
+    image-orientation: from-image;
+    image-rendering: auto;
+    initial-letter: normal;
+    inline-size: 640px;
+
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+
+    max-width: 80vw
+    /* background-image: url(https://play.pokemonshowdown.com/sprites/gen6bgs/bg-aquacordetown.jpg); 
+    background-position: center top -100px;
+    background-size: 100%; */
+
   }
-}
 
-.credits {
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
-.credits a {
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: underline;
-}
+  /* S */
+  /* Extracted CSS rules affecting the div */
+  .statbar {display: none; width: 154px; min-height: 40px; padding: 2px 4px; }
+  .statbar strong { margin: 0px -15px; display: block; text-align: center; color: rgb(34, 34, 34); text-shadow: rgb(255, 255, 255) 1px 1px 0px, rgb(255, 255, 255) 1px -1px 0px, rgb(255, 255, 255) -1px 1px 0px, rgb(255, 255, 255) -1px -1px 0px; }
+  .statbar strong small { font-weight: normal; }
+  .statbar .hpbar { position: relative; border: 1px solid rgb(119, 119, 119); background: rgb(252, 254, 255); padding: 1px; height: 8px; margin: 0px; width: 151px; border-radius: 4px; }
+  .statbar .hpbar .hp { height: 4px; border-top: 2px solid rgb(0, 221, 96); background: rgb(0, 187, 81); border-bottom: 2px solid rgb(0, 119, 52); border-right: 1px solid rgb(0, 119, 52); border-radius: 3px; }
+  .statbar .hpbar .prevhp { background: rgb(187, 238, 204); height: 8px; border-radius: 3px; }
+  .statbar .hpbar .hptext { position: absolute; background: rgb(119, 119, 119); color: rgb(238, 238, 238); text-shadow: rgb(0, 0, 0) 0px 1px 0px; font-size: 9px; width: 32px; height: 12px; top: -1px; text-align: center; -webkit-text-fill-color: rgb(238, 238, 238); }
+  .statbar .hpbar .hptextborder { position: absolute; background: transparent; border-top: 1px solid rgb(119, 119, 119); border-bottom: 1px solid rgb(119, 119, 119); width: 4px; top: -1px; height: 10px; }
+  .statbar span {
+      padding: 0px 1px;
+      border: 1px solid rgb(255, 68, 0);
+      border-radius: 3px;
+  }
 
-.credits a:hover {
-  color: rgba(255, 255, 255, 1);
-}
+  .statbar span.bad {
+      background: rgb(255, 229, 224);
+      color: rgb(255, 68, 0);
+      border-color: rgb(255, 68, 0);
+      -webkit-text-fill-color: rgb(255, 68, 0);
+  }
+
+  .statbar span.good {
+      background: rgb(229, 255, 224);
+      color: rgb(51, 170, 0);
+      border-color: rgb(51, 170, 0);
+      -webkit-text-fill-color: rgb(51, 170, 0);
+  }
+
+  .statbar span.brn, .statbar span.psn, .statbar span.slp, .statbar span.par, .statbar span.frz, .statbar span.tox {
+      padding: 1px 2px;
+      border: 0px;
+      border-radius: 3px;
+      -webkit-text-fill-color: rgb(255, 255, 255);
+  }
+
+  .statbar span.brn {
+      background: rgb(238, 85, 51);
+      color: rgb(255, 255, 255);
+      -webkit-text-fill-color: rgb(255, 255, 255);
+  }
+
+  .statbar span.psn, span.tox {
+    background: #A4009A;
+  }
+  .statbar span.par {
+    background: #9AA400;
+  }
+  .statbar span.slp {
+    background: #AA77AA;
+  }
+  .statbar span.frz {
+    background: #009AA4;
+  }
+
+
+  .statbar .status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      min-height: 10px;
+      font-size: 7pt;
+  }
+
+  .statbar .status img {
+      vertical-align: top;
+      top: -2px;
+      position: relative;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+      .pixelated, .itemicon, .picon, .trainersprite {
+          image-rendering: pixelated;
+      }
+  }
+
+  .rstatbar .hpbar .hptext { right: -32px; border-radius: 0px 4px 4px 0px; }
+  .rstatbar .hpbar .hptextborder { right: -3px; }
+  .messagebar { position: absolute; display: none; bottom: 10px; left: 110px; right: 110px; color: rgb(204, 204, 204); background: rgba(0, 0, 0, 0.75); border-radius: 6px; padding: 4px 6px 0px; overflow: hidden; }
+  .messagebar strong { color: rgb(255, 255, 255); font-size: 12pt; }
+  .messagebar p { display: none; margin: 0px; padding: 0px; }
+  .weather { position: absolute; display: block; inset: 0px; text-shadow: rgb(255, 255, 255) 1px 1px 0px, rgb(255, 255, 255) 1px -1px 0px, rgb(255, 255, 255) -1px 1px 0px, rgb(255, 255, 255) -1px -1px 0px; color: black; }
+  .weather em { display: block; margin: 24px 0px 0px 115px; font-size: 12pt; }
+  .picon { display: inline-block; width: 40px; height: 30px; }
+  .trainer .picon { margin: 0px -4px; }
+  .pixelated, .itemicon, .picon, .trainersprite { image-rendering: pixelated; }
+  .status { color: white; border-radius: 3px; padding: 0px 2px; }
+
+  /* New styles for userSelections */
+  .userSelections {
+    /* position: fixed;
+    bottom: 20px;
+    left: 25%;
+    transform: translateX(-50%); */
+    background: rgb(218, 229, 240);
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 5px;
+    /* padding: 20px; */
+    box-shadow: rgba(255, 255, 255, 0.6) 1px 1px 0px inset;
+    font-family: Verdana, sans-serif;
+    /* min-width: 100vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+  }
+
+  .userSelections .inner {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* max-width: 100vw; */
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 30px;
+    /* padding-right: 30px */
+    /* padding-left: 30px;
+    padding-right: 30px; */
+  }
+
+  .userSelections input[type="text"] {
+    display: block;
+    padding: 1px;
+    margin: 2px 3px 1px 1px;
+    width: 129px;
+    height: 20px;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 3px;
+    box-shadow: rgb(204, 204, 204) 0px 1px 2px inset, rgba(255, 255, 255, 0.6) 1px 1px 0px;
+    background: rgb(248, 251, 253);
+  }
+
+  .userSelections button {
+    background: transparent;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin: 0px;
+    font-size: 9pt;
+    font-family: Verdana, sans-serif;
+  }
+
+  .userSelections label {
+    display: block;
+    font-size: 8pt;
+    font-weight: bold;
+    color: rgb(85, 85, 85);
+    padding-left: 2px;
+    margin-bottom: 2px;
+  }
+
+  .userSelections input[type="radio"],
+  .userSelections input[type="checkbox"] {
+    margin-right: 5px;
+  }
+
+  .userSelections div {
+    margin-bottom: 10px;
+  }
+
+  .userSelections input[type="number"] {
+    width: 60px;
+    padding: 1px;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 3px;
+    box-shadow: rgb(204, 204, 204) 0px 1px 2px inset, rgba(255, 255, 255, 0.6) 1px 1px 0px;
+    background: rgb(248, 251, 253);
+  }
+
+  .monContainer {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 1; 
+    height: 100%;
+    min-height: 40%;
+    width: 100%;
+    background-image: url(https://play.pokemonshowdown.com/sprites/gen6bgs/bg-aquacordetown.jpg); 
+    background-position: center top -100px;
+    background-size: 100%;
+    border-radius: 5px;
+  }
+
+  .userSelections .inner div {
+      min-width: 0;
+  }
+
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 700px) {
+    .monContainer {
+      background-position: center top -70px;
+      background-size: auto;
+
+    }
+
+    .badAppleButton {
+      display: none;
+    }
+
+    .kevinBlasting {
+      display: none;
+    }
+
+    
+    body {
+      justify-content: flex-start;
+    }
+    
+    .innerbattle {
+      margin-top: 5vh;
+    }
+  }
+
+  .credits {
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .credits a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: underline;
+  }
+
+  .credits a:hover {
+    color: rgba(255, 255, 255, 1);
+  }
 
 </style>
 <script src="fullDex.js"></script>
-<script>
-  function remove(el) {
-  var element = el;
-  element.remove();
-}
-
-let numSpikes = 0;
-let numTSpikes = 0;
-let numStickyWeb = 0;
-let numRocks = 0;
-let firstMon = "Quagsire"
-let nickname = "";
-</script>
 </head>
 <body>
-<!-- <div class="backdrop" style="position:absolute; background-image:url(https://play.pokemonshowdown.com/sprites/gen6bgs/bg-aquacordetown.jpg);display:block;opacity:0.8"></div> -->
 <div class="innerbattle">
   <div class="monContainer">
 
@@ -392,398 +378,318 @@ let nickname = "";
 
 
 
-
-<script>
-function addStatusText(goodBad, text = null) {
-  let textToAdd = "";
-  if (text) {
-    textToAdd = text;
-  } else {
-    input = document.getElementById('statusInput');
-    if (!input.value.length) {
-      return
-    }
-    textToAdd = input.value;
-  }
-  const status = document.querySelector('.status');
-  const span = document.createElement('span');
-  span.className = goodBad;
-  span.textContent = textToAdd;
-  span.onclick = function() {
-    remove(this);
-  }
-  status.appendChild(span);
-  status.appendChild(document.createTextNode(' '));
-  if (!text) {
-    input.value = ''; // Clear input after adding
-
-  }
-}
-
-</script>
 <div class="userSelections">
   <div class="inner">
-<script>
+    <div style="margin-bottom: 0px; display: flex; gap: 15px; flex-wrap: wrap;">
 
+<!-- SPRITE SELECTION -->
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <label>Change Pokemon:</label>
+        <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="display: none;"> </span>
+        <input type="text" id="nicknameInput" placeholder="Nickname" style="width: 100%;" oninput="handleNicknameInput(this.value)">
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <button onclick="updatePokemon()">Change</button>
+          <div style="display: flex; flex-direction: row; gap: 5px; align-items: center;">
+            <label style="margin: 0; font-size: 9pt; white-space: nowrap;">Mon Scale:</label>
+            <input type="range" id="monScaleSlider" min="0.8" max="1.4" step="0.1" value="1.1" oninput="updateMonScale(this.value)" style="width: 80px;">
+          </div>
+        </div>
+      </div>
 
-function handleInput(value) {
-    // console.log(value);
-  const input = value.toLowerCase();
-  const autocompleteSpan = document.getElementById('autocomplete');
-  const pokemonInput = document.getElementById('pokemonInput');
-  
-  // Find first matching pokemon name
-  const match = Object.keys(dex).find(name => 
-    name.toLowerCase().startsWith(input)
-  );
+<!-- BASIC MODIFIERS -->
+      <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 0px;">
+        <label>Basic Modifiers:</label>
+        <select id="statusEffect" onchange="updateStatus(this.value)" style="width: 100px;">
+          <option value="none" selected>Status</option>
+          <option value="brn">Burn</option>
+          <option value="frz">Freeze</option>
+          <option value="par">Para</option>
+          <option value="psn">Poison</option>
+          <option value="tox">Toxic</option>
+          <option value="slp">Sleep</option>
+        </select>
+        <select id="teraType" onchange="updateTeraType(this.value)" style="width: 100px;">
+          <option value="none" selected>Tera</option>
+          <option value="normal">Normal</option>
+          <option value="fire">Fire</option>
+          <option value="water">Water</option>
+          <option value="electric">Electric</option>
+          <option value="grass">Grass</option>
+          <option value="ice">Ice</option>
+          <option value="fighting">Fighting</option>
+          <option value="poison">Poison</option>
+          <option value="ground">Ground</option>
+          <option value="flying">Flying</option>
+          <option value="psychic">Psychic</option>
+          <option value="bug">Bug</option>
+          <option value="rock">Rock</option>
+          <option value="ghost">Ghost</option>
+          <option value="dragon">Dragon</option>
+          <option value="dark">Dark</option>
+          <option value="steel">Steel</option>
+          <option value="fairy">Fairy</option>
+          <option value="stellar">Stellar</option>
+        </select>
+        <select id="sideSelect" onchange="updatePokemon()" style="width: 100px;">
+          <option value="front" selected>POV</option>
+          <option value="front">Opp. Mon</option>
+          <option value="back">Your Mon</option>
+        </select>
+        <select id="genderSelect" onchange="updatePokemon()" style="width: 100px;">
+          <option value="M" selected>Male</option>
+          <option value="F">Female</option>
+        </select>
+        <div style="display: flex; gap: 5px; align-items: center;">
+          <input type="number" id="levelInput" min="1" max="100" value="100" style="width: 45px;">
+          <label style="margin: 0;">Shiny</label>
+          <input type="checkbox" id="shinyToggle" style="margin: 0;">
+        </div>
+      </div>
 
-  // console.log(match);
+    </div>
 
-  if (match && input) {
-    // Show autocomplete
-    autocompleteSpan.textContent = match;
-    // Position the span
-    autocompleteSpan.style.top = pokemonInput.offsetTop + 'px';
-    autocompleteSpan.style.left = pokemonInput.offsetLeft + 'px';
-  } else {
-    autocompleteSpan.textContent = '';
-  }
-}
+<!-- CUSTOM STATUS -->
+    <div style="margin-bottom: 0px;">
+      <label>Add Custom Status:</label>
+      <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+        <input type="text" id="statusInput" placeholder="eg. Tuberculosis" onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
+        <button onclick="addStatusText('good')" style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
+        <button onclick="addStatusText('bad')" style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
+      </div>
+    </div>
 
-function handleNicknameInput(value = "") {
-  // console.log("nickname", value);
-  nickname = value;
-  if (nickname.length) {
-    document.getElementById('pokemonName').innerText = nickname;
-  } else {
-    updatePokemon();
-  }
-}
+<!-- STAT MODIFIERS -->
+    <div style="margin-bottom: 0px;">
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+        <div style="max-width: 100px;">
+          <label id="labelAtk">Atk:</label>
+          <select id="selectAtk" onchange="updateStatMod('Atk', this.value)">
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option selected value="0">+0</option>
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="4">+4</option>
+            <option value="5">+5</option>
+            <option value="6">+6</option>
+          </select>
+        </div>
+        <div>
+          <label id="labelDef">Def:</label>
+          <select id="selectDef" onchange="updateStatMod('Def', this.value)">
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option selected value="0">+0</option>
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="4">+4</option>
+            <option value="5">+5</option>
+            <option value="6">+6</option>
+          </select>
+        </div>
+        <div>
+          <label id="labelSpA">SpA:</label>
+          <select id="selectSpA" onchange="updateStatMod('SpA', this.value)">
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option selected value="0">+0</option>
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="4">+4</option>
+            <option value="5">+5</option>
+            <option value="6">+6</option>
+          </select>
+        </div>
+        <div>
+          <label id="labelSpD">SpD:</label>
+          <select id="selectSpD" onchange="updateStatMod('SpD', this.value)">
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option selected value="0">+0</option>
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="4">+4</option>
+            <option value="5">+5</option>
+            <option value="6">+6</option>
+          </select>
+        </div>
+        <div>
+          <label id="labelSpe">Spe:</label>
+          <select id="selectSpe" onchange="updateStatMod('Spe', this.value)">
+            <option value="-6">-6</option>
+            <option value="-5">-5</option>
+            <option value="-4">-4</option>
+            <option value="-3">-3</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option selected value="0">+0</option>
+            <option value="1">+1</option>
+            <option value="2">+2</option>
+            <option value="3">+3</option>
+            <option value="4">+4</option>
+            <option value="5">+5</option>
+            <option value="6">+6</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
-function handleKeyDown(event) {
-  if (event.key === 'Enter') {
-    updatePokemon();
-  } else if (event.key === "Tab") {
-    updatePokemon();
-  }
-}
+<!-- HAZARDS -->
+    <div style="margin-bottom: 0px;">
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+        <div>
+          <label>Rocks:</label>
+          <select onchange="numRocks = parseInt(this.value); updatePokemon();">
+            <option selected value="0">0</option>
+            <option value="1">1</option>
+          </select>
+        </div>
+        <div>
+          <label>Spikes:</label>
+          <select onchange="numSpikes = parseInt(this.value); updatePokemon();">
+            <option selected value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div>
+          <label>T. Spikes:</label>
+          <select onchange="numTSpikes = parseInt(this.value); updatePokemon();">
+            <option selected value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+        <div>
+          <label>Webs:</label>
+          <select onchange="numStickyWeb = parseInt(this.value); updatePokemon();">
+            <option selected value="0">0</option>
+            <option value="1">1</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
-function updateMonScale(value) {
-  const sprite = document.getElementById('pokemonSprite');
-  sprite.style.transform = `scale(${value})`;
-}
+<!-- BACKGROUND -->
+    <div style="margin-top: 0px; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+      <div style="max-width: 40%;">
+      <label>Background:</label>
+      <select id="backgroundSelect" onchange="updateBackground(this.value)" style="width: 150px; max-width: 100%;">
+        <option value="bg-aquacordetown.jpg" selected>Aquacorde Town</option>
+        <option value="transparent">TRANSPARENT</option>
+        <option value="bg-beach.jpg">Beach</option>
+        <option value="bg-city.jpg">City</option>
+        <option value="bg-dampcave.jpg">Damp Cave</option>
+        <option value="bg-darkbeach.jpg">Dark Beach</option>
+        <option value="bg-darkcity.jpg">Dark City</option>
+        <option value="bg-darkmeadow.jpg">Dark Meadow</option>
+        <option value="bg-deepsea.jpg">Deep Sea</option>
+        <option value="bg-desert.jpg">Desert</option>
+        <option value="bg-earthycave.jpg">Earthy Cave</option>
+        <option value="bg-elite4drake.jpg">Elite 4 Drake</option>
+        <option value="bg-forest.jpg">Forest</option>
+        <option value="bg-icecave.jpg">Ice Cave</option>
+        <option value="bg-leaderwallace.jpg">Leader Wallace</option>
+        <option value="bg-library.jpg">Library</option>
+        <option value="bg-meadow.jpg">Meadow</option>
+        <option value="bg-orasdesert.jpg">ORAS Desert</option>
+        <option value="bg-orassea.jpg">ORAS Sea</option>
+        <option value="bg-skypillar.jpg">Sky Pillar</option>
+      </select>
+      </div>
 
-function resetAll() {
-  // Reset Pokemon to default
-  firstMon = "Quagsire";
-  nickname = "";
-  document.getElementById('pokemonInput').value = "";
-  document.getElementById('nicknameInput').value = "";
-  document.getElementById('autocomplete').textContent = "Quagsire";
-
-  // Reset status effect
-  document.getElementById('statusEffect').value = "none";
-  updateStatus('none');
-
-  // Reset tera type
-  document.getElementById('teraType').value = "none";
-  updateTeraType('none');
-
-  // Reset stat modifiers
-  ['Atk', 'Def', 'SpA', 'SpD', 'Spe'].forEach(stat => {
-    document.getElementById('select' + stat).value = '0';
-    updateStatMod(stat, '0');
-  });
-
-  // Reset hazards
-  numSpikes = 0;
-  numTSpikes = 0;
-  numStickyWeb = 0;
-  numRocks = 0;
-  document.querySelectorAll('select[onchange*="numSpikes"], select[onchange*="numTSpikes"], select[onchange*="numStickyWeb"], select[onchange*="numRocks"]').forEach(select => {
-    select.value = '0';
-  });
-
-  // Reset side/gender/shiny/level
-  document.getElementById('sideSelect').value = 'front';
-  document.getElementById('genderSelect').value = 'M';
-  document.getElementById('shinyToggle').checked = false;
-  document.getElementById('levelInput').value = 100;
-  document.getElementById('pokemonLevel').style.display = 'none';
-
-  // Clear custom status text
-  document.querySelectorAll('.status span.good, .status span.bad').forEach(span => {
-    if (span.id !== 'pokemonStatus' && !span.id.startsWith('stat')) {
-      span.remove();
-    }
-  });
-  document.getElementById('statusInput').value = '';
-
-  // Reset background
-  document.getElementById('backgroundSelect').value = 'bg-aquacordetown.jpg';
-  updateBackground('bg-aquacordetown.jpg');
-
-  // Reset mon scale
-  document.getElementById('monScaleSlider').value = 1.1;
-  updateMonScale(1.1);
-
-  // Update pokemon to apply all changes
-  updatePokemon();
-}
-</script>
-<div style="margin-bottom: 0px; display: flex; gap: 15px; flex-wrap: wrap;">
-  <div style="display: flex; flex-direction: column; gap: 5px;">
-    <label>Change Pokemon:</label>
-    <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="display: none;"> </span>
-    <input type="text" id="nicknameInput" placeholder="Nickname" style="width: 100%;" oninput="handleNicknameInput(this.value)">
-    <div style="display: flex; flex-direction: column; gap: 5px;">
-      <button onclick="updatePokemon()">Change</button>
-      <div style="display: flex; flex-direction: row; gap: 5px; align-items: center;">
-        <label style="margin: 0; font-size: 9pt; white-space: nowrap;">Mon Scale:</label>
-        <input type="range" id="monScaleSlider" min="0.8" max="1.4" step="0.1" value="1.1" oninput="updateMonScale(this.value)" style="width: 80px;">
+<!-- BAD APPLE BUTTON -->
+      <div class="badAppleButton" style="max-width: 60%;">
+        <label>Bad Apple lol:</label>
+        <button id="badAppleButton" onclick="playBadApple()">Bad Apple</button>
       </div>
     </div>
   </div>
-
-  <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 0px;">
-    <label>Basic Modifiers:</label>
-    <select id="statusEffect" onchange="updateStatus(this.value)" style="width: 100px;">
-      <option value="none" selected>Status</option>
-      <option value="brn">Burn</option>
-      <option value="frz">Freeze</option>
-      <option value="par">Para</option>
-      <option value="psn">Poison</option>
-      <option value="tox">Toxic</option>
-      <option value="slp">Sleep</option>
-    </select>
-    <select id="teraType" onchange="updateTeraType(this.value)" style="width: 100px;">
-      <option value="none" selected>Tera</option>
-      <option value="normal">Normal</option>
-      <option value="fire">Fire</option>
-      <option value="water">Water</option>
-      <option value="electric">Electric</option>
-      <option value="grass">Grass</option>
-      <option value="ice">Ice</option>
-      <option value="fighting">Fighting</option>
-      <option value="poison">Poison</option>
-      <option value="ground">Ground</option>
-      <option value="flying">Flying</option>
-      <option value="psychic">Psychic</option>
-      <option value="bug">Bug</option>
-      <option value="rock">Rock</option>
-      <option value="ghost">Ghost</option>
-      <option value="dragon">Dragon</option>
-      <option value="dark">Dark</option>
-      <option value="steel">Steel</option>
-      <option value="fairy">Fairy</option>
-      <option value="stellar">Stellar</option>
-    </select>
-    <!-- <div style="display: flex; gap: 5px;"> -->
-      <select id="sideSelect" onchange="updatePokemon()" style="width: 100px;">
-        <option value="front" selected>Opp. Mon</option>
-        <option value="back">Your Mon</option>
-      </select>
-      <select id="genderSelect" onchange="updatePokemon()" style="width: 100px;">
-        <option value="M" selected>Male</option>
-        <option value="F">Female</option>
-      </select>
-    <!-- </div> -->
-    <div style="display: flex; gap: 5px; align-items: center;">
-      <input type="number" id="levelInput" min="1" max="100" value="100" style="width: 45px;">
-      <label style="margin: 0;">Shiny</label>
-      <input type="checkbox" id="shinyToggle" style="margin: 0;">
-    </div>
-  </div>
-
 </div>
 
-<div style="margin-bottom: 0px;">
-  <label>Add Custom Status:</label>
-  <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-    <input type="text" id="statusInput" placeholder="eg. Tuberculosis" onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
-    <button onclick="addStatusText('good')" style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
-    <button onclick="addStatusText('bad')" style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
-  </div>
-</div>
 
 <script>
-  function updateStatus(value) {
-    const statusElement = document.getElementById('pokemonStatus');
-    if (value === 'none') {
-      statusElement.style.display = 'none';
-    } else {
-      statusElement.className = value;
-      statusElement.innerText = value.toUpperCase();
-      statusElement.style.display = 'block';
-    }
+
+// VARIABLE INITIALIZATION
+  let numSpikes = 0;
+  let numTSpikes = 0;
+  let numStickyWeb = 0;
+  let numRocks = 0;
+  let firstMon = "Quagsire"
+  let nickname = "";
+
+
+// ASSORTED INITIALIZATION
+document.getElementById('autocomplete').textContent = 'Quagsire';
+document.getElementById('pokemonInput').value = 'Quagsire';
+
+  function remove(el) {
+    var element = el;
+    element.remove();
   }
-</script>
 
-<div style="margin-bottom: 0px;">
-  <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-    <div style="max-width: 100px;">
-      <label id="labelAtk">Atk:</label>
-      <select id="selectAtk" onchange="updateStatMod('Atk', this.value)">
-        <option value="-6">-6</option>
-        <option value="-5">-5</option>
-        <option value="-4">-4</option>
-        <option value="-3">-3</option>
-        <option value="-2">-2</option>
-        <option value="-1">-1</option>
-        <option selected value="0">+0</option>
-        <option value="1">+1</option>
-        <option value="2">+2</option>
-        <option value="3">+3</option>
-        <option value="4">+4</option>
-        <option value="5">+5</option>
-        <option value="6">+6</option>
-      </select>
-    </div>
-    <div>
-      <label id="labelDef">Def:</label>
-      <select id="selectDef" onchange="updateStatMod('Def', this.value)">
-        <option value="-6">-6</option>
-        <option value="-5">-5</option>
-        <option value="-4">-4</option>
-        <option value="-3">-3</option>
-        <option value="-2">-2</option>
-        <option value="-1">-1</option>
-        <option selected value="0">+0</option>
-        <option value="1">+1</option>
-        <option value="2">+2</option>
-        <option value="3">+3</option>
-        <option value="4">+4</option>
-        <option value="5">+5</option>
-        <option value="6">+6</option>
-      </select>
-    </div>
-    <div>
-      <label id="labelSpA">SpA:</label>
-      <select id="selectSpA" onchange="updateStatMod('SpA', this.value)">
-        <option value="-6">-6</option>
-        <option value="-5">-5</option>
-        <option value="-4">-4</option>
-        <option value="-3">-3</option>
-        <option value="-2">-2</option>
-        <option value="-1">-1</option>
-        <option selected value="0">+0</option>
-        <option value="1">+1</option>
-        <option value="2">+2</option>
-        <option value="3">+3</option>
-        <option value="4">+4</option>
-        <option value="5">+5</option>
-        <option value="6">+6</option>
-      </select>
-    </div>
-    <div>
-      <label id="labelSpD">SpD:</label>
-      <select id="selectSpD" onchange="updateStatMod('SpD', this.value)">
-        <option value="-6">-6</option>
-        <option value="-5">-5</option>
-        <option value="-4">-4</option>
-        <option value="-3">-3</option>
-        <option value="-2">-2</option>
-        <option value="-1">-1</option>
-        <option selected value="0">+0</option>
-        <option value="1">+1</option>
-        <option value="2">+2</option>
-        <option value="3">+3</option>
-        <option value="4">+4</option>
-        <option value="5">+5</option>
-        <option value="6">+6</option>
-      </select>
-    </div>
-    <div>
-      <label id="labelSpe">Spe:</label>
-      <select id="selectSpe" onchange="updateStatMod('Spe', this.value)">
-        <option value="-6">-6</option>
-        <option value="-5">-5</option>
-        <option value="-4">-4</option>
-        <option value="-3">-3</option>
-        <option value="-2">-2</option>
-        <option value="-1">-1</option>
-        <option selected value="0">+0</option>
-        <option value="1">+1</option>
-        <option value="2">+2</option>
-        <option value="3">+3</option>
-        <option value="4">+4</option>
-        <option value="5">+5</option>
-        <option value="6">+6</option>
-      </select>
-    </div>
-  </div>
-</div>
 
-<div style="margin-bottom: 0px;">
-  <!-- <label>Hazards:</label> -->
-  <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-    <div>
-      <label>Rocks:</label>
-      <select onchange="numRocks = parseInt(this.value); updatePokemon();">
-        <option selected value="0">0</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-    <div>
-      <label>Spikes:</label>
-      <select onchange="numSpikes = parseInt(this.value); updatePokemon();">
-        <option selected value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
-    </div>
-    <div>
-      <label>T. Spikes:</label>
-      <select onchange="numTSpikes = parseInt(this.value); updatePokemon();">
-        <option selected value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-      </select>
-    </div>
-    <div>
-      <label>Webs:</label>
-      <select onchange="numStickyWeb = parseInt(this.value); updatePokemon();">
-        <option selected value="0">0</option>
-        <option value="1">1</option>
-      </select>
-    </div>
-  </div>
-</div>
+  //UPDATE FUNCTIONS
 
-<div style="margin-top: 0px; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-  <div style="max-width: 40%;">
-  <label>Background:</label>
-  <select id="backgroundSelect" onchange="updateBackground(this.value)" style="width: 150px; max-width: 100%;">
-    <option value="bg-aquacordetown.jpg" selected>Aquacorde Town</option>
-    <option value="transparent">TRANSPARENT</option>
-    <option value="bg-beach.jpg">Beach</option>
-    <option value="bg-city.jpg">City</option>
-    <option value="bg-dampcave.jpg">Damp Cave</option>
-    <option value="bg-darkbeach.jpg">Dark Beach</option>
-    <option value="bg-darkcity.jpg">Dark City</option>
-    <option value="bg-darkmeadow.jpg">Dark Meadow</option>
-    <option value="bg-deepsea.jpg">Deep Sea</option>
-    <option value="bg-desert.jpg">Desert</option>
-    <option value="bg-earthycave.jpg">Earthy Cave</option>
-    <option value="bg-elite4drake.jpg">Elite 4 Drake</option>
-    <option value="bg-forest.jpg">Forest</option>
-    <option value="bg-icecave.jpg">Ice Cave</option>
-    <option value="bg-leaderwallace.jpg">Leader Wallace</option>
-    <option value="bg-library.jpg">Library</option>
-    <option value="bg-meadow.jpg">Meadow</option>
-    <option value="bg-orasdesert.jpg">ORAS Desert</option>
-    <option value="bg-orassea.jpg">ORAS Sea</option>
-    <option value="bg-skypillar.jpg">Sky Pillar</option>
-  </select>
-  </div>
-  <div class="badAppleButton" style="max-width: 60%;">
-    <label>Bad Apple lol:</label>
-    <button id="badAppleButton" onclick="playBadApple()">Bad Apple</button>
-  </div>
-</div>
+  function addStatusText(goodBad, text = null) {
+      let textToAdd = "";
+      if (text) {
+        textToAdd = text;
+      } else {
+        input = document.getElementById('statusInput');
+        if (!input.value.length) {
+          return
+        }
+        textToAdd = input.value;
+      }
+      const status = document.querySelector('.status');
+      const span = document.createElement('span');
+      span.className = goodBad;
+      span.textContent = textToAdd;
+      span.onclick = function () {
+        remove(this);
+      }
+      status.appendChild(span);
+      status.appendChild(document.createTextNode(' '));
+      if (!text) {
+        input.value = ''; // Clear input after adding
 
-<script>
+      }
+    }
+
+  function updateStatus(value) {
+      const statusElement = document.getElementById('pokemonStatus');
+      if (value === 'none') {
+        statusElement.style.display = 'none';
+      } else {
+        statusElement.className = value;
+        statusElement.innerText = value.toUpperCase();
+        statusElement.style.display = 'block';
+      }
+  }
+
+
   function updateBackground(value) {
     const container = document.querySelector('.monContainer');
     if (value === 'transparent') {
@@ -796,62 +702,164 @@ function resetAll() {
   }
 
   function updateTeraType(value) {
-      const teraElement = document.getElementById('pokemonTera');
-      if (value === 'none') {
-        teraElement.style.display = 'none';
+    const teraElement = document.getElementById('pokemonTera');
+    if (value === 'none') {
+      teraElement.style.display = 'none';
+    } else {
+      teraElement.src = `https://play.pokemonshowdown.com/sprites/types/${value.charAt(0).toUpperCase() + value.slice(1)}.png`;
+      teraElement.alt = value.charAt(0).toUpperCase() + value.slice(1);
+      teraElement.style.display = 'block';
+    }
+  }
+
+  function updateStatMod(stat, value) {
+    const statElement = document.getElementById('stat' + stat);
+    const numValue = parseInt(value);
+
+    if (numValue === 0) {
+      statElement.style.display = 'none';
+      return;
+    }
+
+    const modifiers = {
+      '-6': '0.25x',
+      '-5': '0.29x',
+      '-4': '0.33x',
+      '-3': '0.4x',
+      '-2': '0.5x',
+      '-1': '0.67x',
+      '0': '1x',
+      '1': '1.5x',
+      '2': '2x',
+      '3': '2.5x',
+      '4': '3x',
+      '5': '3.5x',
+      '6': '4x'
+    };
+
+    statElement.style.display = 'block';
+    statElement.innerText = `${modifiers[value]} ${stat}`;
+    statElement.className = numValue > 0 ? 'good' : 'bad';
+    statElement.onclick = function () {
+      //  this.style.display = 'none';
+      updateStatMod(stat, '0');
+      //  console.log("clicked",stat);
+      document.getElementById('select' + stat).value = '0';
+    }
+  }
+
+  function updateMonScale(value) {
+      const sprite = document.getElementById('pokemonSprite');
+      sprite.style.transform = `scale(${value})`;
+    }
+
+
+
+  function handleInput(value) {
+      // console.log(value);
+      const input = value.toLowerCase();
+      const autocompleteSpan = document.getElementById('autocomplete');
+      const pokemonInput = document.getElementById('pokemonInput');
+
+      // Find first matching pokemon name
+      const match = Object.keys(dex).find(name =>
+        name.toLowerCase().startsWith(input)
+      );
+
+      // console.log(match);
+
+      if (match && input) {
+        // Show autocomplete
+        autocompleteSpan.textContent = match;
+        // Position the span
+        autocompleteSpan.style.top = pokemonInput.offsetTop + 'px';
+        autocompleteSpan.style.left = pokemonInput.offsetLeft + 'px';
       } else {
-        teraElement.src = `https://play.pokemonshowdown.com/sprites/types/${value.charAt(0).toUpperCase() + value.slice(1)}.png`;
-        teraElement.alt = value.charAt(0).toUpperCase() + value.slice(1);
-        teraElement.style.display = 'block';
+        autocompleteSpan.textContent = '';
       }
     }
-function updateStatMod(stat, value) {
-  const statElement = document.getElementById('stat' + stat);
-  const numValue = parseInt(value);
-  
-  if (numValue === 0) {
-    statElement.style.display = 'none';
-    return;
+
+  function handleNicknameInput(value = "") {
+    // console.log("nickname", value);
+    nickname = value;
+    if (nickname.length) {
+      document.getElementById('pokemonName').innerText = nickname;
+    } else {
+      updatePokemon();
+    }
   }
 
-  const modifiers = {
-    '-6': '0.25x',
-    '-5': '0.29x', 
-    '-4': '0.33x',
-    '-3': '0.4x',
-    '-2': '0.5x',
-    '-1': '0.67x',
-    '0': '1x',
-    '1': '1.5x',
-    '2': '2x',
-    '3': '2.5x',
-    '4': '3x',
-    '5': '3.5x',
-    '6': '4x'
-  };
-
-  statElement.style.display = 'block';
-  statElement.innerText = `${modifiers[value]} ${stat}`;
-  statElement.className = numValue > 0 ? 'good' : 'bad';
-  statElement.onclick = function() {  
-  //  this.style.display = 'none';
-   updateStatMod(stat, '0');
-  //  console.log("clicked",stat);
-   document.getElementById('select' + stat).value = '0';
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      updatePokemon();
+    } else if (event.key === "Tab") {
+      updatePokemon();
+    }
   }
-}
-</script>
-</div>
 
 
 
+  function resetAll() {
+    // Reset Pokemon to default
+    firstMon = "Quagsire";
+    nickname = "";
+    document.getElementById('pokemonInput').value = "";
+    document.getElementById('nicknameInput').value = "";
+    document.getElementById('autocomplete').textContent = "Quagsire";
+
+    // Reset status effect
+    document.getElementById('statusEffect').value = "none";
+    updateStatus('none');
+
+    // Reset tera type
+    document.getElementById('teraType').value = "none";
+    updateTeraType('none');
+
+    // Reset stat modifiers
+    ['Atk', 'Def', 'SpA', 'SpD', 'Spe'].forEach(stat => {
+      document.getElementById('select' + stat).value = '0';
+      updateStatMod(stat, '0');
+    });
+
+    // Reset hazards
+    numSpikes = 0;
+    numTSpikes = 0;
+    numStickyWeb = 0;
+    numRocks = 0;
+    document.querySelectorAll('select[onchange*="numSpikes"], select[onchange*="numTSpikes"], select[onchange*="numStickyWeb"], select[onchange*="numRocks"]').forEach(select => {
+      select.value = '0';
+    });
+
+    // Reset side/gender/shiny/level
+    document.getElementById('sideSelect').value = 'front';
+    document.getElementById('genderSelect').value = 'M';
+    document.getElementById('shinyToggle').checked = false;
+    document.getElementById('levelInput').value = 100;
+    document.getElementById('pokemonLevel').style.display = 'none';
+
+    // Clear custom status text
+    document.querySelectorAll('.status span.good, .status span.bad').forEach(span => {
+      if (span.id !== 'pokemonStatus' && !span.id.startsWith('stat')) {
+        span.remove();
+      }
+    });
+    document.getElementById('statusInput').value = '';
+
+    // Reset background
+    document.getElementById('backgroundSelect').value = 'bg-aquacordetown.jpg';
+    updateBackground('bg-aquacordetown.jpg');
+
+    // Reset mon scale
+    document.getElementById('monScaleSlider').value = 1.1;
+    updateMonScale(1.1);
+
+    // Update pokemon to apply all changes
+    updatePokemon();
+  }
 
 
-</div>
-<script>
+      
 document.getElementById('shinyToggle').addEventListener('change', updatePokemon);
-
-
 document.getElementById('levelInput').addEventListener('change', function() {
   const value = parseInt(this.value);
   if (value < 1) this.value = 1;
@@ -949,24 +957,18 @@ function updatePokemon() {
     // Width is now controlled by CSS max-height on sprite and flexbox centering
   };
   
-//   sprite.src = spriteUrl;
-//   
-
-
   // Update gender icon
   genderIcon.src = `https://play.pokemonshowdown.com/fx/gender-${isFemale ? 'f' : 'm'}.png`;
   genderIcon.alt = isFemale ? 'F' : 'M';
 }
 
-// Initialize on page load
-document.getElementById('autocomplete').textContent = 'Quagsire';
-document.getElementById('pokemonInput').value = 'Quagsire';
+
 updatePokemon();
 updateBackground('bg-aquacordetown.jpg');
 
-</script>
-<script>
 
+
+// BAD APPLE STUFF -- DO NOT TOUCH
 let all_apple_frames = [];
 let statusDiv = document.getElementsByClassName('status')[0];
 let currentFrame = 0;
@@ -982,7 +984,7 @@ makeAppleFrame = (frame) => {
   return spans;
 }
 
-  // Play the music when starting Bad Apple
+ // MUSIC INITIALIZATION
   let music = document.getElementById('badAppleMusic');
   if (!music) {
     music = document.createElement('audio');
@@ -1077,10 +1079,7 @@ fetch('./bad_apple.json')
   .then(response => response.json())
   .then(data => {
     badAppleFrames = data;
-
     all_apple_frames = badAppleFrames.map(frame => makeAppleFrame(frame));
-
-
   })
   .catch(err => {
     console.error("Could not load bad_apple.json:", err);
