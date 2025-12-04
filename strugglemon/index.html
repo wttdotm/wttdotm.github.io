@@ -386,6 +386,8 @@
         </div>
         <div class="status">
             <span id="pokemonStatus" style="display: none; width: fit-content;" onclick="updateStatus('none')"></span> <img id="pokemonTera" style="display: none; width: fit-content;" src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel" class="pixelated" onclick="updateTeraType('none')">
+            <span id="statEva" class="good" style="display: none; width: fit-content;">1.0x Evasion</span>
+            <span id="statAcc" class="good" style="display: none; width: fit-content;">1.0x Accuracy</span>
             <span id="statAtk" class="good" style="display: none; width: fit-content;">1.0x Atk</span>
             <span id="statDef" class="good" style="display: none; width: fit-content;">1.0x Def</span>
             <span id="statSpA" class="good" style="display: none; width: fit-content;">1.0x SpA</span>
@@ -887,6 +889,47 @@
             <button id="badAppleButton" onclick="playBadApple()">Bad Apple</button>
           </div>
         </div>
+        <div style="margin-bottom: 0px;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+            <div style="max-width: 100px;">
+              <label id="labelEva">Eva:</label>
+              <select id="selectEva" onchange="updateStatMod('Eva', this.value)">
+                <option value="-6">-6</option>
+                <option value="-5">-5</option>
+                <option value="-4">-4</option>
+                <option value="-3">-3</option>
+                <option value="-2">-2</option>
+                <option value="-1">-1</option>
+                <option selected value="0">+0</option>
+                <option value="1">+1</option>
+                <option value="2">+2</option>
+                <option value="3">+3</option>
+                <option value="4">+4</option>
+                <option value="5">+5</option>
+                <option value="6">+6</option>
+              </select>
+            </div>
+            <div>
+              <label id="labelAcc">Acc:</label>
+              <select id="selectAcc" onchange="updateStatMod('Acc', this.value)">
+                <option value="-6">-6</option>
+                <option value="-5">-5</option>
+                <option value="-4">-4</option>
+                <option value="-3">-3</option>
+                <option value="-2">-2</option>
+                <option value="-1">-1</option>
+                <option selected value="0">+0</option>
+                <option value="1">+1</option>
+                <option value="2">+2</option>
+                <option value="3">+3</option>
+                <option value="4">+4</option>
+                <option value="5">+5</option>
+                <option value="6">+6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
     
       <div class="showLeftSide">
         <button onclick="showSide('left')">⬅ Previous Options</button>
@@ -1074,7 +1117,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
       '5': '3.5x',
       '6': '4x'
     };
-
+    stat = stat == 'Eva' ? 'Evasion' : stat == 'Acc' ? 'Accuracy' : stat;
     statElement.style.display = 'block';
     statElement.innerText = `${modifiers[value]} ${stat}`;
     statElement.className = numValue > 0 ? 'good' : 'bad';
