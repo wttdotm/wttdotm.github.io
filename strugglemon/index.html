@@ -1165,10 +1165,18 @@ document.getElementById('pokemonInput').value = 'Quagsire';
   function resetAll() {
     // Reset Pokemon to default
     firstMon = "Quagsire";
+    pokemon = "quagsire";
+    pokemonSpriteURL = "https://play.pokemonshowdown.com/sprites/ani/quagsire.gif";
+    displayName = "Quagsire";
+    isCustomSprite = false;
+    isBack = false;
+    isFemale = false;
+    isShiny = false;
+    autocompleteText = "";
     nickname = "";
-    document.getElementById('pokemonInput').value = "";
-    document.getElementById('nicknameInput').value = "";
-    document.getElementById('autocomplete').textContent = "Quagsire";
+    // document.getElementById('pokemonInput').value = "";
+    // document.getElementById('nicknameInput').value = "";
+    // document.getElementById('autocomplete').textContent = "Quagsire";
 
     // Reset status effect
     document.getElementById('statusEffect').value = "none";
@@ -1200,7 +1208,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
     isFemale = false;
     document.getElementById('shinyToggle').checked = false;
     isShiny = false;
-    document.getElementById('levelInput').value = 100;
+    document.getElementById('levelSelect').value = 100;
     document.getElementById('pokemonLevel').style.display = 'none';
 
     // Clear custom status text
@@ -1436,8 +1444,18 @@ makeAppleFrame = (frame) => {
         span.id = "ba-" + i;
         all_apple_spans.push(span);
       }
-      handleInput("hydrapple");
-      handleNicknameInput("Bad Apple But...");
+      resetAll();
+      pokemon = "hydrapple";
+      displayName = "Bad Apple But...";
+      pokemonSpriteURL = "https://play.pokemonshowdown.com/sprites/ani/hydrapple.gif";
+      isCustomSprite = false;
+      isBack = false;
+      isFemale = false;
+      isShiny = false;
+      autocompleteText = "";
+      nickname = "Bad Apple But...";
+      // handleInput("hydrapple");
+      // handleNicknameInput("Bad Apple But...");
       addStatusText('good', "It's");
       addStatusText('good', "Pokemon");
       addStatusText('good', "Showdown");
