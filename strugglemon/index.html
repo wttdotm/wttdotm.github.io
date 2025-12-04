@@ -193,9 +193,9 @@
 
   .userSelections .inner {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* align-items: center; */
-    justify-content: center;
+    justify-content: space-between;
     /* max-width: 100vw; */
     width: 100%;
     margin-top: 20px;
@@ -203,6 +203,10 @@
     /* padding-right: 30px */
     /* padding-left: 30px;
     padding-right: 30px; */
+  }
+
+  .inner .rightSide .leftSide {
+    min-width: 80%;
   }
 
   .userSelections input[type="text"] {
@@ -273,6 +277,15 @@
       min-width: 0;
   }
 
+  .showRightSide { 
+    display: none
+  }
+
+  .showLeftSide { 
+    display: none
+  }
+
+
   /* Extra small devices (phones, 600px and down) */
   @media only screen and (max-width: 700px) {
     .monContainer {
@@ -296,6 +309,18 @@
     
     .innerbattle {
       margin-top: 5vh;
+    }
+
+    .rightSide {
+      display: none;
+    }
+    
+    .showRightSide {
+      display: block
+    }
+
+    .showLeftSide {
+      display: block
     }
   }
 
@@ -351,7 +376,7 @@
         <!-- <img src="https://play.pokemonshowdown.com/fx/caltrop.png" style="display: block; position: relative; left: 75px; top: 163px; width: 24px; height: 24px; opacity: 1;"> -->
       </div>
       <div style="text-align: center; position: relative; top: -10px;">
-        <strong><span id="pokemonName" style="border: none;">Regirock</span> <img id="pokemonGender" src="https://play.pokemonshowdown.com/fx/gender-f.png" alt="F" width="7" height="10" class="pixelated"> <small id="pokemonLevel" style="display: none;">L100</small></strong>
+        <strong><span id="pokemonName" style="border: none;">Quagsire</span> <img id="pokemonGender" src="https://play.pokemonshowdown.com/fx/gender-m.png" alt="F" width="7" height="10" class="pixelated"> <small id="pokemonLevel" style="display: none;">L100</small></strong>
       </div>
       <div class="hpbar" style="position: relative; top: -10px; z-index: 40;">
         <div class="hptext">100%</div>
@@ -369,260 +394,498 @@
         </div>
       </div>
       <div class="sprite-container" style="position: relative; z-index: 1; min-height: 120px; display: flex; align-items: center; justify-content: center;">
-        <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; opacity: 1; z-index: 2; max-height: 120px; transform: scale(1.1);">
+        <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/quagsire.gif" style="display: block; opacity: 1; z-index: 2; max-height: 120px; transform: scale(1.1);">
         <!-- <img id="pokemonSprite" src="https://play.pokemonshowdown.com/sprites/ani/regirock.gif" style="display: block; height: 115px; margin-top: 15px; opacity: 1; z-index: 2;"> -->
       </div>
     </div>
     </div>
-    <div class="credits">By WTTDOTM! <a href="https://wttdotm.com" target="_blank">Website</a>, <a href="https://twitter.com/wttdotm" target="_blank">Twitter</a>, <a href="https://instagram.com/wttdotm" target="_blank">Instagram</a>, <span class="kevinBlasting"><a href="https://replay.pokemonshowdown.com/gen9draft-2289579996">Me blasting my friend kevin in draft lol</a></span></div>
+    <div class="credits">By WTTDOTM! <a href="https://wttdotm.com" target="_blank">Website</a>, <a href="https://twitter.com/wttdotm" target="_blank">Twitter</a>, <a href="https://instagram.com/wttdotm" target="_blank">Instagram</a><span class="kevinBlasting">, <a href="https://replay.pokemonshowdown.com/gen9draft-2289579996">Me blasting my friend kevin in draft lol</a></span></div>
 
 
 
 <div class="userSelections">
   <div class="inner">
-    <div style="margin-bottom: 0px; display: flex; gap: 15px; flex-wrap: wrap;">
+    <div class="leftSide">
+      <div style="margin-bottom: 0px; display: flex; gap: 15px; flex-wrap: wrap;">
 
-<!-- SPRITE SELECTION -->
-      <div style="display: flex; flex-direction: column; gap: 5px;">
-        <label>Change Pokemon:</label>
-        <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="display: none;"> </span>
-        <input type="text" id="nicknameInput" placeholder="Nickname" style="width: 100%;" oninput="handleNicknameInput(this.value)">
+  <!-- SPRITE SELECTION -->
         <div style="display: flex; flex-direction: column; gap: 5px;">
-          <button onclick="updatePokemon()">Change</button>
-          <div style="display: flex; flex-direction: row; gap: 5px; align-items: center;">
-            <label style="margin: 0; font-size: 9pt; white-space: nowrap;">Mon Scale:</label>
-            <input type="range" id="monScaleSlider" min="0.8" max="1.4" step="0.1" value="1.1" oninput="updateMonScale(this.value)" style="width: 80px;">
+          <label>Change Pokemon:</label>
+          <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="display: none;"> </span>
+          <input type="text" id="nicknameInput" placeholder="Nickname" style="width: 100%;" oninput="handleNicknameInput(this.value)">
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <button onclick="updatePokemon()">Change</button>
+            <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-bottom: 0px;x">
+              <label style="margin: 0; font-size: 9pt; white-space: nowrap;">Mon Scale:</label>
+              <input type="range" id="monScaleSlider" min="0.5" max="1.8" step="0.1" value="1.1" oninput="updateMonScale(this.value)" style="width: 80px;">
+            </div>
+            <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-bottom: 0px;">
+              <label style="margin: 0; font-size: 9pt; white-space: nowrap;">Shiny:</label>
+              <input type="checkbox" id="shinyToggle" style="margin: 0;">
+              <select id="levelSelect" onchange="updateLevel(this.value)">
+                <option value="100" selected>Lvl</option>
+                <option value="100">100</option>
+                <option value="99">99</option>
+                <option value="98">98</option>
+                <option value="97">97</option>
+                <option value="96">96</option>
+                <option value="95">95</option>
+                <option value="91">91</option>
+                <option value="90">90</option>
+                <option value="89">89</option>
+                <option value="88">88</option>
+                <option value="87">87</option>
+                <option value="86">86</option>
+                <option value="85">85</option>
+                <option value="84">84</option>
+                <option value="83">83</option>
+                <option value="82">82</option>
+                <option value="81">81</option>
+                <option value="80">80</option>
+                <option value="79">79</option>
+                <option value="78">78</option>
+                <option value="77">77</option>
+                <option value="76">76</option>
+                <option value="75">75</option>
+                <option value="74">74</option>
+                <option value="73">73</option>
+                <option value="72">72</option>
+                <option value="71">71</option>
+                <option value="70">70</option>
+                <option value="69">69</option>
+                <option value="68">68</option>
+                <option value="67">67</option>
+                <option value="66">66</option>
+                <option value="65">65</option>
+                <option value="64">64</option>
+                <option value="63">63</option>
+                <option value="62">62</option>
+                <option value="61">61</option>
+                <option value="60">60</option>
+                <option value="59">59</option>
+                <option value="58">58</option>
+                <option value="57">57</option>
+                <option value="56">56</option>
+                <option value="55">55</option>
+                <option value="54">54</option>
+                <option value="53">53</option>
+                <option value="52">52</option>
+                <option value="51">51</option>
+                <option value="50">50</option>
+                <option value="49">49</option>
+                <option value="48">48</option>
+                <option value="47">47</option>
+                <option value="46">46</option>
+                <option value="45">45</option>
+                <option value="44">44</option>
+                <option value="43">43</option>
+                <option value="42">42</option>
+                <option value="41">41</option>
+                <option value="40">40</option>
+                <option value="39">39</option>
+                <option value="38">38</option>
+                <option value="37">37</option>
+                <option value="36">36</option>
+                <option value="35">35</option>
+                <option value="34">34</option>
+                <option value="33">33</option>
+                <option value="32">32</option>
+                <option value="31">31</option>
+                <option value="30">30</option>
+                <option value="29">29</option>
+                <option value="28">28</option>
+                <option value="27">27</option>
+                <option value="26">26</option>
+                <option value="25">25</option>
+                <option value="24">24</option>
+                <option value="23">23</option>
+                <option value="22">22</option>
+                <option value="21">21</option>
+                <option value="20">20</option>
+                <option value="19">19</option>
+                <option value="18">18</option>
+                <option value="17">17</option>
+                <option value="16">16</option>
+                <option value="15">15</option>
+                <option value="14">14</option>
+                <option value="13">13</option>
+                <option value="12">12</option>
+                <option value="11">11</option>
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+              <select id="hpSelect" onchange="updateHP(this.value)">
+                <option value="100" selected>HP</option>
+                <option value="100">100</option>
+                <option value="99">99</option>
+                <option value="98">98</option>
+                <option value="97">97</option>
+                <option value="96">96</option>
+                <option value="95">95</option>
+                <option value="91">91</option>
+                <option value="90">90</option>
+                <option value="89">89</option>
+                <option value="88">88</option>
+                <option value="87">87</option>
+                <option value="86">86</option>
+                <option value="85">85</option>
+                <option value="84">84</option>
+                <option value="83">83</option>
+                <option value="82">82</option>
+                <option value="81">81</option>
+                <option value="80">80</option>
+                <option value="79">79</option>
+                <option value="78">78</option>
+                <option value="77">77</option>
+                <option value="76">76</option>
+                <option value="75">75</option>
+                <option value="74">74</option>
+                <option value="73">73</option>
+                <option value="72">72</option>
+                <option value="71">71</option>
+                <option value="70">70</option>
+                <option value="69">69</option>
+                <option value="68">68</option>
+                <option value="67">67</option>
+                <option value="66">66</option>
+                <option value="65">65</option>
+                <option value="64">64</option>
+                <option value="63">63</option>
+                <option value="62">62</option>
+                <option value="61">61</option>
+                <option value="60">60</option>
+                <option value="59">59</option>
+                <option value="58">58</option>
+                <option value="57">57</option>
+                <option value="56">56</option>
+                <option value="55">55</option>
+                <option value="54">54</option>
+                <option value="53">53</option>
+                <option value="52">52</option>
+                <option value="51">51</option>
+                <option value="50">50</option>
+                <option value="49">49</option>
+                <option value="48">48</option>
+                <option value="47">47</option>
+                <option value="46">46</option>
+                <option value="45">45</option>
+                <option value="44">44</option>    
+                <option value="43">43</option>
+                <option value="42">42</option>
+                <option value="41">41</option>
+                <option value="40">40</option>
+                <option value="39">39</option>
+                <option value="38">38</option>
+                <option value="37">37</option>
+                <option value="36">36</option>
+                <option value="35">35</option>
+                <option value="34">34</option>
+                <option value="33">33</option>
+                <option value="32">32</option>
+                <option value="31">31</option>
+                <option value="30">30</option>
+                <option value="29">29</option>
+                <option value="28">28</option>
+                <option value="27">27</option>
+                <option value="26">26</option>
+                <option value="25">25</option>
+                <option value="24">24</option>
+                <option value="23">23</option>
+                <option value="22">22</option>
+                <option value="21">21</option>
+                <option value="20">20</option>
+                <option value="19">19</option>
+                <option value="18">18</option>
+                <option value="17">17</option>
+                <option value="16">16</option>
+                <option value="15">15</option>
+                <option value="14">14</option>
+                <option value="13">13</option>
+                <option value="12">12</option>
+                <option value="11">11</option>
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+  <!-- BASIC MODIFIERS -->
+        <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 0px;">
+          <label>Basic Modifiers:</label>
+          <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-bottom: 0px;">
+            <input type="file" id="files" style="display: none;" accept="image/*" onchange="uploadSprite(this.files[0])">
+            <label for="files"
+              style="padding: 5px 0px; font-size: 8pt; font-family:Arial, Helvetica, sans-serif; white-space: nowrap; background: rgb(224, 255, 254); border: 1px solid rgb(100, 100, 255); border-radius: 4px; color: gray; display:inline-block; min-width: 100%; text-align: center;">Upload Your<br />Own Sprite!</label>
+          </div>
+          <select id="statusEffect" onchange="updateStatus(this.value)" style="width: 100px;">
+            <option value="none" selected>Status</option>
+            <option value="brn">Burn</option>
+            <option value="frz">Freeze</option>
+            <option value="par">Para</option>
+            <option value="psn">Poison</option>
+            <option value="tox">Toxic</option>
+            <option value="slp">Sleep</option>
+          </select>
+          <select id="teraType" onchange="updateTeraType(this.value)" style="width: 100px;">
+            <option value="none" selected>Tera</option>
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="electric">Electric</option>
+            <option value="grass">Grass</option>
+            <option value="ice">Ice</option>
+            <option value="fighting">Fighting</option>
+            <option value="poison">Poison</option>
+            <option value="ground">Ground</option>
+            <option value="flying">Flying</option>
+            <option value="psychic">Psychic</option>
+            <option value="bug">Bug</option>
+            <option value="rock">Rock</option>
+            <option value="ghost">Ghost</option>
+            <option value="dragon">Dragon</option>
+            <option value="dark">Dark</option>
+            <option value="steel">Steel</option>
+            <option value="fairy">Fairy</option>
+            <option value="stellar">Stellar</option>
+          </select>
+          <select id="sideSelect" onchange="updatePokemon()" style="width: 100px;">
+            <option value="front" selected>POV</option>
+            <option value="front">Opp. Mon</option>
+            <option value="back">Your Mon</option>
+          </select>
+          <select id="genderSelect" onchange="updatePokemon()" style="width: 100px;">
+            <option value="M" selected>Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+
+      </div>
+
+  <!-- CUSTOM STATUS -->
+      <!-- <div style="margin-bottom: 0px; display: flex; flex-direction: row; gap: 8px; align-items: flex-start;">
+        <div>
+          <label>Add Custom Status:</label>
+          <div style="display: flex; gap: 5px; flex-wrap: wrap; display: flex; flex-direction: column; gap: 5px; margin-bottom: 0px;">
+            <input type="text" id="statusInput" placeholder="eg. Tuberculosis" onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
+            <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-bottom: 0px;">
+              <button onclick="addStatusText('good')" style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
+              <button onclick="addStatusText('bad')" style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; gap: 5px; flex-wrap: wrap; display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
+            <label>Upload Custom Sprite:</label>
+            <input type="file" id="files" style="display: none;" accept="image/*" onchange="uploadSprite(this.files[0])">
+            <label for="files" style=" width: 100%; margin-top: -3px; margin-bottom: -100px; padding: 17px 0px; font-size: 9pt; font-family:Arial, Helvetica, sans-serif; white-space: nowrap; background: rgb(224, 255, 254); border: 1px solid rgb(100, 100, 255); border-radius: 4px; color: gray; display:inline-block; min-width: 100%; text-align: center;">Select file</label>
+          </div>
+        </div>
+      </div> -->
+
+          <div style="margin-bottom: 0px;">
+            <label>Add Custom Status:</label>
+            <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+              <input type="text" id="statusInput" placeholder="eg. Tuberculosis"
+                onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
+              <button onclick="addStatusText('good')"
+                style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
+              <button onclick="addStatusText('bad')"
+                style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
+            </div>
+          </div>
+
+  <!-- STAT MODIFIERS -->
+      <div style="margin-bottom: 0px;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+          <div style="max-width: 100px;">
+            <label id="labelAtk">Atk:</label>
+            <select id="selectAtk" onchange="updateStatMod('Atk', this.value)">
+              <option value="-6">-6</option>
+              <option value="-5">-5</option>
+              <option value="-4">-4</option>
+              <option value="-3">-3</option>
+              <option value="-2">-2</option>
+              <option value="-1">-1</option>
+              <option selected value="0">+0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4</option>
+              <option value="5">+5</option>
+              <option value="6">+6</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelDef">Def:</label>
+            <select id="selectDef" onchange="updateStatMod('Def', this.value)">
+              <option value="-6">-6</option>
+              <option value="-5">-5</option>
+              <option value="-4">-4</option>
+              <option value="-3">-3</option>
+              <option value="-2">-2</option>
+              <option value="-1">-1</option>
+              <option selected value="0">+0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4</option>
+              <option value="5">+5</option>
+              <option value="6">+6</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelSpA">SpA:</label>
+            <select id="selectSpA" onchange="updateStatMod('SpA', this.value)">
+              <option value="-6">-6</option>
+              <option value="-5">-5</option>
+              <option value="-4">-4</option>
+              <option value="-3">-3</option>
+              <option value="-2">-2</option>
+              <option value="-1">-1</option>
+              <option selected value="0">+0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4</option>
+              <option value="5">+5</option>
+              <option value="6">+6</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelSpD">SpD:</label>
+            <select id="selectSpD" onchange="updateStatMod('SpD', this.value)">
+              <option value="-6">-6</option>
+              <option value="-5">-5</option>
+              <option value="-4">-4</option>
+              <option value="-3">-3</option>
+              <option value="-2">-2</option>
+              <option value="-1">-1</option>
+              <option selected value="0">+0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4</option>
+              <option value="5">+5</option>
+              <option value="6">+6</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelSpe">Spe:</label>
+            <select id="selectSpe" onchange="updateStatMod('Spe', this.value)">
+              <option value="-6">-6</option>
+              <option value="-5">-5</option>
+              <option value="-4">-4</option>
+              <option value="-3">-3</option>
+              <option value="-2">-2</option>
+              <option value="-1">-1</option>
+              <option selected value="0">+0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4</option>
+              <option value="5">+5</option>
+              <option value="6">+6</option>
+            </select>
           </div>
         </div>
       </div>
 
-<!-- BASIC MODIFIERS -->
-      <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 0px;">
-        <label>Basic Modifiers:</label>
-        <select id="statusEffect" onchange="updateStatus(this.value)" style="width: 100px;">
-          <option value="none" selected>Status</option>
-          <option value="brn">Burn</option>
-          <option value="frz">Freeze</option>
-          <option value="par">Para</option>
-          <option value="psn">Poison</option>
-          <option value="tox">Toxic</option>
-          <option value="slp">Sleep</option>
-        </select>
-        <select id="teraType" onchange="updateTeraType(this.value)" style="width: 100px;">
-          <option value="none" selected>Tera</option>
-          <option value="normal">Normal</option>
-          <option value="fire">Fire</option>
-          <option value="water">Water</option>
-          <option value="electric">Electric</option>
-          <option value="grass">Grass</option>
-          <option value="ice">Ice</option>
-          <option value="fighting">Fighting</option>
-          <option value="poison">Poison</option>
-          <option value="ground">Ground</option>
-          <option value="flying">Flying</option>
-          <option value="psychic">Psychic</option>
-          <option value="bug">Bug</option>
-          <option value="rock">Rock</option>
-          <option value="ghost">Ghost</option>
-          <option value="dragon">Dragon</option>
-          <option value="dark">Dark</option>
-          <option value="steel">Steel</option>
-          <option value="fairy">Fairy</option>
-          <option value="stellar">Stellar</option>
-        </select>
-        <select id="sideSelect" onchange="updatePokemon()" style="width: 100px;">
-          <option value="front" selected>POV</option>
-          <option value="front">Opp. Mon</option>
-          <option value="back">Your Mon</option>
-        </select>
-        <select id="genderSelect" onchange="updatePokemon()" style="width: 100px;">
-          <option value="M" selected>Male</option>
-          <option value="F">Female</option>
-        </select>
-        <div style="display: flex; gap: 5px; align-items: center;">
-          <input type="number" id="levelInput" min="1" max="100" value="100" style="width: 45px;">
-          <label style="margin: 0;">Shiny</label>
-          <input type="checkbox" id="shinyToggle" style="margin: 0;">
+  <!-- HAZARDS -->
+      <div class="hazards" style="margin-bottom: 0px;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+          <div>
+            <label>Rocks:</label>
+            <select onchange="numRocks = parseInt(this.value); updatePokemon();">
+              <option selected value="0">0</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+          <div>
+            <label>Spikes:</label>
+            <select onchange="numSpikes = parseInt(this.value); updatePokemon();">
+              <option selected value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div>
+            <label>T. Spikes:</label>
+            <select onchange="numTSpikes = parseInt(this.value); updatePokemon();">
+              <option selected value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+          <div>
+            <label>Webs:</label>
+            <select onchange="numStickyWeb = parseInt(this.value); updatePokemon();">
+              <option selected value="0">0</option>
+              <option value="1">1</option>
+            </select>
+          </div>
         </div>
       </div>
-
-    </div>
-
-<!-- CUSTOM STATUS -->
-    <div style="margin-bottom: 0px;">
-      <label>Add Custom Status:</label>
-      <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-        <input type="text" id="statusInput" placeholder="eg. Tuberculosis" onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
-        <button onclick="addStatusText('good')" style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
-        <button onclick="addStatusText('bad')" style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
+      <div class="showRightSide">
+        <button onclick="showSide('right')">More Options ⮕</button>
       </div>
     </div>
-
-<!-- STAT MODIFIERS -->
-    <div style="margin-bottom: 0px;">
-      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-        <div style="max-width: 100px;">
-          <label id="labelAtk">Atk:</label>
-          <select id="selectAtk" onchange="updateStatMod('Atk', this.value)">
-            <option value="-6">-6</option>
-            <option value="-5">-5</option>
-            <option value="-4">-4</option>
-            <option value="-3">-3</option>
-            <option value="-2">-2</option>
-            <option value="-1">-1</option>
-            <option selected value="0">+0</option>
-            <option value="1">+1</option>
-            <option value="2">+2</option>
-            <option value="3">+3</option>
-            <option value="4">+4</option>
-            <option value="5">+5</option>
-            <option value="6">+6</option>
-          </select>
+    <div class="rightSide">
+        <!-- BACKGROUND  & BAD APPLE BUTTON -->
+        <div style="margin-top: 0px; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+          <div style="max-width: 40%;">
+            <label>Background:</label>
+            <select id="backgroundSelect" onchange="updateBackground(this.value)" style="width: 150px; max-width: 100%;">
+              <option value="bg-aquacordetown.jpg" selected>Aquacorde Town</option>
+              <option value="white">WHITE</option>
+              <option value="black">BLACK</option>
+              <option value="greenscreen">GREENSCREEN</option>
+              <option value="bg-beach.jpg">Beach</option>
+              <option value="bg-city.jpg">City</option>
+              <option value="bg-dampcave.jpg">Damp Cave</option>
+              <option value="bg-darkbeach.jpg">Dark Beach</option>
+              <option value="bg-darkcity.jpg">Dark City</option>
+              <option value="bg-darkmeadow.jpg">Dark Meadow</option>
+              <option value="bg-deepsea.jpg">Deep Sea</option>
+              <option value="bg-desert.jpg">Desert</option>
+              <option value="bg-earthycave.jpg">Earthy Cave</option>
+              <option value="bg-elite4drake.jpg">Elite 4 Drake</option>
+              <option value="bg-forest.jpg">Forest</option>
+              <option value="bg-icecave.jpg">Ice Cave</option>
+              <option value="bg-leaderwallace.jpg">Leader Wallace</option>
+              <option value="bg-library.jpg">Library</option>
+              <option value="bg-meadow.jpg">Meadow</option>
+              <option value="bg-orasdesert.jpg">ORAS Desert</option>
+              <option value="bg-orassea.jpg">ORAS Sea</option>
+              <option value="bg-skypillar.jpg">Sky Pillar</option>
+            </select>
+          </div>
+        
+          <div class="badAppleButton" style="max-width: 60%;">
+            <label>Bad Apple lol:</label>
+            <button id="badAppleButton" onclick="playBadApple()">Bad Apple</button>
+          </div>
         </div>
-        <div>
-          <label id="labelDef">Def:</label>
-          <select id="selectDef" onchange="updateStatMod('Def', this.value)">
-            <option value="-6">-6</option>
-            <option value="-5">-5</option>
-            <option value="-4">-4</option>
-            <option value="-3">-3</option>
-            <option value="-2">-2</option>
-            <option value="-1">-1</option>
-            <option selected value="0">+0</option>
-            <option value="1">+1</option>
-            <option value="2">+2</option>
-            <option value="3">+3</option>
-            <option value="4">+4</option>
-            <option value="5">+5</option>
-            <option value="6">+6</option>
-          </select>
-        </div>
-        <div>
-          <label id="labelSpA">SpA:</label>
-          <select id="selectSpA" onchange="updateStatMod('SpA', this.value)">
-            <option value="-6">-6</option>
-            <option value="-5">-5</option>
-            <option value="-4">-4</option>
-            <option value="-3">-3</option>
-            <option value="-2">-2</option>
-            <option value="-1">-1</option>
-            <option selected value="0">+0</option>
-            <option value="1">+1</option>
-            <option value="2">+2</option>
-            <option value="3">+3</option>
-            <option value="4">+4</option>
-            <option value="5">+5</option>
-            <option value="6">+6</option>
-          </select>
-        </div>
-        <div>
-          <label id="labelSpD">SpD:</label>
-          <select id="selectSpD" onchange="updateStatMod('SpD', this.value)">
-            <option value="-6">-6</option>
-            <option value="-5">-5</option>
-            <option value="-4">-4</option>
-            <option value="-3">-3</option>
-            <option value="-2">-2</option>
-            <option value="-1">-1</option>
-            <option selected value="0">+0</option>
-            <option value="1">+1</option>
-            <option value="2">+2</option>
-            <option value="3">+3</option>
-            <option value="4">+4</option>
-            <option value="5">+5</option>
-            <option value="6">+6</option>
-          </select>
-        </div>
-        <div>
-          <label id="labelSpe">Spe:</label>
-          <select id="selectSpe" onchange="updateStatMod('Spe', this.value)">
-            <option value="-6">-6</option>
-            <option value="-5">-5</option>
-            <option value="-4">-4</option>
-            <option value="-3">-3</option>
-            <option value="-2">-2</option>
-            <option value="-1">-1</option>
-            <option selected value="0">+0</option>
-            <option value="1">+1</option>
-            <option value="2">+2</option>
-            <option value="3">+3</option>
-            <option value="4">+4</option>
-            <option value="5">+5</option>
-            <option value="6">+6</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-<!-- HAZARDS -->
-    <div style="margin-bottom: 0px;">
-      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-        <div>
-          <label>Rocks:</label>
-          <select onchange="numRocks = parseInt(this.value); updatePokemon();">
-            <option selected value="0">0</option>
-            <option value="1">1</option>
-          </select>
-        </div>
-        <div>
-          <label>Spikes:</label>
-          <select onchange="numSpikes = parseInt(this.value); updatePokemon();">
-            <option selected value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </div>
-        <div>
-          <label>T. Spikes:</label>
-          <select onchange="numTSpikes = parseInt(this.value); updatePokemon();">
-            <option selected value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-        </div>
-        <div>
-          <label>Webs:</label>
-          <select onchange="numStickyWeb = parseInt(this.value); updatePokemon();">
-            <option selected value="0">0</option>
-            <option value="1">1</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-<!-- BACKGROUND -->
-    <div style="margin-top: 0px; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-      <div style="max-width: 40%;">
-      <label>Background:</label>
-      <select id="backgroundSelect" onchange="updateBackground(this.value)" style="width: 150px; max-width: 100%;">
-        <option value="bg-aquacordetown.jpg" selected>Aquacorde Town</option>
-        <option value="transparent">TRANSPARENT</option>
-        <option value="bg-beach.jpg">Beach</option>
-        <option value="bg-city.jpg">City</option>
-        <option value="bg-dampcave.jpg">Damp Cave</option>
-        <option value="bg-darkbeach.jpg">Dark Beach</option>
-        <option value="bg-darkcity.jpg">Dark City</option>
-        <option value="bg-darkmeadow.jpg">Dark Meadow</option>
-        <option value="bg-deepsea.jpg">Deep Sea</option>
-        <option value="bg-desert.jpg">Desert</option>
-        <option value="bg-earthycave.jpg">Earthy Cave</option>
-        <option value="bg-elite4drake.jpg">Elite 4 Drake</option>
-        <option value="bg-forest.jpg">Forest</option>
-        <option value="bg-icecave.jpg">Ice Cave</option>
-        <option value="bg-leaderwallace.jpg">Leader Wallace</option>
-        <option value="bg-library.jpg">Library</option>
-        <option value="bg-meadow.jpg">Meadow</option>
-        <option value="bg-orasdesert.jpg">ORAS Desert</option>
-        <option value="bg-orassea.jpg">ORAS Sea</option>
-        <option value="bg-skypillar.jpg">Sky Pillar</option>
-      </select>
-      </div>
-
-<!-- BAD APPLE BUTTON -->
-      <div class="badAppleButton" style="max-width: 60%;">
-        <label>Bad Apple lol:</label>
-        <button id="badAppleButton" onclick="playBadApple()">Bad Apple</button>
+    
+      <div class="showLeftSide">
+        <button onclick="showSide('left')">⬅ Previous Options</button>
       </div>
     </div>
   </div>
@@ -638,6 +901,12 @@
   let numRocks = 0;
   let firstMon = "Quagsire"
   let nickname = "";
+  let nicknamePlaceholder = "Nickname";
+
+  let fullHPWidth = 150;
+  let currentHPPercent = 100;
+
+
 
 
 // ASSORTED INITIALIZATION
@@ -651,6 +920,48 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
 
   //UPDATE FUNCTIONS
+
+  const showSide = (side) => {
+    if (side === 'right') {
+      document.querySelector('.rightSide').style.display = 'block';
+      document.querySelector('.leftSide').style.display = 'none';
+    } else if (side === 'left') {
+      document.querySelector('.leftSide').style.display = 'block';
+      document.querySelector('.rightSide').style.display = 'none';
+    }
+  }
+
+  const uploadSprite = (file) => {
+    console.log("uploading sprite", file);
+    document.getElementById('pokemonSprite').src = URL.createObjectURL(file);
+    document.getElementById('pokemonName').innerText = file.name;
+    document.getElementById('pokemonInput').value = file.name;
+  }
+
+  const updateHP = (value) => {
+    currentHPPercent = value;
+    const hpElement = document.querySelector('.hp');
+    const prevHpElement = document.querySelector('.prevhp');
+    let newHPWidth = fullHPWidth * (currentHPPercent / 100);
+    hpElement.style.width = `${newHPWidth}px`;
+    prevHpElement.style.width = `${newHPWidth + 1}px`;
+    document.querySelector('.hptext').innerText = `${currentHPPercent}%`;
+  }
+
+  const updateLevel = (value = 100) => {
+    value = parseInt(document.getElementById('levelSelect').value);
+    console.log("updating level", value);
+    if (value < 1) value = 1;
+    if (value > 100) value = 100;
+
+    if (value == 100) {
+      document.getElementById('pokemonLevel').style.display = 'none';
+    }
+    else {
+      document.getElementById('pokemonLevel').style.display = 'inline-block';
+      document.getElementById('pokemonLevel').textContent = `L${value}`;
+    }
+  }
 
   function addStatusText(goodBad, text = null) {
       let textToAdd = "";
@@ -692,9 +1003,19 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
   function updateBackground(value) {
     const container = document.querySelector('.monContainer');
-    if (value === 'transparent') {
+    if (value === 'white' || value === 'black' || value === 'greenscreen') {
       container.style.backgroundImage = 'none';
-      container.style.backgroundColor = 'white';
+      switch (value) {
+        case 'white':
+          container.style.backgroundColor = 'white';
+          break;
+        case 'black':
+          container.style.backgroundColor = 'black';
+          break;
+        case 'greenscreen':
+          container.style.backgroundColor = 'lime';
+          break;
+      }
     } else {
       container.style.backgroundImage = `url(https://play.pokemonshowdown.com/sprites/gen6bgs/${value})`;
       container.style.backgroundColor = '';
@@ -760,6 +1081,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
       const input = value.toLowerCase();
       const autocompleteSpan = document.getElementById('autocomplete');
       const pokemonInput = document.getElementById('pokemonInput');
+      const nicknameInput = document.getElementById('nicknameInput');
 
       // Find first matching pokemon name
       const match = Object.keys(dex).find(name =>
@@ -774,6 +1096,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
         // Position the span
         autocompleteSpan.style.top = pokemonInput.offsetTop + 'px';
         autocompleteSpan.style.left = pokemonInput.offsetLeft + 'px';
+        nicknameInput.placeholder = `Tab/Enter -> ${match}`;
       } else {
         autocompleteSpan.textContent = '';
       }
@@ -793,6 +1116,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
     if (event.key === 'Enter') {
       updatePokemon();
     } else if (event.key === "Tab") {
+      console.log("tab");
       updatePokemon();
     }
   }
@@ -858,20 +1182,25 @@ document.getElementById('pokemonInput').value = 'Quagsire';
   }
 
 
+
+
+
       
 document.getElementById('shinyToggle').addEventListener('change', updatePokemon);
-document.getElementById('levelInput').addEventListener('change', function() {
-  const value = parseInt(this.value);
-  if (value < 1) this.value = 1;
-  if (value > 100) this.value = 100;
+// document.getElementById('levelInput').addEventListener('change', function() {
+//   const value = parseInt(this.value);
+//   if (value < 1) this.value = 1;
+//   if (value > 100) this.value = 100;
   
-  if (value === 100) document.getElementById('pokemonLevel').style.display = 'none';
-  else document.getElementById('pokemonLevel').style.display = 'inline-block';
-  document.getElementById('pokemonLevel').textContent = `L${this.value}`;
-});
+//   if (value === 100) document.getElementById('pokemonLevel').style.display = 'none';
+//   else document.getElementById('pokemonLevel').style.display = 'inline-block';
+//   document.getElementById('pokemonLevel').textContent = `L${this.value}`;
+// });
 
 
 function updatePokemon() {
+  const nicknameInput = document.getElementById('nicknameInput');
+  nicknameInput.placeholder = nicknamePlaceholder;
   // console.log("loading in pokemon no mon");
   // console.log("in update pokemon");
   // const input = document.getElementById('pokemonInput');
