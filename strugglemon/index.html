@@ -320,7 +320,7 @@
     }
 
     .showLeftSide {
-      display: none;
+      display: block;
     }
   }
 
@@ -684,38 +684,17 @@
 
       </div>
 
-  <!-- CUSTOM STATUS -->
-      <!-- <div style="margin-bottom: 0px; display: flex; flex-direction: row; gap: 8px; align-items: flex-start;">
-        <div>
-          <label>Add Custom Status:</label>
-          <div style="display: flex; gap: 5px; flex-wrap: wrap; display: flex; flex-direction: column; gap: 5px; margin-bottom: 0px;">
-            <input type="text" id="statusInput" placeholder="eg. Tuberculosis" onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
-            <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-bottom: 0px;">
-              <button onclick="addStatusText('good')" style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
-              <button onclick="addStatusText('bad')" style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
-            </div>
-          </div>
+      <div style="margin-bottom: 0px;">
+        <label>Add Custom Status:</label>
+        <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+          <input type="text" id="statusInput" placeholder="eg. Tuberculosis"
+            onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
+          <button onclick="addStatusText('good')"
+            style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
+          <button onclick="addStatusText('bad')"
+            style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
         </div>
-        <div>
-          <div style="display: flex; gap: 5px; flex-wrap: wrap; display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
-            <label>Upload Custom Sprite:</label>
-            <input type="file" id="files" style="display: none;" accept="image/*" onchange="uploadSprite(this.files[0])">
-            <label for="files" style=" width: 100%; margin-top: -3px; margin-bottom: -100px; padding: 17px 0px; font-size: 9pt; font-family:Arial, Helvetica, sans-serif; white-space: nowrap; background: rgb(224, 255, 254); border: 1px solid rgb(100, 100, 255); border-radius: 4px; color: gray; display:inline-block; min-width: 100%; text-align: center;">Select file</label>
-          </div>
-        </div>
-      </div> -->
-
-          <div style="margin-bottom: 0px;">
-            <label>Add Custom Status:</label>
-            <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-              <input type="text" id="statusInput" placeholder="eg. Tuberculosis"
-                onkeydown="if(event.key === 'Enter') { event.preventDefault(); if(event.shiftKey) { addStatusText('bad'); } else { addStatusText('good'); } }">
-              <button onclick="addStatusText('good')"
-                style="background: rgb(229, 255, 224); color: rgb(51, 170, 0); display:inline-block;">Add Good</button>
-              <button onclick="addStatusText('bad')"
-                style="background: rgb(255, 229, 224); color: rgb(255, 68, 0); display:inline-block;">Add Bad</button>
-            </div>
-          </div>
+      </div>
 
   <!-- STAT MODIFIERS -->
       <div style="margin-bottom: 0px;">
@@ -929,10 +908,11 @@
             </div>
           </div>
         </div>
-      </div>
+
     
       <div class="showLeftSide">
         <button onclick="showSide('left')">⬅ Previous Options</button>
+      </div>
       </div>
     </div>
   </div>
