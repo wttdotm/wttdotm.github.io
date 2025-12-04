@@ -411,7 +411,11 @@
   <!-- SPRITE SELECTION -->
         <div style="display: flex; flex-direction: column; gap: 5px;">
           <label>Change Pokemon:</label>
-          <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="display: none;"> </span>
+          <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;"
+            oninput="handleInput(this.value)"
+            onkeydown="if(event.key === 'Tab') { event.preventDefault(); handleKeyDown(event) } else if(event.key === 'Enter') { handleKeyDown(event) }"><span
+            id="autocomplete" style="display: none;"> </span>
+          <!-- <input type="text" id="pokemonInput" placeholder="Enter Pokemon name" style="width: 100%;" oninput="handleInput(this.value)" onkeydown="if(event.key === 'Tab') { event.preventDefault(); if(document.getElementById('autocomplete').textContent) { updatePokemon() } } else if(event.key === 'Enter') { handleKeyDown(event) }"><span id="autocomplete" style="display: none;"> </span> -->
           <input type="text" id="nicknameInput" placeholder="Nickname" style="width: 100%;" oninput="handleNicknameInput(this.value)">
           <div style="display: flex; flex-direction: column; gap: 5px;">
             <button onclick="updatePokemon()">Change</button>
@@ -665,12 +669,12 @@
             <option value="fairy">Fairy</option>
             <option value="stellar">Stellar</option>
           </select>
-          <select id="sideSelect" onchange="updatePokemon()" style="width: 100px;">
+          <select id="sideSelect" onchange="updateSide(this.value)" style="width: 100px;">
             <option value="front" selected>POV</option>
             <option value="front">Opp. Mon</option>
             <option value="back">Your Mon</option>
           </select>
-          <select id="genderSelect" onchange="updatePokemon()" style="width: 100px;">
+          <select id="genderSelect" onchange="updateGender(this.value)" style="width: 100px;">
             <option value="M" selected>Male</option>
             <option value="F">Female</option>
           </select>
@@ -906,6 +910,16 @@
   let fullHPWidth = 150;
   let currentHPPercent = 100;
 
+  // Pokemon display variables
+  let displayName = "Quagsire";
+  let pokemon = "quagsire";
+  let pokemonSpriteURL = "https://play.pokemonshowdown.com/sprites/ani/quagsire.gif";
+  let isCustomSprite = false;
+  let isBack = false;
+  let isFemale = false;
+  let isShiny = false;
+  let autocompleteText = "";
+
 
 
 
@@ -921,6 +935,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
   //UPDATE FUNCTIONS
 
+
   const showSide = (side) => {
     if (side === 'right') {
       document.querySelector('.rightSide').style.display = 'block';
@@ -933,9 +948,11 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
   const uploadSprite = (file) => {
     console.log("uploading sprite", file);
-    document.getElementById('pokemonSprite').src = URL.createObjectURL(file);
-    document.getElementById('pokemonName').innerText = file.name;
-    document.getElementById('pokemonInput').value = file.name;
+    pokemon = file.name.toLowerCase().replace(" ", '');
+    pokemonSpriteURL = URL.createObjectURL(file);
+    displayName = file.name;
+    isCustomSprite = true;
+    updatePokemon();
   }
 
   const updateHP = (value) => {
@@ -1074,10 +1091,26 @@ document.getElementById('pokemonInput').value = 'Quagsire';
       sprite.style.transform = `scale(${value})`;
     }
 
+  function updateSide(value) {
+    isBack = value === 'back';
+    updatePokemon();
+  }
+
+  function updateGender(value) {
+    isFemale = value === 'F';
+    updatePokemon();
+  }
+
+  function updateShiny(checked) {
+    isShiny = checked;
+    updatePokemon();
+  }
 
 
-  function handleInput(value) {
-      // console.log(value);
+
+  function  handleInput(value) {
+      console.log("in handleInput", value);
+      console.log("autocompleteText", autocompleteText);
       const input = value.toLowerCase();
       const autocompleteSpan = document.getElementById('autocomplete');
       const pokemonInput = document.getElementById('pokemonInput');
@@ -1092,6 +1125,7 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
       if (match && input) {
         // Show autocomplete
+        autocompleteText = match;
         autocompleteSpan.textContent = match;
         // Position the span
         autocompleteSpan.style.top = pokemonInput.offsetTop + 'px';
@@ -1107,15 +1141,20 @@ document.getElementById('pokemonInput').value = 'Quagsire';
     nickname = value;
     if (nickname.length) {
       document.getElementById('pokemonName').innerText = nickname;
-    } else {
-      updatePokemon();
     }
   }
 
   function handleKeyDown(event) {
+    console.log("handleKeyDown", event.key);
+    console.log("autocompleteText", autocompleteText);
+    isCustomSprite = false;
     if (event.key === 'Enter') {
+      pokemon = autocompleteText;
+      displayName = autocompleteText;
       updatePokemon();
     } else if (event.key === "Tab") {
+      pokemon = autocompleteText;
+      displayName = pokemon;
       console.log("tab");
       updatePokemon();
     }
@@ -1156,8 +1195,11 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
     // Reset side/gender/shiny/level
     document.getElementById('sideSelect').value = 'front';
+    isBack = false;
     document.getElementById('genderSelect').value = 'M';
+    isFemale = false;
     document.getElementById('shinyToggle').checked = false;
+    isShiny = false;
     document.getElementById('levelInput').value = 100;
     document.getElementById('pokemonLevel').style.display = 'none';
 
@@ -1185,50 +1227,12 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
 
 
-      
-document.getElementById('shinyToggle').addEventListener('change', updatePokemon);
-// document.getElementById('levelInput').addEventListener('change', function() {
-//   const value = parseInt(this.value);
-//   if (value < 1) this.value = 1;
-//   if (value > 100) this.value = 100;
-  
-//   if (value === 100) document.getElementById('pokemonLevel').style.display = 'none';
-//   else document.getElementById('pokemonLevel').style.display = 'inline-block';
-//   document.getElementById('pokemonLevel').textContent = `L${this.value}`;
-// });
 
+document.getElementById('shinyToggle').addEventListener('change', function() {
+  updateShiny(this.checked);
+});
 
-function updatePokemon() {
-  const nicknameInput = document.getElementById('nicknameInput');
-  nicknameInput.placeholder = nicknamePlaceholder;
-  // console.log("loading in pokemon no mon");
-  // console.log("in update pokemon");
-  // const input = document.getElementById('pokemonInput');
-  // console.log("autocomplete", document.getElementById('autocomplete').innerHTML);
-  let displayName = document.getElementById('autocomplete').innerText;
-  // console.log("display name", document.getElementById('autocomplete').textContent);
-  let pokemon = document.getElementById('autocomplete').textContent.toLowerCase().replace(" ", '') || firstMon.toLowerCase();
-  // console.log("loading in pokemon", displayName);
-  document.getElementById('pokemonInput').value = displayName;
-  // let pokemon = document.getElementById('pokemonName').textContent.toLowerCase().replace(" ", '');
-  if (pokemon.includes('-')) {
-    let parts = pokemon.split('-');
-    pokemon = parts[0] + "-" + parts.slice(1).join('');
-  }
-  const sprite = document.getElementById('pokemonSprite');
-  const genderIcon = document.getElementById('pokemonGender');
-
-  const isBack = document.getElementById('sideSelect').value === 'back';
-  const isFemale = document.getElementById('genderSelect').value === 'F';
-  const isShiny = document.getElementById('shinyToggle').checked;
-  
-  // Update sprite URL
-  let spriteUrl = 'https://play.pokemonshowdown.com/sprites/';
-
-  spriteUrl += isBack ? 'ani-back' : 'ani';
-  if (isShiny) spriteUrl += '-shiny';
-  spriteUrl += `/${pokemon}.gif`;
-  
+const updateHazards = () => {
   const changeXDisplays = (el, numToChange) => {
     // get num of children of element
     const numChildren = el.children.length;
@@ -1254,7 +1258,7 @@ function updatePokemon() {
     document.getElementById('rocksSelf').style.display = 'block';
     document.getElementById('rocksOpp').style.display = 'none';
   } else if (!isBack && numRocks > 0) {
-    document.getElementById('rocksSelf').style.display = 'none';  
+    document.getElementById('rocksSelf').style.display = 'none';
     document.getElementById('rocksOpp').style.display = 'block';
   } else if (numRocks === 0) {
     document.getElementById('rocksSelf').style.display = 'none';
@@ -1268,27 +1272,87 @@ function updatePokemon() {
     document.getElementById('hazards').style.zIndex = 3;
   }
 
-  //CHANGE NAME:
-  document.getElementById('pokemonName').textContent = nickname || displayName || firstMon;
+}
 
-  const img = new Image();
-  img.src = spriteUrl;
-  
-  img.onerror = function() {
-    // If animated sprite fails to load, use static sprite
-    sprite.src = spriteUrl.replace('ani', 'gen5').replace('.gif', '.png');
-    
-  };
-  
-  img.onload = function() {
-    // If animated sprite loads successfully, use it
-    sprite.src = spriteUrl;
-    // Width is now controlled by CSS max-height on sprite and flexbox centering
-  };
-  
-  // Update gender icon
+const updateGenderIcon = () => {
+  const genderIcon = document.getElementById('pokemonGender');
   genderIcon.src = `https://play.pokemonshowdown.com/fx/gender-${isFemale ? 'f' : 'm'}.png`;
   genderIcon.alt = isFemale ? 'F' : 'M';
+}
+
+const updateDisplayName = (displayNameInput) => {
+  document.getElementById('pokemonName').textContent = displayNameInput ? displayNameInput : nickname || firstMon;
+}
+
+
+const updateSprite = (customURL) => {
+  console.log("updating sprite", customURL);
+  console.log("pokemon", pokemon);
+  spriteImage = document.getElementById('pokemonSprite');
+  const img = new Image();
+
+  if (customURL) {
+    console.log("updating sprite with custom URL", customURL);
+    img.src = customURL;
+  } else {
+    console.log("updating sprite with noncustom url and pokemon", pokemon);
+    let pokemonParts = pokemon.toLowerCase();
+    if (pokemon.includes('-')) {
+      let parts = pokemonParts.split('-');
+      pokemonParts = parts[0] + "-" + parts.slice(1).join('');
+    }
+    console.log("pokemon after hyphen check", pokemon);
+
+    let spriteUrl = 'https://play.pokemonshowdown.com/sprites/';
+    spriteUrl += isBack ? 'ani-back' : 'ani';
+    if (isShiny) spriteUrl += '-shiny';
+    spriteUrl += `/${pokemonParts}.gif`;
+    img.src = spriteUrl;
+  }
+  console.log("img.src", img.src);
+
+
+  img.onerror = function () {
+    // If animated sprite fails to load, use static sprite
+    spriteImage.src = img.src.replace('ani', 'gen5').replace('.gif', '.png');
+
+  };
+
+  img.onload = function () {
+    // If animated sprite loads successfully, use it
+    spriteImage.src = img.src;
+    // Width is now controlled by CSS max-height on sprite and flexbox centering
+  };
+
+  if (isBack && customURL) {
+    spriteImage.style.transform = 'scaleX(-1)';
+  } else {
+    spriteImage.style.transform = 'scaleX(1)';
+  }
+}
+
+const updateInputText = (inputText) => {
+  document.getElementById('pokemonInput').value = inputText;
+}
+
+function updatePokemon() {
+  console.log("updating pokemon", pokemon);
+  
+  // update hazards
+  updateHazards();
+
+  //update gender icon
+  updateGenderIcon();
+
+  //update display name
+  console.log("display name", displayName);
+  updateDisplayName(displayName);
+
+  updateSprite(isCustomSprite ? pokemonSpriteURL : null);
+  updateInputText(pokemon.charAt(0).toUpperCase() + pokemon.slice(1));
+
+  const nicknameInput = document.getElementById('nicknameInput');
+  nicknameInput.placeholder = nicknamePlaceholder;
 }
 
 
