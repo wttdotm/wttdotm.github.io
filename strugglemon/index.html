@@ -92,6 +92,30 @@
   .statbar .hpbar .prevhp { background: rgb(187, 238, 204); height: 8px; border-radius: 3px; }
   .statbar .hpbar .hptext { position: absolute; background: rgb(119, 119, 119); color: rgb(238, 238, 238); text-shadow: rgb(0, 0, 0) 0px 1px 0px; font-size: 9px; width: 32px; height: 12px; top: -1px; text-align: center; -webkit-text-fill-color: rgb(238, 238, 238); }
   .statbar .hpbar .hptextborder { position: absolute; background: transparent; border-top: 1px solid rgb(119, 119, 119); border-bottom: 1px solid rgb(119, 119, 119); width: 4px; top: -1px; height: 10px; }
+  
+  .statbar .hpbar .hp-yellow {
+    border-top-color: #f8e379;
+    background-color: #f5d538;
+    border-bottom-color: #be9f0a;
+    border-right-color: #be9f0a;
+  }
+
+  .statbar .hpbar .prevhp-yellow {
+      background-color: #fcf4ca;
+  }
+
+  .statbar .hpbar .prevhp-red {
+    background-color: #facec5;
+  }
+
+  .statbar .hpbar .hp-red {
+      border-top-color: #f37f67;
+      background-color: #ee4928;
+      border-bottom-color: #a3260d;
+      border-right-color: #a3260d;
+  }
+
+
   .statbar span {
       padding: 0px 1px;
       border: 1px solid rgb(255, 68, 0);
@@ -457,8 +481,8 @@
       <div class="hpbar" style="position: relative; top: -10px; z-index: 40;">
         <div class="hptext">100%</div>
         <div class="hptextborder"></div>
-        <div class="prevhp" style="width: 151px;">
-          <div class="hp" style="width: 150px; border-right-width: 1px;"></div>
+        <div class="prevhp" style="width: 151px;" id="prevhp">
+          <div class="hp" style="width: 150px; border-right-width: 1px;" id="hp"></div>
         </div>
         <div class="status">
             <span id="pokemonStatus" style="display: none; width: fit-content;" onclick="updateStatus('none')"></span> <img id="pokemonTera" style="display: none; width: fit-content;" src="https://play.pokemonshowdown.com/sprites/types/Steel.png" alt="Steel" class="pixelated" onclick="updateTeraType('none')">
@@ -1171,12 +1195,22 @@ document.getElementById('pokemonInput').value = 'Quagsire';
 
   const updateHP = (value) => {
     currentHPPercent = value;
-    const hpElement = document.querySelector('.hp');
-    const prevHpElement = document.querySelector('.prevhp');
+    const hpElement = document.getElementById('hp');
+    const prevHpElement = document.getElementById('prevhp');
     let newHPWidth = fullHPWidth * (currentHPPercent / 100);
     hpElement.style.width = `${newHPWidth}px`;
     prevHpElement.style.width = `${newHPWidth + 1}px`;
     document.querySelector('.hptext').innerText = `${currentHPPercent}%`;
+    if (currentHPPercent <= 20) {
+      hpElement.className = 'hp hp-red';
+      prevHpElement.className = 'prevhp prevhp-red';
+    } else if (currentHPPercent <= 50) {
+      hpElement.className = 'hp hp-yellow';
+      prevHpElement.className = 'prevhp prevhp-yellow';
+    } else {
+      hpElement.className = 'hp';
+      prevHpElement.className = 'prevhp';
+    }
   }
 
   const updateLevel = (value = 100) => {
@@ -1448,6 +1482,10 @@ document.getElementById('pokemonInput').value = 'Quagsire';
     // Reset mon scale
     document.getElementById('monScaleSlider').value = 1.1;
     updateMonScale(1.1);
+
+    // Reset HP
+    document.getElementById('hpSelect').value = '100';
+    updateHP(100);
 
     // Update pokemon to apply all changes
     updatePokemon();
