@@ -74,7 +74,7 @@
     align-items: center; 
     justify-content: center; 
 
-    max-width: 80vw
+    max-width: 80vw;
     /* background-image: url(https://play.pokemonshowdown.com/sprites/gen6bgs/bg-aquacordetown.jpg); 
     background-position: center top -100px;
     background-size: 100%; */
@@ -197,16 +197,21 @@
     /* align-items: center; */
     justify-content: space-between;
     /* max-width: 100vw; */
-    width: 100%;
+    width: 95%;
     margin-top: 20px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     /* padding-right: 30px */
     /* padding-left: 30px;
-    padding-right: 30px; */
+    padding-right: 30px; */ 
   }
 
-  .inner .rightSide .leftSide {
-    min-width: 80%;
+  .leftSide, .rightSide {
+    flex: 1;       /* each gets 50% */
+    min-width: 0;  /* prevents overflow from long content */
+  }
+
+  .rightSide div {
+    max-width: 100%; /* remove the shrinking effect */
   }
 
   .userSelections input[type="text"] {
@@ -249,6 +254,14 @@
     margin-bottom: 10px;
   }
 
+  .userSelections .showRightSide {
+    margin-bottom: 0px;
+  }
+
+  .userSelections .showLeftSide {
+    margin-bottom: 0px;
+  }
+
   .userSelections input[type="number"] {
     width: 60px;
     padding: 1px;
@@ -278,7 +291,7 @@
   }
 
   .showRightSide { 
-    display: none
+    display: none;
   }
 
   .showLeftSide { 
@@ -286,8 +299,33 @@
   }
 
 
+  .howTo {
+    /* border: 1px solid red; */
+    line-height: 1; 
+    font-size: 8pt;
+    padding-right: 30px;
+  }
+
+  .howTo p {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .howToTitle p {
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+
+  .howTo ul {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+
   /* Extra small devices (phones, 600px and down) */
   @media only screen and (max-width: 700px) {
+
     .monContainer {
       background-position: center top -70px;
       background-size: auto;
@@ -307,8 +345,13 @@
       justify-content: flex-start;
     }
     
+    .userSelections .inner {
+      margin-left: 30px;
+    }
     .innerbattle {
-      margin-top: 5vh;
+      margin-top: 2vh;
+      height: 70%;
+      justify-content: flex-start;
     }
 
     .rightSide {
@@ -339,12 +382,45 @@
     color: rgba(255, 255, 255, 1);
   }
 
+.monContainer {
+  position: relative;      /* create a clipping context */
+  overflow: hidden;        /* clip weather effect to container */
+}
+
+.monContainer .weather {
+  display: none;
+  position: absolute;      /* float above contents */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;    /* don't block UI */
+  z-index: 0;         
+  opacity: 0.5;
+  background-image: url("https://play.pokemonshowdown.com/fx/weather-raindance.jpg");
+}
+
+.monContainer  .terrain {
+  display: none;
+  position: absolute;      /* float above contents */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;    /* don't block UI */
+  z-index: 0;         
+  opacity: 1;
+  background-image: url("https://play.pokemonshowdown.com/fx/weather-grassyterrain.png");
+}
+
 </style>
 <script src="fullDex.js"></script>
 </head>
 <body>
 <div class="innerbattle">
   <div class="monContainer">
+    <div id="terrainDiv" class="weather terrain"></div>
+    <div id="weatherDiv" class="weather"></div>
 
     <div class="statbar rstatbar leftstatbar" style="display: flex; flex-direction: column; align-items: center; left: 130px; top: 20px; opacity: 1;">
       <div id="hazards" style="position: relative; z-index: 3; top: -20px;">
@@ -834,7 +910,7 @@
     </div>
     <div class="rightSide">
         <!-- BACKGROUND  & BAD APPLE BUTTON -->
-        <div style="margin-top: 0px; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
+        <div style="margin-top: 0px; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px; ">
           <div style="max-width: 40%;">
             <label>Background:</label>
             <select id="backgroundSelect" onchange="updateBackground(this.value)" style="width: 150px; max-width: 100%;">
@@ -863,14 +939,14 @@
             </select>
           </div>
         
-          <div class="badAppleButton" style="max-width: 60%;">
+          <div class="badAppleButton" style="max-width: 60%; ">
             <label>Bad Apple lol:</label>
             <button id="badAppleButton" onclick="playBadApple()">Bad Apple</button>
           </div>
         </div>
         <div style="margin-bottom: 0px;">
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0px;">
-            <div style="max-width: 100px;">
+            <div style="max-width: 100px; ">
               <label id="labelEva">Eva:</label>
               <select id="selectEva" onchange="updateStatMod('Eva', this.value)">
                 <option value="-6">-6</option>
@@ -906,9 +982,47 @@
                 <option value="6">+6</option>
               </select>
             </div>
+            <div style="max-width: 40%;">
+              <label>Weather:</label>
+              <select id="weatherSelect" onchange="updateWeather(this.value)" style="width: 80px; max-width: 100%;">
+                <option value="none" selected>None</option>
+                <option value="rain">Rain</option>
+                <option value="sun">Sun</option>
+                <option value="sand">Sand</option>
+                <option value="hail">Hail</option>
+              </select>
+            </div>
+            <div style="max-width: 40%;">
+              <label>Terrain:</label>
+              <select id="terrainSelect" onchange="updateTerrain(this.value)" style="width: 80px; max-width: 100%;">
+                <option value="none" selected>None</option>
+                <option value="grassy">Grassy</option>
+                <option value="electric">Electric</option>
+                <option value="misty">Misty</option>
+                <option value="psychic">Psychic</option>
+              </select>
+            </div>
           </div>
         </div>
-
+      
+        <div class="howTo">
+          <p class="howToTitle"><b>Shortcuts:</b></p>
+            <p>Upload Custom Image: Paste <code>Ctrl/Cmd + V</code>.</p>
+            <p>Autocomplete Mon: <code>Enter</code> or <code>Tab</code>.</p>
+            <p>Status: 
+              <ul>
+                <li>Good: <code>Enter</code> </li>
+                <li>Bad: <code>Shift+Enter</code></li>
+              </ul>
+            <p>Screenshot to clipboard: 
+              <ul>
+                <li>Mac: <code>Cmd+Ctrl+Shift+4</code></li>
+                <li>Windows: <code>Win+Shift+S</code></li>
+              </ul>
+          <p class="howToTitle" ><b>FAQ:</b></p>
+          <p><i>"How do I add other forms?"</i>: Same syntax as showdown: <code>Pokemon-Form</code> (eg. <code>Charizard-Mega-X</code> or <code>Oricorio-Pom-Pom</code>)
+          <p><i>"Can you add ____?"</i>: Screens are coming soon, but you can make it yourself and submit a PR <a href="https://github.com/wttdotm/strugglemon">here</a>
+        </div>
     
       <div class="showLeftSide">
         <button onclick="showSide('left')">⬅ Previous Options</button>
@@ -933,6 +1047,27 @@
   let fullHPWidth = 150;
   let currentHPPercent = 100;
 
+  //weather + terrain
+  let currentWeather = "none";
+  let currentTerrain = "none";
+  let currentRoom = "none";
+
+  let weatherOptions = {
+    "rain": "https://play.pokemonshowdown.com/fx/weather-raindance.jpg",
+    "sun": "https://play.pokemonshowdown.com/fx/weather-sunnyday.jpg",
+    "sand": "https://play.pokemonshowdown.com/fx/weather-sandstorm.png",
+    "hail": "https://play.pokemonshowdown.com/fx/weather-hail.png",
+  }
+
+  let terrainOptions = {
+    "grassy": "https://play.pokemonshowdown.com/fx/weather-grassyterrain.png",
+    "electric": "https://play.pokemonshowdown.com/fx/weather-electricterrain.png",
+    "misty": "https://play.pokemonshowdown.com/fx/weather-mistyterrain.png",
+    "psychic": "https://play.pokemonshowdown.com/fx/weather-psychicterrain.png",
+  }
+
+
+
   // Pokemon display variables
   let displayName = "Quagsire";
   let pokemon = "quagsire";
@@ -942,6 +1077,8 @@
   let isFemale = false;
   let isShiny = false;
   let autocompleteText = "";
+
+
 
 
 
@@ -956,6 +1093,39 @@ document.getElementById('pokemonInput').value = 'Quagsire';
   }
 
 
+
+
+  document.addEventListener("paste", e => {
+
+          // Don't trigger if user is typing in a text field
+      const el = document.activeElement;
+      if (
+        el &&
+        (el.tagName === "INPUT" ||
+          el.tagName === "TEXTAREA" ||
+          el.isContentEditable)
+      ) {
+        return;
+      }
+    
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+
+
+
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          const file = item.getAsFile();
+          if (file) {
+            console.log("Pasted image detected → loading as custom sprite");
+            uploadSprite(file);  // ← you already have this!
+          }
+          break;
+        }
+      }
+    });
+
   //UPDATE FUNCTIONS
 
 
@@ -968,6 +1138,27 @@ document.getElementById('pokemonInput').value = 'Quagsire';
       document.querySelector('.rightSide').style.display = 'none';
     }
   }
+
+  const updateWeather = (value) => {
+    currentWeather = value;
+    if (value === 'none') {
+      document.getElementById('weatherDiv').style.display = 'none';
+    } else {
+      document.getElementById('weatherDiv').style.display = 'block';
+      document.getElementById('weatherDiv').style.backgroundImage = `url(${weatherOptions[value]})`;
+    }
+  }
+
+  const updateTerrain = (value) => {
+    currentTerrain = value;
+    if (value === 'none') {
+      document.getElementById('terrainDiv').style.display = 'none';
+    } else {
+      document.getElementById('terrainDiv').style.display = 'block';
+      document.getElementById('terrainDiv').style.backgroundImage = `url(${terrainOptions[value]})`;
+    }
+  }
+
 
   const uploadSprite = (file) => {
     console.log("uploading sprite", file);
@@ -1245,6 +1436,14 @@ document.getElementById('pokemonInput').value = 'Quagsire';
     // Reset background
     document.getElementById('backgroundSelect').value = 'bg-aquacordetown.jpg';
     updateBackground('bg-aquacordetown.jpg');
+
+    // Reset weather
+    document.getElementById('weatherSelect').value = 'none';
+    updateWeather('none');
+
+    // Reset terrain
+    document.getElementById('terrainSelect').value = 'none';
+    updateTerrain('none');
 
     // Reset mon scale
     document.getElementById('monScaleSlider').value = 1.1;
