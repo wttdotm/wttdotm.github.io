@@ -738,7 +738,10 @@
           <div style="display: flex; flex-direction: row; gap: 5px; align-items: center; margin-bottom: 0px;">
             <input type="file" id="files" style="display: none;" accept="image/*" onchange="uploadSprite(this.files[0])">
             <label for="files"
-              style="padding: 5px 0px; font-size: 8pt; font-family:Arial, Helvetica, sans-serif; white-space: nowrap; background: rgb(224, 255, 254); border: 1px solid rgb(100, 100, 255); border-radius: 4px; color: gray; display:inline-block; min-width: 100%; text-align: center;">Upload Your<br />Own Sprite!</label>
+              id="uploadSpriteLabel"
+              style="padding: 5px 0px; font-size: 8pt; font-family:Arial, Helvetica, sans-serif; white-space: nowrap; background: rgb(224, 255, 254); border: 1px solid rgb(100, 100, 255); border-radius: 4px; color: gray; display:inline-block; min-width: 100%; text-align: center; cursor:pointer;"
+              onmouseenter="this.dataset.prevText=this.innerHTML;this.innerHTML='Click or just<br/>Ctrl-V';"
+              onmouseleave="this.innerHTML=this.dataset.prevText;">Upload Your<br />Own Sprite!</label>
           </div>
           <select id="statusEffect" onchange="updateStatus(this.value)" style="width: 100px;">
             <option value="none" selected>Status</option>
