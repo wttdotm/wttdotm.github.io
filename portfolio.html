@@ -65,17 +65,29 @@
     const sortPage = (method) => {
       const majorWork = document.getElementsByClassName("major_work");
       const sideProject = document.getElementsByClassName("side_project");
+      const majorWorkButton = document.getElementById("major_work_button");
+      const sideProjectButton = document.getElementById("side_project_button");
+      const allProjectsButton = document.getElementById("all_projects_button");
       if (method === "major_work") {
         Array.from(majorWork).forEach(project => project.style.display = "block");
         Array.from(sideProject).forEach(project => project.style.display = "none");
+        majorWorkButton.style.fontStyle = "italic";
+        sideProjectButton.style.fontStyle = "normal";
+        allProjectsButton.style.fontStyle = "normal";
 
       } else if (method === "side_project") {
         Array.from(majorWork).forEach(project => project.style.display = "none");
         Array.from(sideProject).forEach(project => project.style.display = "block");
+        sideProjectButton.style.fontStyle = "italic";
+        majorWorkButton.style.fontStyle = "normal";
+        allProjectsButton.style.fontStyle = "normal";
 
       } else if (method === "all") {
         Array.from(majorWork).forEach(project => project.style.display = "block");
         Array.from(sideProject).forEach(project => project.style.display = "block");
+        allProjectsButton.style.fontStyle = "italic";
+        sideProjectButton.style.fontStyle = "normal";
+        majorWorkButton.style.fontStyle = "normal";
       }
     }
   </script>
@@ -85,7 +97,7 @@
     <h1>Portfolio</h1>
 
     <h3>Sort: 
-      <span class="sort_button" onclick="sortPage('major_work')">Major Work</span> | <span class="sort_button" onclick="sortPage('side_project')">Side Projects</span> | <span class="sort_button" onclick="sortPage('all')">All</span></h3>
+      <span class="sort_button" onclick="sortPage('major_work')" id="major_work_button">Major Work</span> | <span class="sort_button" onclick="sortPage('side_project')" id="side_project_button">Side Projects</span> | <span class="sort_button" onclick="sortPage('all')" id="all_projects_button">All</span></h3>
 
     <!-- <h3>Sort By: <span id="dateSort" onclick="dateSort()">Date</span>, <span id="mediumSort" onclick="mediumSort()">Medium</span>, <span id="titleSort" onclick="titleSort()">Title</span></h3> -->
 
