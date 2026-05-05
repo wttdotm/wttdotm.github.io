@@ -101,8 +101,10 @@
             const subject = url.searchParams.get("su") || "";
             const body = url.searchParams.get("body") || "";
 
+            const mailtoSafeBody = body.replace(/\n/g, "\r\n");
+
             return "mailto:?subject=" + encodeURIComponent(subject) +
-                "&body=" + encodeURIComponent(body);
+                "&body=" + encodeURIComponent(mailtoSafeBody);
         }
 
         function updateGmailLinksForViewport() {
