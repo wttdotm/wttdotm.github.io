@@ -96,19 +96,37 @@
     </div>
 
     <script>
-        function gmailWebLinkToMailtoLink(webHref) {
+        function getComposePartsFromGmailWebLink(webHref) {
             const url = new URL(webHref);
-            const subject = url.searchParams.get("su") || "";
-            const body = url.searchParams.get("body") || "";
+            return {
+                subject: url.searchParams.get("su") || "",
+                body: url.searchParams.get("body") || ""
+            };
+        }
 
+        function gmailWebLinkToMobileDeepLink(webHref) {
+            const { subject, body } = getComposePartsFromGmailWebLink(webHref);
+
+            return "googlegmail:///co?subject=" + encodeURIComponent(subject) +
+                "&body=" + encodeURIComponent(body);
+        }
+
+        function gmailWebLinkToMailtoLink(webHref) {
+            const { subject, body } = getComposePartsFromGmailWebLink(webHref);
+
+            // CRLF line breaks are safer for mailto than plain \n,
+            // especially through in-app browsers like Instagram.
             const mailtoSafeBody = body.replace(/\n/g, "\r\n");
 
             return "mailto:?subject=" + encodeURIComponent(subject) +
                 "&body=" + encodeURIComponent(mailtoSafeBody);
         }
 
-        function updateGmailLinksForViewport() {
-            const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
+        function isMobileViewport() {
+            return window.matchMedia("(max-width: 768px)").matches;
+        }
+
+        function setupMobileGmailDeepLinkFallbacks() {
             const gmailLinks = document.querySelectorAll(".gmail-compose-link");
 
             gmailLinks.forEach(function (link) {
@@ -116,23 +134,46 @@
                     link.dataset.webHref = link.getAttribute("href");
                 }
 
-                if (!link.dataset.mailtoHref) {
-                    link.dataset.mailtoHref = gmailWebLinkToMailtoLink(link.dataset.webHref);
-                }
+                link.dataset.gmailDeepLink = gmailWebLinkToMobileDeepLink(link.dataset.webHref);
+                link.dataset.mailtoHref = gmailWebLinkToMailtoLink(link.dataset.webHref);
 
-                if (isMobileViewport) {
-                    link.setAttribute("href", link.dataset.mailtoHref);
-                    link.removeAttribute("target");
-                } else {
-                    link.setAttribute("href", link.dataset.webHref);
-                    link.setAttribute("target", "_blank");
-                }
+                link.addEventListener("click", function (event) {
+                    if (!isMobileViewport()) {
+                        link.setAttribute("href", link.dataset.webHref);
+                        link.setAttribute("target", "_blank");
+                        return;
+                    }
+
+                    event.preventDefault();
+
+                    let didLeavePage = false;
+
+                    function markPageLeft() {
+                        didLeavePage = true;
+                    }
+
+                    window.addEventListener("pagehide", markPageLeft, { once: true });
+                    document.addEventListener("visibilitychange", function handleVisibilityChange() {
+                        if (document.hidden) {
+                            didLeavePage = true;
+                        }
+                        document.removeEventListener("visibilitychange", handleVisibilityChange);
+                    });
+
+                    // Try Gmail app first.
+                    window.location.href = link.dataset.gmailDeepLink;
+
+                    // If Gmail did not open, fall back to mailto.
+                    setTimeout(function () {
+                        if (!didLeavePage && !document.hidden) {
+                            window.location.href = link.dataset.mailtoHref;
+                        }
+                    }, 900);
+                });
             });
         }
 
-        updateGmailLinksForViewport();
-        window.addEventListener("resize", updateGmailLinksForViewport);
-        window.addEventListener("orientationchange", updateGmailLinksForViewport);
+        setupMobileGmailDeepLinkFallbacks();
     </script>
 
 </body>
