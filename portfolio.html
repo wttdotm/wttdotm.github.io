@@ -43,6 +43,10 @@
     }
     .projectHeaderImage {
       max-width: 50%;
+      margin-left: auto;
+    }
+    .projectHeader img {
+      max-height: 60vh
     }
 
     .sort_button {
@@ -51,6 +55,7 @@
     .sort_button:hover {
       text-decoration: underline;
     }
+    
 
     @media only screen and (max-width: 600px) {
       .projectHeader {
@@ -144,9 +149,273 @@
 
     <h3>Sort: 
       <span class="sort_button" onclick="sortPage('major_work')" id="major_work_button">Major Work</span> | <span class="sort_button" onclick="sortPage('side_project')" id="side_project_button">Side Projects</span> | <span class="sort_button" onclick="sortPage('all')" id="all_projects_button">All</span></h3>
+            <hr />
 
     <!-- <h3>Sort By: <span id="dateSort" onclick="dateSort()">Date</span>, <span id="mediumSort" onclick="mediumSort()">Medium</span>, <span id="titleSort" onclick="titleSort()">Title</span></h3> -->
 
+    <div class="project major_work">
+      <h2>First Light</h2>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Installation, Envelopes, Paper, Website</span><br />
+              Python, HTML, CSS, and JavaScript<br />
+              <span class="date">2024-Present</i></span></p>
+        </div>
+        <iframe class="projectHeaderImage" src="/assets/portfolio_assets/firstlight/3d_iframe.html" target="_blank"
+          frameborder="0"></iframe>
+        <!-- <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/> -->
+      </div>
+     <p>First Light project that gives people the opportunity to be the first person in the world to see a specific star.
+        At the current scale of astronomical knowledge (1.8 billion+ celestial objects), most newly-discovered stars are
+        found by computerized telescopes, processed for their quantifiable characteristics, and stored in huge databases to
+        be later fed into models by researchers. Because these tens of thousands of new stars discovered every day are (a)
+        barely incremental (b) uninteresting individually and (c) visually boring, the vast majority of them will never
+        actually be seen, only calculated with. The story of modern starlight is one where photons originate trillions and
+        trillions of miles away, spend countless millennia getting to our solar system, and end up as numbers in a row of
+        data instead rather than a glint in someone's eye.
+     <p>I use a series of scripts to scrape astronomy research databases, find the newest unremarkable and academically
+        ignorable stars, and cross-reference them with literature archives to ensure that they have never been covered in
+        any research.
+    
+      <h3>First Light: Discovery</h3>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Multimedia Installation</br>
+                <span class="date">2026</i></span></p>
+        </div>
+        <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/fl_discovery.png" />
+      </div>
+        An installation at the <a href="https://www.exploratorium.edu/" target="_blank">San Francisco Exploratorium</a> for their Summer 2026 exhibition "Life in Space." Visitors enter a custom First Light booth and walk through a series of interactive screens where they learn about the scientific process behind First Light, culminating in the opportunity to print out their very own First Light star then and there.
+      <br />
+      <br />
+      <h3>First Light: Envelopes</h3>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Envelopes, Paper, Website</br>
+                <span class="date">2024 - Present</i></span></p>
+        </div>
+        <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png" />
+      </div>
+      I print out large stacks of the original pictures of these stars upside down and - without looking at them - fold them
+      up and seal them. The result is First Light, a collection of envelopes that let the opener be the first witness to the
+      star, and through the act of looking at it fasten it as real against the cosmos.
+      You can buy one yourself at <a href="https://firstlightstars.com" target="_blank">FirstLightStars.com</a>.
+      <br />
+      <br />
+      <h3>First Light: Emergence</h3>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i>Python, HTML, CSS, and JavaScript<br />
+              <span class="date">2025</i></span></p>
+        </div>
+        <iframe class="projectHeaderImage" src="https://wttdotm.com/spaceStuff" target="_blank"></iframe>
+      </div>
+      A project currently on display on the online gallery <a href="https://externalpages.org" target="_blank">External
+        Pages</a> and visible in the iframe above. <i>First Light: Emergence</i> uses Python scripts to request and fetch
+      the coordinates of disregarded and unseen stars from web-based sky atlases such as Gaia, SIMBAD, and VizieR. It then
+      collects the images of that portion of sky found in three sky surveys - DSS2, SDSS9, and PanSTARRS - each more recent
+      and showcasing the star in greater detail than the last. Every hour, these surveys slowly fade into each other,
+      channel by channel. This careful, unhurried passage from raw color band data to full visual representation does not
+      reject the biases inherited by computer-generated imagery, such as sensor noise and resolution limits: here those
+      artifacts are vital reminders of the images’ origins as aftereffects of data collection. After all, with each passing
+      second, the always-improving image on the screen becomes the best picture of that star that anybody has ever seen. The
+      embracing of imperfection and inherent slowness of First Light is crucial to the project, rejecting instant
+      gratification and encouraging viewers to dwell on the question of what constitutes an image and how we decide what is
+      worth seeing.
+    
+      <h4>Links</h4>
+      <a href="https://firstlightstars.com" target="_blank">First Light Website</a>, <a href="https://externalpages.org"
+        target="_blank">External Pages</a>
+      <br />
+      <br />
+      <hr />
+    </div>
+
+
+        <div class="project major_work">
+          <h2>Traffic Cam Photobooth</h2>
+          <div class="projectHeader">
+            <div class="projectHeaderText">
+              <p><i><span id="medium">Website</span> <br />
+                  HTML, CSS, and JavaScript<br />
+                  <span class="date">2024</i></span></p>
+              <span>🥇 Webby Award Winner, 2025</span>
+            </div>
+            <img onclick="window.open('https://trafficcamphotobooth.com', '_blank')" class="projectHeaderImage"
+              src="https://trafficcamphotobooth.com/linkPreview.png" />
+          </div>
+          <h4>Description</h4>
+          <p>Traffic Cam Photobooth is a website that allows anybody to locate their nearest publicly available traffic camera
+            and use it to take pictures of themselves. While these cameras are ostensibly intended for traffic, they also serve
+            to acclimate us to the idea that constant monitoring is an everyday part life. No matter the target of this
+            surveillance, it's clear from looking at the map that most New Yorkers (and since its launch, now people in many
+            other locations) get unconsentingly captured by the lens of at least one camera - if not several - every day. TCP
+            offers visitors an engaging and lighthearted way to engage with this very serious topic by drawing attention to
+            these easily ignored cameras. People can use their feeds, which their tax dollars help fund, to take pictures of
+            themselves, spreading the knowledge of this sprawling surveillance apparatus through fun self-portraits designed to
+            be sharable online.</p>
+          <h4>Links</h4>
+          <a href="https://trafficcamphotobooth.com" target="_blank">Traffic Cam Photobooth</a>, <a
+            href="https://trafficcamphotobooth.com/assets/CeaseAndDesist.pdf" target="_blank">Cease and Desist</a>, <a
+            href="https://winners.webbyawards.com/winners/websites-and-mobile-sites/general-desktop-mobile-sites/weird?years=0">Webby
+            Award</a>
+          <h4>Press</h4>
+          <a href="https://www.fastcompany.com/91176990/surveillance-cameras-self-photo-nyc" target="_blank">Fast Company,</a>
+          <a href="https://www.404media.co/traffic-cam-photobooth-cease-and-desist/">404 News</a>, <a target="_blank"
+            href="https://www.pcmag.com/articles/nyc-wants-you-to-stop-taking-traffic-cam-selfies-but-heres-how-to-do-it">PC
+            Mag</a>, <a target="_blank"
+            href="https://www.nbcnews.com/now/video/new-york-artist-creates-website-to-capture-selfies-using-traffic-cameras-217354821851/">NBC</a>,
+          <a target="_blank"
+            href="https://ny1.com/nyc/all-boroughs/mornings-on-1/2024/08/13/brooklyn-artist-uses-traffic-cameras-for-unique-selfies-across-nyc">New
+            York 1</a>, <a target="_blank"
+            href="https://abc7ny.com/videoClip/fire-commissioner-fdny-robert-tucker-nyc/15178890/">ABC</a>, <a target="_blank"
+            href="https://www.fox5ny.com/news/nyc-traffic-cam-photobooth-selfie">Fox 5 NY</a>, <a target="_blank"
+            href="https://www.youtube.com/watch?v=-mUpocDoQZ8">PIX 11</a>, <a target="_blank"
+            href="https://www.nbcnewyork.com/news/local/how-to-take-selfies-with-new-york-citys-traffic-cameras/5698806/">NBC
+            NY</a>, <a target="_blank"
+            href="https://nypost.com/2024/08/11/us-news/new-web-site-lets-nyers-use-traffic-cams-to-turn-streets-into-instant-photo-booths/">NY
+            Post</a>, <a target="_blank"
+            href="https://omny.fm/shows/winsam-on-demand/brooklyn-man-launches-traffic-cam-selfie-website">1010 WINS</a>, <a
+            target="_blank"
+            href="https://petapixel.com/2024/08/12/website-turns-traffic-cameras-into-photobooths-on-the-street/">Petapixel</a>,
+          <a target="_blank"
+            href="https://jalopnik.com/art-project-turns-new-yorks-dystopian-traffic-surveilla-1851619333">Jalopnik</a>
+          <br />
+          <br />
+          <h3>GardenCam</h3>
+          <div class="projectHeader">
+            <div class="projectHeaderText">
+              <p><i><span id="medium">Website, Video</br>
+                    <span class="date">2026</i></span></p>
+            </div>
+            <img class="projectHeaderImage" src="assets/portfolio_assets/gardencam_gif.gif" />
+          </div>
+          <a href="https://gardencam.wttdotm.com/" target="_blank">GardenCam</a> was a website made for the Knicks 2026 championship run that streamed the traffic cameras outside of Madison Square Garden for the duration of the Knicks vs. Spurs finals series. Initially created in order to capture the reverie outside of MSG, GardenCam also inadvertently caught the imposition of one of the strictest lockdowns midtown manhattan had seen in decades as Donald Trump visited for Game 3 and the resulting perimeter lasted through Game 4. Upon the Knicks clinching the chip in Game 5, GardenCam also caught exclusive footage of celebrations around the city and the resulting parade later that week.
+          <h4>Press</h4>
+          <a href="https://www.wired.com/story/how-to-watch-the-knicks-parade-on-nyc-traffic-surveillance-cameras/" target="_blank">WIRED</a>,
+          <a href="https://nypost.com/2026/06/12/us-news/knicks-fan-uses-traffic-cameras-to-document-elation-chaos-outside-msg-during-finals/" target="_blank">NY Post</a>, CBS, Newswire
+          <br />
+          <br />
+          <hr />
+        </div>
+
+<div class="project major_work">
+  <h2>NYC Street Clock</h2>
+  <div class="projectHeader">
+    <div class="projectHeaderText">
+      <p><i><span id="medium">HTML, JavaScript, CSS, Python</span> <br />
+          <span class="date">2026</i></span></p>
+      <!-- <a href="#" onclick="event.preventDefault(); document.getElementById('modal').style.display = 'block';">Watch the explainer</a> -->
+
+    </div>
+    <img onclick="window.open('https://clock.alltext.nyc', '_blank')" class="projectHeaderImage"
+      src="https://clock.alltext.nyc/nyc_clock_link_preview.png" />
+    <!-- <iframe id="nyc_clock_iframe" src="https://clock.alltext.nyc/iframe_simple.html" onclick="window.open('https://clock.alltext.nyc', '_blank')" class="projectHeaderImage"/></iframe> -->
+  </div>
+  <p><a href="https://clock.alltext.nyc" target="_blank">NYC Street Clock,</a> made in collaboration with <a
+      href="https://yufengzhao.com" target="_blank">Yufeng Zhao</a>, is an online clock made out of over 20,000 Google
+    Street View captures from around New York City that
+    contain the current time somewhere in the image. In watching the minutes tick by and clicking around the different
+    matches within a given moment,
+    viewers see not only the passage of time but also the breadth of ways that numbers exist in the city: The M116 bus
+    in
+    the early afternoon; an advertisement for $6.50 halal food in the evening; or the awning of the jewelry store at
+    1204
+    Broadway past midnight.</p>
+    <h4>Press</h4>
+    <a href="https://www.nytimes.com/2026/05/13/briefing/the-good-list-top-gun-voice-memos.html"
+      target="_blank">NY Times</a>
+  <br />
+  <br />
+  <br />
+  <hr />
+</div>
+
+
+    <div class="project major_work">
+      <h2>Mr. Beast Saying Increasingly Large Amounts of Money</h2>
+      <div class="projectHeader">
+        <div class="projectHeaderText">
+          <p><i><span id="medium">Film</span> <br />
+              Mr. Beast Videos and Python<br />
+              <span class="date">2024</i></span></p>
+        </div>
+        <iframe class="projectHeaderImage" width="1189" height="669" src="https://www.youtube.com/embed/umPvpcClzE0"
+          title="Mr. Beast Saying Increasingly Large Amounts of Money (Unabridged)" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <p>Mr. Beast Saying Increasingly Large Amounts of Money is a critique-through-reduction of Mr. Beast, the world's most
+        popular YouTuber. Discourse around Mr. Beast is often mired in an irreconcilable conflict between the grandiosity of
+        his consumption, the scale of his philanthropic projects, and the uneasy voyeurism of charity done for a view count.
+        Oftentimes, he will justify the extreme opulence and wastefulness of some of his videos by pointing out that they
+        allow him to finance the acts of generosity in other ones. The debates inevitably reduce to bean counting, and so
+        this video does that quite literally.
+      <p>I downloaded hundreds of Mr. Beast videos and then wrote a script to scrape their transcripts for all mentions of
+        dollar amounts, create clips of each amount, and then stitch them together in increasing order. The result is an
+        off-putting video that puts the cult of scale present in Mr. Beast's content in a stark but hypnotic light. Watch
+        for yourself and see, or check out my talk on the making of the video.
+      <h3>Press</h3>
+      <a href="https://joinreboot.org/p/mr-beast-saying-increasingly-large" target="_blank">Reboot</a>, <a
+        href="https://48hills.org/2025/04/100000-ice-cream-sundae-what-mrbeasts-dollar-dreams-say-about-our-internet/"
+        target="_blank">48 Hills</a>, <a
+        href="https://www.numlock.com/p/numlock-sunday-morry-kolman-on-hishttps://www.numlock.com/p/numlock-sunday-morry-kolman-on-his"
+        target="_blank">Numlock</a>
+      <h3>Links</h3>
+      <a href="https://www.youtube.com/watch?v=umPvpcClzE0" target="_blank">Mr. Beast Saying Increasingly Large Amounts of
+        Money</a>
+      <a href="https://drive.google.com/file/d/1c8ZkV3sqX8A4QYiROsARIW30XNk_NNqW/view?usp=sharing" target="_blank">Talk on
+        the making of the video</a>
+      <br />
+      <br />
+      <hr />
+    </div>
+
+
+<div class="project major_work">
+  <h2>Are You The Asshole</h2>
+  <div class="projectHeader">
+    <div class="projectHeaderText">
+      <p><i><span id="medium">Website</span> <br />
+          Python, HTML, CSS, and JavaScript<br />
+          <span class="date">2022</i></span></p>
+    </div>
+    <img class="projectHeaderImage" src="assets/portfolio_assets/ayta/AYTA.png" />
+  </div>
+  <h4>Description</h4>
+  <p>Are You The Asshole? (AYTA for short) is an interactive experience of dataset training bias in artificial
+    intelligence models. It is a website that uses 3 real AI models to educate users on the effect of biased data in the
+    decision-making abilities of artificial intelligence. It is inspired by Reddit's popular community r/AmITheAsshole,
+    where users post their moral quandaries and ask the commenters whether they were in the wrong—whether they were "the
+    asshole."
+  <p>Are You The Asshole creates commenters from three AI text-generation models. These are custom text-generation
+    systems trained on three different sets of data: one that has only ever read r/AmITheAsshole comments that call the
+    poster the asshole, one that only read comments absolving the poster, and one that was privy to a mix. These three
+    models illustrate the wildly different lines of reasoning artificial intelligence can follow when trained on biased
+    information.
+  <p>When reading the results of a judgement, note the way in which the AI constructs ideas from snippets of human
+    reasoning. Sometimes the AI can produce stunning results, but it is fundamentally attempting to mimic the ways that
+    humans put together arguments. The "judgements" that the different models render do not come from reasoned
+    ideas—they come from recognizing the patterns in human speech. Keep an eye out for the seams.
+
+  <h4>Links</h4>
+  <a href="https://areyoutheasshole.com" target="_blank">Are You The Asshole Website</a>, <a
+    href="https://trafficcamphotobooth.com/assets/CeaseAndDesist.pdf" target="_blank">r/YouTheAsshole</a>
+  <h4>Press</h4>
+
+  <a href="https://www.theverge.com/2022/4/20/23033694/are-you-the-asshole-ai-reddit-clone-art-project-ethics-aita"
+    target="_blank">The Verge</a>,
+  <a href="https://www.vice.com/en/article/m7vyvx/are-you-the-asshole-new-ai-mimics-infamous-advice-subreddit"
+    target="_blank">Vice</a>,
+  <a href="https://www.emergingtechbrew.com/stories/2022/04/19/fan-of-r-amitheasshole-now-a-reddit-trained-ai-can-give-you-the-answer"
+    target="_blank">Morning Brew</a>,
+  <a href="https://www.gqmagazine.fr/lifestyle/article/etes-vous-oui-ou-non-un-gros-connard-une-intelligence-artificielle-permet-desormais-de-repondre-a-cette-question-qui-peut-changer-votre-vie"
+    target="_blank">GQ France</a>,
+  <a href="https://www.garbageday.email/p/this-ai-will-tell-you-if-youre-being" target="_blank">Garbage Day </a>
+  <br />
+  <br />
+  <hr />
+</div>
 
     <div class="project major_work">
       <h2>MNIST Histories</h2>
@@ -164,29 +433,6 @@
       character recognition (OCR) models. The resulting dataset, called MNIST, became one of the most canonical ML training
       datasets of all time, and is still downloaded over 100,000 times a month. While most pages were anonymized, a few wrote
       their names outside the blacked out field. MNIST Histories is a work-in-progress project that explores the stories of these identifiable writers, as well as restore what individuality is possible to the anonymous thousands that contributed alongside them.</p>
-        <br/>
-        <br/>
-        <br/>
-        <hr/>
-    </div>
-
-    <div class="project side_project">
-      <h2>NYC Street Clock</h2>
-      <div class="projectHeader">
-        <div class="projectHeaderText">
-          <p><i><span id="medium">HTML, JavaScript, CSS, Python</span> <br/>
-            <span class="date">2026</i></span></p>
-            <!-- <a href="#" onclick="event.preventDefault(); document.getElementById('modal').style.display = 'block';">Watch the explainer</a> -->
-     
-        </div>
-        <img onclick="window.open('https://clock.alltext.nyc', '_blank')" class="projectHeaderImage" src="https://clock.alltext.nyc/nyc_clock_link_preview.png"/>
-        <!-- <iframe id="nyc_clock_iframe" src="https://clock.alltext.nyc/iframe_simple.html" onclick="window.open('https://clock.alltext.nyc', '_blank')" class="projectHeaderImage"/></iframe> -->
-      </div>
-      <p><a href="https://clock.alltext.nyc" target="_blank">NYC Street Clock,</a> made in collaboration with <a href="https://yufengzhao.com" target="_blank">Yufeng Zhao</a>, is an online clock made out of over 20,000 Google Street View captures from around New York City that
-      contain the current time somewhere in the image. In watching the minutes tick by and clicking around the different matches within a given moment,
-      viewers see not only the passage of time but also the breadth of ways that numbers exist in the city: The M116 bus in
-      the early afternoon; an advertisement for $6.50 halal food in the evening; or the awning of the jewelry store at 1204
-      Broadway past midnight.</p>
         <br/>
         <br/>
         <br/>
@@ -250,70 +496,6 @@
         <hr/>
     </div>
 
-    <div class="project major_work">
-      <h2>First Light</h2>
-      <div class="projectHeader">
-        <div class="projectHeaderText">
-          <p><i><span id="medium">Envelopes, Paper, Website</span> <br/>
-            Python, HTML, CSS, and JavaScript<br/>
-            <span class="date">2024-Present</i></span></p>
-        </div>
-        <iframe class="projectHeaderImage" src="/assets/portfolio_assets/firstlight/3d_iframe.html" target="_blank" frameborder="0"></iframe>
-        <!-- <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/> -->
-      </div>
-      <p>First Light project that gives people the opportunity to be the first person in the world to see a specific star. At the current scale of astronomical knowledge (1.8 billion+ celestial objects), most newly-discovered stars are found by computerized telescopes, processed for their quantifiable characteristics, and stored in huge databases to be later fed into models by researchers. Because these tens of thousands of new stars discovered every day are (a) barely incremental (b) uninteresting individually and (c) visually boring, the vast majority of them will never actually be seen, only calculated with. The story of modern starlight is one where photons originate trillions and trillions of miles away, spend countless millennia getting to our solar system, and end up as numbers in a row of data instead rather than a glint in someone's eye.
-        <p>I use a series of scripts to scrape astronomy research databases, find the newest unremarkable and academically ignorable stars, and cross-reference them with literature archives to ensure that they have never been covered in any research.
-          
-          <h3>First Light: Envelopes</h3>
-          <div class="projectHeader">
-            <div class="projectHeaderText">
-              <p><i><span id="medium">Envelopes, Paper, Website</br>
-                <span class="date">2024</i></span></p>
-            </div>
-            <img class="projectHeaderImage" src="assets/portfolio_assets/firstlight/firstlightpreview.png"/>
-          </div>
-          I print out large stacks of the original pictures of these stars upside down and - without looking at them - fold them up and seal them. The result is First Light, a collection of envelopes that let the opener be the first witness to the star, and through the act of looking at it fasten it as real against the cosmos.
-          You can buy one yourself at <a href="https://firstlightstars.com" target="_blank">FirstLightStars.com</a>.
-          <br/>
-          <br/>
-          <h3>First Light: Emergence</h3>
-          <div class="projectHeader">
-            <div class="projectHeaderText">
-              <p><i>Python, HTML, CSS, and JavaScript<br/>
-                <span class="date">2025</i></span></p>
-            </div>
-            <iframe class="projectHeaderImage" src="https://wttdotm.com/spaceStuff" target="_blank"></iframe>
-          </div>
-        A project currently on display on the online gallery <a href="https://externalpages.org" target="_blank">External Pages</a> and visible in the iframe above. <i>First Light: Emergence</i> uses Python scripts to request and fetch the coordinates of disregarded and unseen stars from web-based sky atlases such as Gaia, SIMBAD, and VizieR. It then collects the images of that portion of sky found in three sky surveys - DSS2, SDSS9, and PanSTARRS - each more recent and showcasing the star in greater detail than the last. Every hour, these surveys slowly fade into each other, channel by channel. This careful, unhurried passage from raw color band data to full visual representation does not reject the biases inherited by computer-generated imagery, such as sensor noise and resolution limits: here those artifacts are vital reminders of the images’ origins as aftereffects of data collection. After all, with each passing second, the always-improving image on the screen becomes the best picture of that star that anybody has ever seen. The embracing of imperfection and inherent slowness of First Light is crucial to the project, rejecting instant gratification and encouraging viewers to dwell on the question of what constitutes an image and how we decide what is worth seeing.
- 
-        <h4>Links</h4>
-        <a href="https://firstlightstars.com" target="_blank">First Light Website</a>, <a href="https://externalpages.org" target="_blank">External Pages</a>
-        <br/>
-        <br/>
-        <hr/>
-    </div>
-
-    <div class="project major_work">
-      <h2>Traffic Cam Photobooth</h2>
-      <div class="projectHeader">
-        <div class="projectHeaderText">
-          <p><i><span id="medium">Website</span> <br/>
-            HTML, CSS, and JavaScript<br/>
-            <span class="date">2024</i></span></p>
-            <span>🥇 Webby Award Winner, 2025</span>
-        </div>
-        <img onclick="window.open('https://trafficcamphotobooth.com', '_blank')" class="projectHeaderImage" src="https://trafficcamphotobooth.com/linkPreview.png"/>
-      </div>
-      <h4>Description</h4>
-      <p>Traffic Cam Photobooth is a website that allows anybody to locate their nearest publicly available traffic camera and use it to take pictures of themselves. While these cameras are ostensibly intended for traffic, they also serve to acclimate us to the idea that constant monitoring is an everyday part life. No matter the target of this surveillance, it's clear from looking at the map that most New Yorkers (and since its launch, now people in many other locations) get unconsentingly captured by the lens of at least one camera - if not several - every day. TCP offers visitors an engaging and lighthearted way to engage with this very serious topic by drawing attention to these easily ignored cameras. People can use their feeds, which their tax dollars help fund, to take pictures of themselves, spreading the knowledge of this sprawling surveillance apparatus through fun self-portraits designed to be sharable online.</p>
-      <h4>Links</h4>
-      <a href="https://trafficcamphotobooth.com" target="_blank">Traffic Cam Photobooth</a>, <a href="https://trafficcamphotobooth.com/assets/CeaseAndDesist.pdf" target="_blank">Cease and Desist</a>, <a href="https://winners.webbyawards.com/winners/websites-and-mobile-sites/general-desktop-mobile-sites/weird?years=0">Webby Award</a>
-      <h4>Press</h4>
-      <a href="https://www.fastcompany.com/91176990/surveillance-cameras-self-photo-nyc" target="_blank">Fast Company,</a> <a href="https://www.404media.co/traffic-cam-photobooth-cease-and-desist/">404 News</a>, <a target="_blank" href="https://www.pcmag.com/articles/nyc-wants-you-to-stop-taking-traffic-cam-selfies-but-heres-how-to-do-it">PC Mag</a>, <a target="_blank" href="https://www.nbcnews.com/now/video/new-york-artist-creates-website-to-capture-selfies-using-traffic-cameras-217354821851/">NBC</a>, <a target="_blank" href="https://ny1.com/nyc/all-boroughs/mornings-on-1/2024/08/13/brooklyn-artist-uses-traffic-cameras-for-unique-selfies-across-nyc">New York 1</a>, <a target="_blank" href="https://abc7ny.com/videoClip/fire-commissioner-fdny-robert-tucker-nyc/15178890/">ABC</a>, <a target="_blank" href="https://www.fox5ny.com/news/nyc-traffic-cam-photobooth-selfie">Fox 5 NY</a>, <a target="_blank" href="https://www.youtube.com/watch?v=-mUpocDoQZ8">PIX 11</a>, <a target="_blank" href="https://www.nbcnewyork.com/news/local/how-to-take-selfies-with-new-york-citys-traffic-cameras/5698806/">NBC NY</a>, <a target="_blank" href="https://nypost.com/2024/08/11/us-news/new-web-site-lets-nyers-use-traffic-cams-to-turn-streets-into-instant-photo-booths/">NY Post</a>, <a target="_blank" href="https://omny.fm/shows/winsam-on-demand/brooklyn-man-launches-traffic-cam-selfie-website">1010 WINS</a>, <a target="_blank" href="https://petapixel.com/2024/08/12/website-turns-traffic-cameras-into-photobooths-on-the-street/">Petapixel</a>, <a target="_blank" href="https://jalopnik.com/art-project-turns-new-yorks-dystopian-traffic-surveilla-1851619333">Jalopnik</a>
-      <br/>
-      <br/>
-      <hr/>
-    </div>
 
     <div class="project side_project">
       <h2>Dudes Hanging Out in Art</h2>
@@ -334,7 +516,7 @@
       <hr/>
     </div>
 
-        <div class="project side_project">
+    <div class="project side_project">
       <div class="projectHeader">
         <div class="projectHeaderText">
           <h3>Twice As Many Stars, after Laura Giplin</h3>
@@ -352,28 +534,6 @@
         <hr/>
     </div> 
 
-
-    <div class="project major_work">
-      <h2>Mr. Beast Saying Increasingly Large Amounts of Money</h2>
-      <div class="projectHeader">
-        <div class="projectHeaderText">
-          <p><i><span id="medium">Film</span> <br/>
-            Mr. Beast Videos and Python<br/>
-            <span class="date">2024</i></span></p>
-        </div>
-        <iframe class="projectHeaderImage" width="1189" height="669" src="https://www.youtube.com/embed/umPvpcClzE0" title="Mr. Beast Saying Increasingly Large Amounts of Money (Unabridged)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <p>Mr. Beast Saying Increasingly Large Amounts of Money is a critique-through-reduction of Mr. Beast, the world's most popular YouTuber. Discourse around Mr. Beast is often mired in an irreconcilable conflict between the grandiosity of his consumption, the scale of his philanthropic projects, and the uneasy voyeurism of charity done for a view count. Oftentimes, he will justify the extreme opulence and wastefulness of some of his videos by pointing out that they allow him to finance the acts of generosity in other ones. The debates inevitably reduce to bean counting, and so this video does that quite literally. 
-      <p>I downloaded hundreds of Mr. Beast videos and then wrote a script to scrape their transcripts for all mentions of dollar amounts, create clips of each amount, and then stitch them together in increasing order. The result is an off-putting video that puts the cult of scale present in Mr. Beast's content in a stark but hypnotic light. Watch for yourself and see, or check out my talk on the making of the video.
-        <h3>Press</h3>
-        <a href="https://joinreboot.org/p/mr-beast-saying-increasingly-large" target="_blank">Reboot</a>, <a href="https://48hills.org/2025/04/100000-ice-cream-sundae-what-mrbeasts-dollar-dreams-say-about-our-internet/" target="_blank">48 Hills</a>, <a href="https://www.numlock.com/p/numlock-sunday-morry-kolman-on-hishttps://www.numlock.com/p/numlock-sunday-morry-kolman-on-his" target="_blank">Numlock</a>
-        <h3>Links</h3>
-        <a href="https://www.youtube.com/watch?v=umPvpcClzE0" target="_blank">Mr. Beast Saying Increasingly Large Amounts of Money</a>
-        <a href="https://drive.google.com/file/d/1c8ZkV3sqX8A4QYiROsARIW30XNk_NNqW/view?usp=sharing" target="_blank">Talk on the making of the video</a>
-        <br/>
-        <br/>
-        <hr/>
-    </div>
 
     <div class="project side_project">
       <h2>Sol LeWitt QR Code Generator</h2>
@@ -466,34 +626,6 @@
 
 
 
-    <div class="project major_work">
-      <h2>Are You The Asshole</h2>
-      <div class="projectHeader">
-        <div class="projectHeaderText">
-          <p><i><span id="medium">Website</span> <br/>
-            Python, HTML, CSS, and JavaScript<br/>
-            <span class="date">2022</i></span></p>
-        </div>
-        <img class="projectHeaderImage" src="assets/portfolio_assets/ayta/AYTA.png"/>
-      </div>
-      <h4>Description</h4>
-      <p>Are You The Asshole? (AYTA for short) is an interactive experience of dataset training bias in artificial intelligence models. It is a website that uses 3 real AI models to educate users on the effect of biased data in the decision-making abilities of artificial intelligence. It is inspired by Reddit's popular community r/AmITheAsshole, where users post their moral quandaries and ask the commenters whether they were in the wrong—whether they were "the asshole."
-      <p>Are You The Asshole creates commenters from three AI text-generation models. These are custom text-generation systems trained on three different sets of data: one that has only ever read r/AmITheAsshole comments that call the poster the asshole, one that only read comments absolving the poster, and one that was privy to a mix. These three models illustrate the wildly different lines of reasoning artificial intelligence can follow when trained on biased information.
-      <p>When reading the results of a judgement, note the way in which the AI constructs ideas from snippets of human reasoning. Sometimes the AI can produce stunning results, but it is fundamentally attempting to mimic the ways that humans put together arguments. The "judgements" that the different models render do not come from reasoned ideas—they come from recognizing the patterns in human speech. Keep an eye out for the seams.
-
-        <h4>Links</h4>
-      <a href="https://areyoutheasshole.com" target="_blank">Are You The Asshole Website</a>, <a href="https://trafficcamphotobooth.com/assets/CeaseAndDesist.pdf" target="_blank">r/YouTheAsshole</a>
-      <h4>Press</h4>
-
-      <a href="https://www.theverge.com/2022/4/20/23033694/are-you-the-asshole-ai-reddit-clone-art-project-ethics-aita" target="_blank">The Verge</a>, 
-      <a href="https://www.vice.com/en/article/m7vyvx/are-you-the-asshole-new-ai-mimics-infamous-advice-subreddit" target="_blank">Vice</a>, 
-      <a href="https://www.emergingtechbrew.com/stories/2022/04/19/fan-of-r-amitheasshole-now-a-reddit-trained-ai-can-give-you-the-answer" target="_blank">Morning Brew</a>, 
-      <a href="https://www.gqmagazine.fr/lifestyle/article/etes-vous-oui-ou-non-un-gros-connard-une-intelligence-artificielle-permet-desormais-de-repondre-a-cette-question-qui-peut-changer-votre-vie" target="_blank">GQ France</a>, 
-      <a href="https://www.garbageday.email/p/this-ai-will-tell-you-if-youre-being" target="_blank">Garbage Day </a>
-      <br/>
-      <br/>
-      <hr/>
-    </div>
 
     <div class="project major_work">
       <h2>TikTok Clock</h2>
