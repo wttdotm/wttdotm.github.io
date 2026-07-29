@@ -8,61 +8,27 @@ window.addEventListener("load", function() {
 
 // if (window.location.href.toLowerCase().includes("wwwwwwwwwwwwwwwwwwwwwwwwww")) {
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     if (window.location.href.toLowerCase().includes("wwwwwwwwwwwwwwwwwwwwwwwww")) {
-//         // find all instances of W in any text element Ws in the page and replace them with <span style="color: white;">W</span>
-//         const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span")
-//         console.log("textElements", textElements)
-//         textElements.forEach(textElement => {
-//             console.log(textElement.tagName)
-//             //get href if textElement is an <a> tag
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.href.toLowerCase().includes("wwwwwwwwwwwwwwwwwwwwwwwww")) {
+        // find all instances of W in any text element Ws in the page and replace them with <span style="color: white;">W</span>
+        const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span")
+        console.log("textElements", textElements)
+        textElements.forEach(textElement => {
+            console.log(textElement.tagName)
+            //get href if textElement is an <a> tag
 
-//             console.log("textElement", textElement)
+            console.log("textElement", textElement)
             
-//             // Only replace W/w outside of any HTML tag (i.e., not between "<" and ">")
-//             // This uses a callback to avoid replacing within tags.
-//             textElement.innerHTML = textElement.innerHTML.replace(/([^<>]*)(<[^>]*>|$)/g, (match, text, tag) => {
-//                 // Replace W/w in the "text" part only, leave the tag untouched.
-//                 if (text) {
-//                     text = text.replace(/W/g, `<span>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW</span>`)
-//                                .replace(/w/g, `<span>wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</span>`);
-//                 }
-//                 return text + (tag || '');
-//             });
-//         })
-//     }
-// })
-
-document.addEventListener("DOMContentLoaded", () => {
-    if (!location.href.toLowerCase().includes("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")) return;
-
-    const walker = document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT
-    );
-
-    const nodes = [];
-
-    while (walker.nextNode()) {
-        if (
-            /w/i.test(walker.currentNode.data) &&
-            !walker.currentNode.parentElement.closest("script, style")
-        ) {
-            nodes.push(walker.currentNode);
-        }
-    }
-
-    nodes.forEach(node => {
-        node.replaceWith(
-            ...node.data.split(/([Ww])/).map(text => {
-                if (!/^[Ww]$/.test(text)) {
-                    return document.createTextNode(text);
+            // Only replace W/w outside of any HTML tag (i.e., not between "<" and ">")
+            // This uses a callback to avoid replacing within tags.
+            textElement.innerHTML = textElement.innerHTML.replace(/([^<>]*)(<[^>]*>|$)/g, (match, text, tag) => {
+                // Replace W/w in the "text" part only, leave the tag untouched.
+                if (text) {
+                    text = text.replace(/W/g, `<span>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW</span>`)
+                               .replace(/w/g, `<span>wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</span>`);
                 }
-
-                const span = document.createElement("span");
-                span.textContent = text.repeat(45);
-                return span;
-            })
-        );
-    });
-});
+                return text + (tag || '');
+            });
+        })
+    }
+})
