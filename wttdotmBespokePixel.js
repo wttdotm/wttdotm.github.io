@@ -3,7 +3,19 @@ window.addEventListener("load", function() {
     if (page == "") {
         page = "index"
     }
-    fetch(`https://wemakeinter.net/diyPixel/morryProjPixel.php?event=pageView&project=mainSite&page=${page}`)
+    // Get all other tags (query parameters and hash fragments) in the current URL
+    let tags = [];
+    // Get query params
+    let searchParams = new URLSearchParams(window.location.search);
+    for (const [key, value] of searchParams.entries()) {
+        tags.push(`${key}=${value}`);
+    }
+    // Get hash fragment if it exists and is not empty
+    if (window.location.hash && window.location.hash !== "#") {
+        tags.push(`hash=${encodeURIComponent(window.location.hash.substring(1))}`);
+    }
+    // tags now holds all query param pairs and hash in the url
+    fetch(`https://wemakeinter.net/diyPixel/morryProjPixel.php?event=pageView&project=mainSite&page=${page}&${tags.join("&")}`)
 });
 
 // if (window.location.href.toLowerCase().includes("wwwwwwwwwwwwwwwwwwwwwwwwww")) {
