@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bad Apple but it's a Link Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph meta tags -->
+  <meta property="og:title" content="Bad Apple but it's a Link Preview" />
+  <meta property="og:description" content="See Bad Apple rendered as a video link preview." />
+  <meta property="og:type" content="video.other" />
+  <meta property="og:video" content="./assets/bad_apple_video.mp4" />
+  <meta property="og:video:type" content="video/mp4" />
+  <meta property="og:video:width" content="1280" />
+  <meta property="og:video:height" content="720" />
+  <meta property="og:image" content="./assets/bad_apple_video_thumbnail.jpg" />
+  <!-- Fallback image if platform doesn't render video previews -->
+
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="player" />
+  <meta name="twitter:title" content="Bad Apple but it's a Link Preview" />
+  <meta name="twitter:description" content="See Bad Apple rendered as a video link preview." />
+  <meta name="twitter:player" content="./assets/bad_apple_video.mp4" />
+  <meta name="twitter:player:width" content="1280" />
+  <meta name="twitter:player:height" content="720" />
+  <meta name="twitter:image" content="./assets/bad_apple_video_thumbnail.jpg" />
+
+</head>
+<body>
+  <h1>Bad Apple but it's a Link Preview</h1>
+  <video controls width="640" poster="./assets/bad_apple_video_thumbnail.jpg">
+    <source src="./assets/bad_apple_video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p>
+    This page is designed so that link previews on social media platforms display the video "Bad Apple" using Open Graph video tags.
+  </p>
+</body>
+</html>
